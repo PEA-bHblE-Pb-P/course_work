@@ -1,0 +1,83 @@
+Table character {
+  id int
+  type_id int [ref: > type.id]
+  name varchar
+  birthday datetime
+  history text
+  sex_id int [ref: > sex.id]
+  place_of_living_id int [ref: > location.id]
+  location_id int [ref: > location.id]
+  group int [ref: > group.id]
+  favor_id int [ref: > favor.id]
+}
+
+Table type {
+  id int [pk]
+  name varchar
+}
+
+
+Table sex {
+  id int [pk]
+  name varchar
+}
+
+Table murder {
+  killer_id int [ref: > character.id]
+  victim int [ref: > character.id]
+  description varchar
+}
+
+Table place_of_living {
+  character_id int [ref: > character.id]
+  location_id int [ref: > location.id]
+}
+
+Table location {
+  id int
+  lat int
+  lon int
+  name varchar
+  is_place_of_living boolean
+}
+
+Table vampire_to_servant {
+  servant_id int [ref: > character.id]
+  vampire_id int [ref: > character.id]
+}
+
+Table group {
+  id int
+  location_id int [ref: > location.id]
+  admin_id int [ref: > character.id]
+}
+
+Table location_history {
+  character_id int [ref: > character.id]
+  location_id int [ref: > location.id]
+  visit_time datetime
+}
+
+Table court {
+  id int
+  location_id int [ref: > location.id]
+  verdict varchar
+}
+
+
+Table passes {
+  character_id int [ref: > character.id]
+  location_id int [ref: > location.id]
+}
+
+
+Table favor {
+  id int
+  sex_id int [ref: > sex.id] // optional
+  age_min int 
+  age_max int
+}
+
+
+
+
