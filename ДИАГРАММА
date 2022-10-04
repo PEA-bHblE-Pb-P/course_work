@@ -1,8 +1,8 @@
 Table character {
-  id int
+  id int [pk]
   type_id int [ref: > type.id]
   name varchar
-  birthday datetime
+  birthday date
   history text
   sex_id int [ref: > sex.id]
   place_of_living_id int [ref: > location.id]
@@ -23,6 +23,7 @@ Table sex {
 }
 
 Table murder {
+  id int [pk]
   killer_id int [ref: > character.id]
   victim int [ref: > character.id]
   description varchar
@@ -34,7 +35,7 @@ Table place_of_living {
 }
 
 Table location {
-  id int
+  id int [pk]
   lat int
   lon int
   name varchar
@@ -47,7 +48,7 @@ Table vampire_to_servant {
 }
 
 Table group {
-  id int
+  id int [pk]
   location_id int [ref: > location.id]
   admin_id int [ref: > character.id]
 }
@@ -55,11 +56,11 @@ Table group {
 Table location_history {
   character_id int [ref: > character.id]
   location_id int [ref: > location.id]
-  visit_time datetime
+  visit_time timestamp
 }
 
 Table court {
-  id int
+  id int [pk]
   location_id int [ref: > location.id]
   verdict varchar
 }
@@ -72,7 +73,7 @@ Table passes {
 
 
 Table favor {
-  id int
+  id int [pk]
   sex_id int [ref: > sex.id] // optional
   age_min int 
   age_max int
