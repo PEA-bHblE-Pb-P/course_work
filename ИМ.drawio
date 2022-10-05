@@ -7,8 +7,8 @@
                 <mxCell id="node7" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;character&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; type_id&lt;br&gt; name  &lt;br&gt; birthday  &lt;br&gt; history&lt;br&gt; sex_id&lt;br&gt; place_of_living_id&lt;br&gt; location_id&lt;br&gt; group&lt;br&gt; favor_id  &lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
                     <mxGeometry x="13" y="33" width="237" height="247" as="geometry"/>
                 </mxCell>
-                <mxCell id="node5" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;court&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; location_id &lt;br&gt; verdict  &lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
-                    <mxGeometry x="-172" y="-40" width="152" height="81" as="geometry"/>
+                <mxCell id="node5" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;court&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0 0 0 4px ; line-height: 1.6&quot;&gt; location_id &lt;br&gt; verdict &lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0 0 0 4px ; line-height: 1.6&quot;&gt;date &lt;br&gt;group_id&lt;br&gt;defendant_id&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="-172" y="-40" width="152" height="150" as="geometry"/>
                 </mxCell>
                 <mxCell id="node0" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;favor&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; sex_id&lt;br&gt; age_min   &lt;br&gt; age_max   &lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
                     <mxGeometry x="488" y="-72" width="138" height="105" as="geometry"/>
@@ -20,7 +20,7 @@
                     <mxGeometry x="-311" y="-287" width="203" height="129" as="geometry"/>
                 </mxCell>
                 <mxCell id="node9" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;location_history&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; character_id&lt;br&gt; location_id   &lt;br&gt; visit_time: &lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
-                    <mxGeometry x="-330" y="190" width="165" height="105" as="geometry"/>
+                    <mxGeometry x="-390" y="250" width="165" height="105" as="geometry"/>
                 </mxCell>
                 <mxCell id="node8" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;murder&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; killer_id&lt;br&gt; victim   &lt;br&gt; description  &lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
                     <mxGeometry x="73" y="510" width="156" height="105" as="geometry"/>
@@ -151,12 +151,15 @@
                 </mxCell>
                 <mxCell id="edge18" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=ERzeroToMany;endArrow=ERmandOne;endSize=22;strokeColor=#595959;exitX=1.000;exitY=0.809;exitDx=0;exitDy=0;entryX=0.000;entryY=0.500;entryDx=0;entryDy=0;startFill=0;startSize=17;endFill=0;strokeWidth=4;" parent="1" source="node9" target="node7" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <Array as="points"/>
+                        <Array as="points">
+                            <mxPoint x="-76" y="335"/>
+                            <mxPoint x="-76" y="157"/>
+                        </Array>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="10" value="перемещаться" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge18">
                     <mxGeometry x="0.1201" relative="1" as="geometry">
-                        <mxPoint as="offset"/>
+                        <mxPoint y="1" as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="edge2" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=ERzeroToMany;endArrow=ERmandOne;endSize=22;strokeColor=#595959;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.552;entryY=1.000;entryDx=0;entryDy=0;startFill=0;startSize=17;endFill=0;strokeWidth=4;" parent="1" source="node9" target="node2" edge="1">
@@ -233,6 +236,34 @@
                 </mxCell>
                 <mxCell id="19" value="иметь слуг" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge7">
                     <mxGeometry x="-0.3307" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=ERzeroToMany;endArrow=ERmandOne;endSize=22;strokeColor=#595959;startFill=0;startSize=17;endFill=0;strokeWidth=4;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="node5" target="node7">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-134" y="230"/>
+                        </Array>
+                        <mxPoint x="97" y="298.63" as="sourcePoint"/>
+                        <mxPoint x="-210" y="159.99699999999996" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="28" value="быть подсудимым" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="27">
+                    <mxGeometry x="0.1382" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-89" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="29" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=ERzeroToMany;endArrow=ERmandOne;endSize=22;strokeColor=#595959;startFill=0;startSize=17;endFill=0;strokeWidth=4;entryX=0.079;entryY=1.025;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="node6">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="142" y="-30"/>
+                        </Array>
+                        <mxPoint x="-20" y="-30" as="sourcePoint"/>
+                        <mxPoint x="223" y="-24.05000000000001" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="30" value="судить" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="29">
+                    <mxGeometry x="0.1382" y="1" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
