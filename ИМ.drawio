@@ -1,10 +1,10 @@
 <mxfile host="65bd71144e">
     <diagram id="Wr2g1ttwK0UKFfqwhJe3" name="Страница 1">
-        <mxGraphModel dx="1874" dy="1071" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+        <mxGraphModel dx="2355" dy="1294" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="node7" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;character&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; type_id&lt;br&gt; name  &lt;br&gt; birthday  &lt;br&gt; history&lt;br&gt; sex_id&lt;br&gt; place_of_living_id&lt;br&gt; location_id&lt;br&gt; group&lt;br&gt; favor_id  &lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+                <mxCell id="node7" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;character&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0 0 0 4px ; line-height: 1.6&quot;&gt; type_id&lt;br&gt; name  &lt;br&gt; birthday  &lt;br&gt; history&lt;br&gt; sex_id&lt;br&gt; place_of_living_id&lt;br&gt; location_id&lt;br&gt; group_id&lt;br&gt; favor_id  &lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
                     <mxGeometry x="13" y="33" width="237" height="247" as="geometry"/>
                 </mxCell>
                 <mxCell id="node5" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;b&gt;court&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0 0 0 4px ; line-height: 1.6&quot;&gt; location_id &lt;br&gt; verdict &lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0 0 0 4px ; line-height: 1.6&quot;&gt;date &lt;br&gt;group_id&lt;br&gt;defendant_id&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
@@ -120,6 +120,11 @@
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
+                <mxCell id="35" value="проходить в" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge11">
+                    <mxGeometry x="0.2749" y="-3" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
                 <mxCell id="edge10" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=ERzeroToMany;endArrow=ERmandOne;endSize=22;strokeColor=#595959;exitX=0.609;exitY=1.000;exitDx=0;exitDy=0;entryX=0.542;entryY=0.001;entryDx=0;entryDy=0;startFill=0;startSize=17;endFill=0;strokeWidth=4;" parent="1" source="node0" target="node11" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <Array as="points"/>
@@ -165,6 +170,11 @@
                 <mxCell id="edge2" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=ERzeroToMany;endArrow=ERmandOne;endSize=22;strokeColor=#595959;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.552;entryY=1.000;entryDx=0;entryDy=0;startFill=0;startSize=17;endFill=0;strokeWidth=4;" parent="1" source="node9" target="node2" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="38" value="быть посещенным" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge2">
+                    <mxGeometry x="0.1463" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="edge6" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=ERzeroToMany;endArrow=ERmandOne;endSize=22;strokeColor=#595959;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.585;entryY=1.006;entryDx=0;entryDy=0;entryPerimeter=0;startFill=0;startSize=17;endFill=0;strokeWidth=4;" parent="1" source="node8" target="node7" edge="1">
@@ -213,6 +223,11 @@
                             <mxPoint x="-400" y="479"/>
                             <mxPoint x="-400" y="-222"/>
                         </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="36" value="&lt;div&gt;даёт доступ в&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge17">
+                    <mxGeometry x="0.1841" y="-2" relative="1" as="geometry">
+                        <mxPoint y="1" as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="edge1" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=none;endArrow=ERmandOne;endSize=22;strokeColor=#595959;exitX=0.500;exitY=0.001;exitDx=0;exitDy=0;entryX=1.000;entryY=0.961;entryDx=0;entryDy=0;startFill=0;startSize=17;endFill=0;strokeWidth=4;" parent="1" source="node4" target="node7" edge="1">
