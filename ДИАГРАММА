@@ -27,6 +27,7 @@ Table murder {
   killer_id int [ref: > character.id]
   victim int [ref: > character.id]
   description varchar
+  date timestamp
 }
 
 Table place_of_living {
@@ -51,6 +52,7 @@ Table group {
   id int [pk]
   location_id int [ref: > location.id]
   admin_id int [ref: > character.id]
+  name varchar
 }
 
 Table location_history {
@@ -61,8 +63,11 @@ Table location_history {
 
 Table court {
   id int [pk]
-  location_id int [ref: > location.id]
   verdict varchar
+  date date
+  defendant_id int [ref: > character.id]
+  group_id int [ref: > group.id]
+  location_id int [ref: > location.id]
 }
 
 
