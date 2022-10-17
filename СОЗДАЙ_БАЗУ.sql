@@ -25,12 +25,8 @@ CREATE TABLE "murder" (
   "id" int PRIMARY KEY,
   "killer_id" int,
   "victim" int,
-  "description" varchar
-);
-
-CREATE TABLE "place_of_living" (
-  "character_id" int,
-  "location_id" int
+  "description" varchar,
+  "date" timestamp
 );
 
 CREATE TABLE "location" (
@@ -49,7 +45,8 @@ CREATE TABLE "vampire_to_servant" (
 CREATE TABLE "group" (
   "id" int PRIMARY KEY,
   "location_id" int,
-  "admin_id" int
+  "admin_id" int,
+  "name" varchar
 );
 
 CREATE TABLE "location_history" (
@@ -94,10 +91,6 @@ ALTER TABLE "character" ADD FOREIGN KEY ("favor_id") REFERENCES "favor" ("id");
 ALTER TABLE "murder" ADD FOREIGN KEY ("killer_id") REFERENCES "character" ("id");
 
 ALTER TABLE "murder" ADD FOREIGN KEY ("victim") REFERENCES "character" ("id");
-
-ALTER TABLE "place_of_living" ADD FOREIGN KEY ("character_id") REFERENCES "character" ("id");
-
-ALTER TABLE "place_of_living" ADD FOREIGN KEY ("location_id") REFERENCES "location" ("id");
 
 ALTER TABLE "vampire_to_servant" ADD FOREIGN KEY ("servant_id") REFERENCES "character" ("id");
 

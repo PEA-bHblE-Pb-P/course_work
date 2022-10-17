@@ -30,11 +30,6 @@ Table murder {
   date timestamp
 }
 
-Table place_of_living {
-  character_id int [ref: > character.id]
-  location_id int [ref: > location.id]
-}
-
 Table location {
   id int [pk]
   lat int
@@ -83,7 +78,3 @@ Table favor {
   age_min int 
   age_max int
 }
-
-
-
-
