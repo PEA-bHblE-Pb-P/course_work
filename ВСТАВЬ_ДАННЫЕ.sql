@@ -11,7 +11,7 @@ INSERT INTO location(id, lat, lon, name, is_place_of_living) VALUES
 INSERT INTO favor(id, sex_id, age_min, age_max) VALUES
 (1, 2, 1, 100), (2, 3, 30, 40);
 
-INSERT INTO "group"(id, location_id, admin_id) VALUES (1, 2, null);
+INSERT INTO "group"(id, location_id, admin_id, name) VALUES (1, 2, null, 'МЫ ВАМПИРЫ А ВЫ ЛОХИ');
 
 INSERT INTO character(id, type_id, name, birthday, history, sex_id, place_of_living_id, location_id, "group", favor_id) VALUES
 (1, 1, 'Виаго', '1636-03-10', 'Вампир трехсот семидесяти девяти лет от роду, родом из Германии. Денди, помешанный на чистоте и порядке.', 3, 1, 1, 1, 2),
@@ -30,9 +30,8 @@ INSERT INTO vampire_to_servant(servant_id, vampire_id) VALUES
 (5, 1), (3, 2);
 
 INSERT INTO murder(id, killer_id, victim, description) VALUES
-(1, 3, 2, 'Гильермо мог случайно убить Афанаса. Тот поджарился на солнце.'),
+(1, 3, 2, 'Гильермо мог случайно убить Афанаса. Тот слегка загорел на солнце.'),
 (2, 3, 2, 'Гильермо снова пытался убить Афанаса. Тот поджарился на солнце.');
-
 
 INSERT INTO court(id, verdict, date, defendant_id, group_id, location_id) VALUES
 (1, 'Гильермо был отпущен на волю.', '2022-10-17', 5, 1, 1);
