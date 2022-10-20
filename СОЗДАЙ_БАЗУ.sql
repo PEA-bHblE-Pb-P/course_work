@@ -115,3 +115,9 @@ ALTER TABLE "passes" ADD FOREIGN KEY ("character_id") REFERENCES "character" ("i
 ALTER TABLE "passes" ADD FOREIGN KEY ("location_id") REFERENCES "location" ("id");
 
 ALTER TABLE "favor" ADD FOREIGN KEY ("sex_id") REFERENCES "sex" ("id");
+
+ALTER TABLE "passes" ADD CONSTRAINT unique_character_id_location_id UNIQUE ("character_id", "location_id");
+
+ALTER TABLE "location_history" ADD CONSTRAINT unique_character_id_location_id_visit UNIQUE ("character_id", "location_id", "visit_time");
+
+ALTER TABLE "vampire_to_servant" ADD CONSTRAINT unique_vampire_servant UNIQUE ("vampire_id", "servant_id");
