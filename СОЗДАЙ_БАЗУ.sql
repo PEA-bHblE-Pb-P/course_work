@@ -76,6 +76,13 @@ CREATE TABLE "favor" (
   "age_max" int
 );
 
+CREATE TABLE "drink_blood" (
+  "id" SERIAL PRIMARY KEY,
+  "blood_amount_percentage" INT,
+  "character_id" INT REFERENCES "character",
+  "drinker_id" INT REFERENCES "character"
+);
+
 ALTER TABLE "character" ADD FOREIGN KEY ("type_id") REFERENCES "type" ("id");
 
 ALTER TABLE "character" ADD FOREIGN KEY ("sex_id") REFERENCES "sex" ("id");
