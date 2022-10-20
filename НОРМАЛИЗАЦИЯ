@@ -1,1 +1,56 @@
-что кого и как
+## Функциональные зависимости
+
+### character
+id -> name
+id -> type_id -> type_name
+id -> birthday
+id -> history
+id -> sex_id -> sex_name
+id -> group_id -> [location_id, admin_id, group_name]
+id -> favor_id -> [sex_id, age_min, age_max]
+
+### group
+id -> sex_id
+id -> age_min
+id -> age_max
+
+### favor
+id -> sex_id
+id -> age_min
+id -> age_max
+
+### court
+id -> verdict
+id -> date
+id -> defendant_id (character id)
+id -> group_id
+id -> location_id
+
+### location
+id -> lat
+id -> lon
+id -> name
+id -> is_place_of_living
+
+### passes
+character_id -> character
+location_id -> location
+primary key = character_id + location_id
+
+### murder
+id -> killer_id -> character
+id -> victim -> character
+id -> description
+id -> date
+
+### vampire_to_servant
+vampire_id -> character
+servant_id -> character
+primary key = vampire_id + servant_id
+
+### location_history
+character_id -> character
+location_id -> location
+(character_id, location_id) -> visit_time
+ВОТ ЭТО ВЫГЛЯДИТ СТРАННО !!!
+primary key = (character_id, visit_time)

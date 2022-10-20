@@ -120,4 +120,8 @@ ALTER TABLE "passes" ADD CONSTRAINT unique_character_id_location_id UNIQUE ("cha
 
 ALTER TABLE "location_history" ADD CONSTRAINT unique_character_id_location_id_visit UNIQUE ("character_id", "visit_time");
 
-ALTER TABLE "vampire_to_servant" ADD CONSTRAINT unique_vampire_servant UNIQUE ("vampire_id", "servant_id")
+ALTER TABLE "vampire_to_servant" ADD CONSTRAINT unique_vampire_servant UNIQUE ("vampire_id", "servant_id");
+
+ALTER TABLE "favor" ADD CONSTRAINT unique_favor UNIQUE("age_max", "age_min", "sex_id");
+
+ALTER TABLE "character" ADD CONSTRAINT unique_story UNIQUE (history);
