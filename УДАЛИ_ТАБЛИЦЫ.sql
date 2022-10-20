@@ -1,0 +1,1 @@
+DROP TABLE character, court, favor, "group", location, location_history, murder, passes, sex, "type", vampire_to_servant;
