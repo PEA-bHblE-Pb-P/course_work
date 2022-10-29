@@ -52,7 +52,7 @@ CREATE TABLE "group" (
 CREATE TABLE "location_history" (
   "character_id" int NOT NULL,
   "location_id" int,
-  "visit_time" timestamp NOT NULL
+  "visit_time" timestamp NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE "court" (
