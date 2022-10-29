@@ -39,3 +39,23 @@ CREATE OR REPLACE FUNCTION goToServantById(character_id int, servant_id int) RET
 $$ language plpgsql;
 
 SELECT goToServantById(1, 5);
+
+CREATE OR REPLACE FUNCTION peopleNearby(character_id int) RETURNS TABLE(id int, name varchar, sex varchar) AS $$
+    #variable_conflict use_column
+    DECLARE
+        curr_loc_id int;
+        human_type_id int;
+    BEGIN
+        PERFORM verifyCharacterExists(character_id);
+        SELECT location_id FROM character c WHERE c.id = character_id INTO curr_loc_id;
+        SELECT type.id FROM type WHERE name LIKE 'человек' INTO human_type_id;
+
+        RETURN QUERY
+        SELECT c.id AS id, c.name AS name, sx.name AS sex
+        FROM character c
+        JOIN sex sx ON sx.id = c.sex_id
+        WHERE c.location_id = curr_loc_id AND c.type_id = human_type_id;
+    end;
+$$ language plpgsql;
+
+SELECT * FROM peopleNearby(1);

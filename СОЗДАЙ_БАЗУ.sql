@@ -132,3 +132,5 @@ ALTER TABLE "vampire_to_servant" ADD CONSTRAINT unique_vampire_servant UNIQUE ("
 ALTER TABLE "favor" ADD CONSTRAINT unique_favor UNIQUE("age_max", "age_min", "sex_id");
 
 ALTER TABLE "character" ADD CONSTRAINT unique_story UNIQUE (history);
+
+ALTER TABLE "drink_blood" ADD COLUMN "drink_time" timestamp NOT NULL DEFAULT NOW();
