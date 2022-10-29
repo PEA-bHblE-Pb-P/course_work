@@ -26,8 +26,6 @@ DECLARE loc_name varchar;
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT goToLocation(1, 'Genghis Khan Hous_');
-
 CREATE OR REPLACE FUNCTION goToServantById(character_id int, servant_id int) RETURNS VOID AS $$
     DECLARE loc_id int; DECLARE loc_name varchar;
     BEGIN
@@ -37,8 +35,6 @@ CREATE OR REPLACE FUNCTION goToServantById(character_id int, servant_id int) RET
         PERFORM goToLocation(character_id, loc_name);
     END;
 $$ language plpgsql;
-
-SELECT goToServantById(1, 5);
 
 CREATE OR REPLACE FUNCTION peopleNearby(character_id int) RETURNS TABLE(id int, name varchar, sex varchar) AS $$
     #variable_conflict use_column
@@ -57,5 +53,3 @@ CREATE OR REPLACE FUNCTION peopleNearby(character_id int) RETURNS TABLE(id int, 
         WHERE c.location_id = curr_loc_id AND c.type_id = human_type_id;
     end;
 $$ language plpgsql;
-
-SELECT * FROM peopleNearby(1);
