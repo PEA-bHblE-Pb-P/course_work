@@ -104,6 +104,8 @@ CREATE OR REPLACE FUNCTION drinkBlood(vamp_id int, char_id int, amount int) RETU
             UPDATE character SET blood_percentage = current_blood_amount WHERE id = char_id;
             RAISE NOTICE 'Вампир id=% выпил кровь у персонажа id=%', vamp_id, char_id;
             IF (current_blood_amount <= dead_blood_amount) THEN
+                INSERT INTO murder(KILLER_ID, VICTIM, DESCRIPTION, date)
+                    VALUES (vamp_id, char_id, 'Убийством посредством испития крови', NOW());
                 RAISE NOTICE 'Вероятно персонажу id=% стоит отправится на кладбище, остаётся надеяться, что его заметят другие.', char_id ;
             ELSEIF (current_blood_amount <= okay_blood_amount ) THEN
                 RAISE NOTICE 'Персонажу id=% немного поплохело.', char_id;
