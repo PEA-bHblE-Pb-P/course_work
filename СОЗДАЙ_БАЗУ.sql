@@ -139,3 +139,5 @@ ALTER TABLE "favor" ADD CONSTRAINT unique_favor UNIQUE("age_max", "age_min", "se
 ALTER TABLE "character" ADD CONSTRAINT unique_story UNIQUE (history);
 
 ALTER TABLE "drink_blood" ADD COLUMN "drink_time" timestamp NOT NULL DEFAULT NOW();
+
+ALTER TABLE "character" ADD COLUMN "blood_percentage" INT NOT NULL DEFAULT 100;
