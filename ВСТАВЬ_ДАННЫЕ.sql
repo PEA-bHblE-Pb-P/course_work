@@ -2,11 +2,13 @@ INSERT INTO sex(id, name) VALUES (1, 'undefined'), (2, 'feminine'), (3, 'masculi
 
 INSERT INTO type(id, name) VALUES (1, 'вампир'), (2, 'оборотень'), (3, 'человек'), (4, 'энергетический вампир');
 
-INSERT INTO location(id, lat, lon, name, is_place_of_living) VALUES
-(1, -41.2943296, 174.7856846 , 'Genghis Khan House', true),
-(2, -41.2936503, 174.8201893, 'Chocolate Fish Cafe', false),
-(3, -41.2936419, 174.7818361, 'The Welsh Dragon Bar', false),
-(4, -41.2936443, 174.735631, 'Баня Эрика', false);
+INSERT INTO location_type VALUES (1, 'bar'), (2, 'living'), (3, 'cafe');
+
+INSERT INTO location(id, lat, lon, name, location_type_id) VALUES
+(1, -41.2943296, 174.7856846 , 'Genghis Khan House', 2),
+(2, -41.2936503, 174.8201893, 'Chocolate Fish Cafe', 3),
+(3, -41.2936419, 174.7818361, 'The Welsh Dragon Bar', 1),
+(4, -41.2936443, 174.735631, 'Баня Эрика', NULL);
 
 INSERT INTO favor(id, sex_id, age_min, age_max) VALUES
 (1, 2, 1, 100), (2, 3, 30, 40);

@@ -29,12 +29,17 @@ CREATE TABLE "murder" (
   "date" timestamp
 );
 
+CREATE TABLE "location_type" (
+    "id" SERIAL PRIMARY KEY,
+    "type" varchar
+);
+
 CREATE TABLE "location" (
   "id" SERIAL PRIMARY KEY,
-  "lat" int,
-  "lon" int,
+  "lat" float,
+  "lon" float,
   "name" varchar,
-  "is_place_of_living" boolean
+  "location_type_id" int references location_type(id)
 );
 
 CREATE TABLE "vampire_to_servant" (

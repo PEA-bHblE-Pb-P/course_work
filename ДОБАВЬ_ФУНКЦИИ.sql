@@ -53,3 +53,4 @@ CREATE OR REPLACE FUNCTION peopleNearby(character_id int) RETURNS TABLE(id int, 
         WHERE c.location_id = curr_loc_id AND c.type_id = human_type_id;
     end;
 $$ language plpgsql;
+
