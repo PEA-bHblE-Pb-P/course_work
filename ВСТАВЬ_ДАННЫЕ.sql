@@ -8,7 +8,10 @@ INSERT INTO location(id, lat, lon, name, location_type_id) VALUES
 (1, -41.2943296, 174.7856846 , 'Genghis Khan House', 2),
 (2, -41.2936503, 174.8201893, 'Chocolate Fish Cafe', 3),
 (3, -41.2936419, 174.7818361, 'The Welsh Dragon Bar', 1),
-(4, -41.2936443, 174.735631, 'Баня Эрика', NULL);
+(4, -41.2936443, 174.735631, 'Баня Эрика', NULL),
+(5, 90.0, 135.0, 'Пьянка на полюсе', 1);
+
+INSERT INTO passes VALUES (3, 5);
 
 INSERT INTO favor(id, sex_id, age_min, age_max) VALUES
 (1, 2, 1, 100), (2, 3, 30, 40);
