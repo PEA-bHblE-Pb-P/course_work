@@ -5,3 +5,5 @@ SELECT goToServantById(1, 5);
 SELECT * FROM peopleNearby(1);
 
 SELECT goToBar(5, 2);
+
+SELECT drinkBlood(2, 4, 20);

@@ -89,3 +89,27 @@ CREATE OR REPLACE FUNCTION goToBar(bar_id int, vamp_id int) RETURNS VOID AS $$
         end if;
     END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION drinkBlood(vamp_id int, char_id int, amount int) RETURNS VOID AS $$
+    DECLARE current_blood_amount int;
+            okay_blood_amount int = 85;
+            dead_blood_amount int = 75;
+    BEGIN
+        PERFORM verifyCharacterExists(vamp_id);
+        PERFORM verifyCharacterExists(char_id);
+        SELECT blood_percentage FROM character WHERE id = char_id INTO current_blood_amount;
+        IF (current_blood_amount >= amount) THEN
+            SELECT (current_blood_amount - amount) INTO current_blood_amount;
+            INSERT INTO drink_blood(blood_amount_percentage, character_id, drinker_id) VALUES (amount, char_id, vamp_id);
+            UPDATE character SET blood_percentage = current_blood_amount WHERE id = char_id;
+            RAISE NOTICE 'Вампир id=% выпил кровь у персонажа id=%', vamp_id, char_id;
+            IF (current_blood_amount <= dead_blood_amount) THEN
+                RAISE NOTICE 'Вероятно персонажу id=% стоит отправится на кладбище, остаётся надеяться, что его заметят другие.', char_id ;
+            ELSEIF (current_blood_amount <= okay_blood_amount ) THEN
+                RAISE NOTICE 'Персонажу id=% немного поплохело.', char_id;
+            END IF;
+        ELSE
+            RAISE EXCEPTION 'Jesus... You want to drink blood too much...';
+        end if;
+    END;
+$$ language plpgsql;
