@@ -2,7 +2,7 @@ INSERT INTO sex(id, name) VALUES (1, 'undefined'), (2, 'feminine'), (3, 'masculi
 
 INSERT INTO type(id, name) VALUES (1, 'вампир'), (2, 'оборотень'), (3, 'человек'), (4, 'энергетический вампир'), (5, 'охотник на вампиров');
 
-INSERT INTO location_type VALUES (1, 'bar'), (2, 'living'), (3, 'cafe');
+INSERT INTO location_type VALUES (1, 'bar'), (2, 'living'), (3, 'cafe'), (4, 'hospital');
 
 INSERT INTO location(id, lat, lon, name, location_type_id) VALUES
 (1,-41.2943296,174.7856846,'Genghis Khan House',2),
