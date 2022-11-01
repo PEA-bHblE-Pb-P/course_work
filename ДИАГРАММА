@@ -9,6 +9,9 @@ Table character {
   location_id int [ref: > location.id]
   group int [ref: > group.id]
   favor_id int [ref: > favor.id]
+  Indexes {
+    location_id [type: hash]
+  }
 }
 
 Table type {
