@@ -7,6 +7,15 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION verify_character_alive(character_id int) RETURNS VOID AS
+$$
+BEGIN
+    if (SELECT location_id FROM character WHERE id = character_id) IS NULL THEN
+        RAISE EXCEPTION 'Персонаж с id = % мёртв.', character_id;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION go_to_location_by_id(character_id int, loc_id int) RETURNS VOID AS
 $$
@@ -158,8 +167,7 @@ BEGIN
         UPDATE character SET blood_percentage = current_blood_amount WHERE id = char_id;
         RAISE NOTICE 'Вампир id=% выпил кровь у персонажа id=%', vamp_id, char_id;
         IF (current_blood_amount <= dead_blood_amount) THEN
-            INSERT INTO murder(KILLER_ID, VICTIM, DESCRIPTION, date)
-            VALUES (vamp_id, char_id, 'Убийством посредством испития крови', NOW());
+            perform kill(char_id, vamp_id, 'Убийством посредством испития крови');
             RAISE NOTICE 'Вероятно персонажу id=% стоит отправится на кладбище, остаётся надеяться, что его заметят другие.', char_id;
         ELSEIF (current_blood_amount <= okay_blood_amount) THEN
             RAISE NOTICE 'Персонажу id=% немного поплохело.', char_id;
@@ -170,26 +178,54 @@ BEGIN
 END;
 $$ language plpgsql;
 
-create or replace function hunter_go_to_for_fight(char_id int, target_location_id int)
-    RETURNS TABLE
-            (
-                id   int,
-                name varchar,
-                sex  varchar
-            )
+create or replace function kill(char_id int, killer_id int, description character varying) returns void
 as
 $$
-declare
-    vapire_type int;
 begin
-    perform verify_character_exists(char_id);
-    perform go_to_location_by_id(char_id, target_location_id);
-    select id from type where name = 'вампир' INTO vapire_type;
+    INSERT INTO murder(KILLER_ID, VICTIM, DESCRIPTION, date)
+    VALUES (killer_id, char_id, description, NOW());
+    UPDATE character SET location_id = null WHERE id = char_id;
+end;
+$$ language plpgsql;
 
-    select * from character_type_nearby(5, 1);
---     if cnt > 1 rip
---     if cnt == 1 random or opyt
---     need kill func
+
+create or replace function hunter_go_to_for_fight(hunter_id int, target_location_id int) RETURNS void as
+$$
+declare
+    vampire_type          integer;
+    vampire_cnt           integer;
+    vamp_blood_percentage integer;
+begin
+    perform verify_character_exists(hunter_id);
+    perform verify_character_alive(hunter_id);
+    RAISE NOTICE 'Охотник на вамиров id=% вышел на охоту', hunter_id;
+
+    perform go_to_location_by_id(hunter_id, target_location_id);
+    select id from type where name = 'вампир' INTO vampire_type;
+    select COUNT(*) from character_type_nearby(hunter_id, 1) into vampire_cnt;
+    RAISE NOTICE 'Вампиров рядом: %', vampire_cnt;
+    if vampire_cnt > 1 then
+        perform kill(hunter_id, (select id from character_type_nearby(hunter_id, 1) LIMIT 1),
+                     'Охотник проиграл вампиру и умер');
+        RAISE NOTICE 'Охотник проиграл вампиру и умер';
+    elseif vampire_cnt == 1 then
+        select blood_percentage
+        from character
+        where character = (select id from character_type_nearby(hunter_id, 1))
+        into vamp_blood_percentage;
+        if vamp_blood_percentage != 100 then
+            perform kill((select id from character_type_nearby(hunter_id, 1) LIMIT 1), hunter_id,
+                         'Вампир слаб и его убил охотник');
+            RAISE NOTICE 'Вампир слаб и его убил охотник';
+        else
+            perform kill((select id from character_type_nearby(1, hunter_id) LIMIT 1), hunter_id,
+                         'Вампир силён и убил охотника');
+            RAISE NOTICE 'Вампир силён и убил охотника';
+        end if;
+    else
+        RAISE NOTICE 'Охотник не нашёл вампиров';
+    end if;
 
 end ;
 $$ language plpgsql;
+
