@@ -1,9 +1,9 @@
-SELECT goToLocation(1, 'Genghis Khan Hous_');
+SELECT go_to_location(1, 'Genghis Khan Hous_');
 
-SELECT goToServantById(1, 5);
+SELECT go_to_servant_by_id(1, 5);
 
-SELECT * FROM peopleNearby(1);
+SELECT * FROM people_nearby(1);
 
-SELECT goToBar(5, 2);
+SELECT go_to_bar(5, 2);
 
-SELECT drinkBlood(2, 4, 20);
+SELECT drink_blood(2, 4, 20);
