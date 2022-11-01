@@ -1,6 +1,6 @@
 INSERT INTO sex(id, name) VALUES (1, 'undefined'), (2, 'feminine'), (3, 'masculine');
 
-INSERT INTO type(id, name) VALUES (1, 'вампир'), (2, 'оборотень'), (3, 'человек'), (4, 'энергетический вампир');
+INSERT INTO type(id, name) VALUES (1, 'вампир'), (2, 'оборотень'), (3, 'человек'), (4, 'энергетический вампир'), (5, 'охотник на вампиров');
 
 INSERT INTO location_type VALUES (1, 'bar'), (2, 'living'), (3, 'cafe');
 
