@@ -28,6 +28,7 @@ DECLARE
     dead_blood_amount      int = 75;
     hospital_id            int;
     hospital_location_type int;
+    drinker_id int; -- TODO
 BEGIN
     IF (NEW.blood_percentage <= dead_blood_amount) THEN
         RAISE NOTICE 'Потеря крови фатальная:(';
@@ -39,6 +40,7 @@ BEGIN
             select id from type where name = 'hospital' INTO hospital_location_type;
             if (select COUNT(*) from location where location_type_id = hospital_location_type LIMIT 1 == 0) THEN
                 RAISE NOTICE 'А лечить-то негде. Смерть:(';
+
                 perform kill(NEW.id, null, 'Убит недостаточным развитием здравоохранения');
             else
                 select location_id
