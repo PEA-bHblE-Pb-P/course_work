@@ -141,3 +141,6 @@ ALTER TABLE "character" ADD CONSTRAINT unique_story UNIQUE (history);
 ALTER TABLE "drink_blood" ADD COLUMN "drink_time" timestamp NOT NULL DEFAULT NOW();
 
 ALTER TABLE "character" ADD COLUMN "blood_percentage" INT NOT NULL DEFAULT 100;
+
+create index characters_location_id
+    on character using hash (location_id);
