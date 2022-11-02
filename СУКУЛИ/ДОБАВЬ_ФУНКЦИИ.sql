@@ -184,7 +184,7 @@ $$
 begin
     INSERT INTO murder(KILLER_ID, VICTIM, DESCRIPTION, date)
     VALUES (killer_id, char_id, description, NOW());
-    UPDATE character SET location_id = null WHERE id = char_id;
+    UPDATE character SET location_id = null, place_of_living_id = null WHERE id = char_id;
 end;
 $$ language plpgsql;
 
