@@ -151,6 +151,18 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+create or replace function kill(char_id int, killer_id int, description character varying) returns void
+as
+$$
+begin
+    perform verify_character_alive(char_id);
+    INSERT INTO murder(KILLER_ID, VICTIM, DESCRIPTION, date)
+    VALUES (killer_id, char_id, description, NOW());
+    UPDATE character SET location_id = null, place_of_living_id = null WHERE id = char_id;
+    RAISE NOTICE 'id=% убил id=%', killer_id, char_id;
+end;
+$$ language plpgsql;
+
 CREATE OR REPLACE FUNCTION drink_blood(vamp_id int, char_id int, amount int) RETURNS VOID AS
 $$
 DECLARE
@@ -176,16 +188,6 @@ BEGIN
         RAISE EXCEPTION 'Jesus... You want to drink blood too much...';
     end if;
 END;
-$$ language plpgsql;
-
-create or replace function kill(char_id int, killer_id int, description character varying) returns void
-as
-$$
-begin
-    INSERT INTO murder(KILLER_ID, VICTIM, DESCRIPTION, date)
-    VALUES (killer_id, char_id, description, NOW());
-    UPDATE character SET location_id = null, place_of_living_id = null WHERE id = char_id;
-end;
 $$ language plpgsql;
 
 
