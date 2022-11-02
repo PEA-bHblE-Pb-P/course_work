@@ -74,7 +74,7 @@ CREATE OR REPLACE TRIGGER blood_amount_trigger
 EXECUTE PROCEDURE do_something_if_blood_amount_is_nok();
 
 -- триггер на убийство вампира
-create function execution_cannot_be_pardoned(char_id int) returns void
+create function execution_cannot_be_pardoned() returns trigger
 as
 $$
 DECLARE
@@ -86,21 +86,21 @@ DECLARE
     it            int;
     defen_id      int;
 begin
-    if ((select location_id from character where id = char_id) is not null) THEN
+    if ((select location_id from character where id = NEW.id) is not null) THEN
         raise NOTICE 'не убийство';
     else
         select id from type where name = 'вампир' INTO vampire_type;
-        if ((select type_id from character where id = char_id) != vampire_type) THEN
+        if ((select type_id from character where id = NEW.id) != vampire_type) THEN
             raise NOTICE 'суда не будет. Мир несправдлив';
         else
 --         вампира убил человек?
             SELECT type.id FROM type WHERE name LIKE 'охотник на вампиров' INTO hunter_type;
-            select "killer_id" from murder where victim = char_id into killer_id;
+            select "killer_id" from murder where victim = NEW.id into killer_id;
             if ((select type_id from character where id = killer_id) != hunter_type) then
                 raise NOTICE 'просто не повезло. Судить некого';
             else
 --         найти группу вампира
-                select "group" from character where id = char_id into vamp_group_id;
+                select "group" from character where id = NEW.id into vamp_group_id;
                 select place_of_living_id
                 from character
                 where id = (select admin_id from "group" where id = vamp_group_id)
@@ -138,7 +138,8 @@ begin
         end if;
     end if;
 end ;
-$$;
+$$ LANGUAGE plpgsql;
+
 
 
 CREATE OR REPLACE TRIGGER blood_amount_trigger
