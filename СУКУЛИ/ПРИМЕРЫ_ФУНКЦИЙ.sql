@@ -8,9 +8,21 @@ SELECT go_to_bar(5, 2);
 
 SELECT drink_blood(2, 4, 20);
 
-SELECT hunter_go_to_for_fight(6, 4);
+BEGIN;
+SELECT hunter_go_to_for_fight(6, 1);
+SELECT * FROM character WHERE id < 7;
+ROLLBACK;
 
-SELECT go_to_location_by_id(2, 5);
 
+BEGIN;
+SELECT hunter_go_to_for_fight(6, 1);
+SELECT * FROM character WHERE id < 7;
+ROLLBACK;
+
+SELECT go_to_location_by_id(2, -1);
+BEGIN;
+SELECT hunter_go_to_for_fight(6, -1);
+SELECT * FROM character WHERE id < 7;
+ROLLBACK;
 
 select kill(1, 6, 'УПС');

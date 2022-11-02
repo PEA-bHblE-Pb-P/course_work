@@ -141,8 +141,7 @@ end ;
 $$ LANGUAGE plpgsql;
 
 
-
-CREATE OR REPLACE TRIGGER blood_amount_trigger
+CREATE OR REPLACE TRIGGER kill_trigger
     AFTER UPDATE OF location_id
     ON character
     FOR EACH ROW
