@@ -21,31 +21,26 @@ ALTER TABLE character
     ADD CONSTRAINT verifyBirthday
         CHECK (birthday < CURRENT_TIMESTAMP);
 
-CREATE OR REPLACE FUNCTION do_something_if_blood_amount_is_nok() RETURNS TRIGGER AS
-$$
+create function do_something_if_blood_amount_is_nok() returns trigger
+	language plpgsql
+as $$
 DECLARE
     okay_blood_amount      int = 85;
     dead_blood_amount      int = 75;
     hospital_id            int;
     hospital_location_type int;
-    drinker_id             int;
-    last_drinker_time      int;
 BEGIN
-    select MAX(drink_time) from drink_blood where character_id = NEW.id into last_drinker_time;
-    select drinker_id from drink_blood where character_id = NEW.id and drink_time = last_drinker_time into drinker_id;
     IF (NEW.blood_percentage <= dead_blood_amount) THEN
-        perform kill(NEW.id, drinker_id, 'Вампир отсосал всю кровь:(');
         RAISE NOTICE 'Потеря крови фатальная:(';
     ELSEIF (NEW.blood_percentage <= okay_blood_amount) THEN
         IF (NOT (EXISTS(SELECT people_nearby(NEW.id)))) THEN
-            perform kill(NEW.id, drinker_id, 'Пытаясь дойти до больницы, умер от потери крови:(');
             RAISE NOTICE 'Пытаясь дойти до больницы, умер от потери крови:(';
         ELSE
             RAISE NOTICE 'Люди вас нашли';
             select id from type where name = 'hospital' INTO hospital_location_type;
             if (select COUNT(*) from location where location_type_id = hospital_location_type LIMIT 1 == 0) THEN
                 RAISE NOTICE 'А лечить-то негде. Смерть:(';
-                perform kill(NEW.id, drinker_id, 'Убит недостаточным развитием здравоохранения');
+                perform kill(NEW.id, null, 'Убит недостаточным развитием здравоохранения');
             else
                 select location_id
                 from location
@@ -65,7 +60,7 @@ BEGIN
     END IF;
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$;
 
 CREATE OR REPLACE TRIGGER blood_amount_trigger
     AFTER UPDATE OF blood_percentage
@@ -75,16 +70,18 @@ EXECUTE PROCEDURE do_something_if_blood_amount_is_nok();
 
 -- триггер на убийство вампира
 create function execution_cannot_be_pardoned() returns trigger
+    language plpgsql
 as
 $$
 DECLARE
     vampire_type  int;
     hunter_type   int;
-    killer_id     int;
+    _killer_id    int;
     vamp_group_id int;
     home_id       int;
     it            int;
     defen_id      int;
+    admin         int;
 begin
     if ((select location_id from character where id = NEW.id) is not null) THEN
         raise NOTICE 'не убийство';
@@ -95,25 +92,28 @@ begin
         else
 --         вампира убил человек?
             SELECT type.id FROM type WHERE name LIKE 'охотник на вампиров' INTO hunter_type;
-            select "killer_id" from murder where victim = NEW.id into killer_id;
-            if ((select type_id from character where id = killer_id) != hunter_type) then
+            select "killer_id" from murder where victim = NEW.id into _killer_id;
+            if ((select type_id from character where id = _killer_id) != hunter_type) then
                 raise NOTICE 'просто не повезло. Судить некого';
             else
 --         найти группу вампира
                 select "group" from character where id = NEW.id into vamp_group_id;
+                select admin_id from "group" where id = vamp_group_id into admin;
                 select place_of_living_id
                 from character
-                where id = (select admin_id from "group" where id = vamp_group_id)
+                where id = admin
                 into home_id;
                 --         переместить вампиров в дом группы
-                foreach it IN ARRAY (select id from character where "group" = vamp_group_id)
+                for it IN
+                    select id from character where "group" = vamp_group_id
                     loop
                         perform go_to_location_by_id(it, home_id);
                     end loop;
+                raise notice 'iterated over go';
 
 --          кто из вампиров группы пересекался с убийцей?
 
-                foreach it IN ARRAY (select location_id from location_history where character_id = killer_id)
+                foreach it IN ARRAY (select location_id from location_history where character_id = _killer_id)
                     loop
                         select c_id, location_id, visit_time
                         from ((select id as c_id from character where "group" = vamp_group_id) as ci
@@ -137,8 +137,9 @@ begin
             end if;
         end if;
     end if;
+    RETURN NEW;
 end ;
-$$ LANGUAGE plpgsql;
+$$;
 
 
 CREATE OR REPLACE TRIGGER kill_trigger
