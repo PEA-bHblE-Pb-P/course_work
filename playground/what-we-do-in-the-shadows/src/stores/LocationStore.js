@@ -36,4 +36,9 @@ export const useLocationStore = defineStore("locationStore", {
       },
     ],
   }),
+  getters: {
+    houses() {
+      return this.locations.filter((el) => el.type === 2);
+    },
+  },
 });

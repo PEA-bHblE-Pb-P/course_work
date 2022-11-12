@@ -10,6 +10,14 @@
           :location="location"
         />
       </div>
+      <div class="location">
+        <h3>ДОМА</h3>
+        <Location
+            v-for="location of locationStore.houses"
+            :key="location.id"
+            :location="location"
+        />
+      </div>
     </div>
   </main>
 </template>
