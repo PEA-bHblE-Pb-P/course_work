@@ -12,14 +12,18 @@
   },
   "dependencies": {
     "pinia": "^2.0.23",
-    "vue": "^3.2.41"
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.2.0",
+    "autoprefixer": "^10.4.13",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^9.7.0",
+    "postcss": "^8.4.19",
     "prettier": "2.7.1",
+    "tailwindcss": "^3.2.4",
     "vite": "^3.2.3",
     "vite-plugin-eslint": "^1.8.1"
   }
