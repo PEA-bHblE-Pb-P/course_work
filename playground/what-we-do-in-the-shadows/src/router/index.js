@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Index from "../components/Index.vue";
 import Typography from "../components/Typography.vue";
+import Login from "../components/Login.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: "/typography",
       name: "Typography",
       component: Typography
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login
     }
   ],
 });

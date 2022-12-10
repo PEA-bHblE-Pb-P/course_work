@@ -2,7 +2,7 @@
   <div class="w-full">
     <Header/>
     <div class="sidebar">
-      <Sidebar/>
+
     </div>
     <div class="content">
       <router-view class="h-3/4"/>
