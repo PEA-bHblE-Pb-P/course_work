@@ -8,8 +8,11 @@ import io.ktor.server.request.*
 import io.ktor.server.plugins.swagger.*
 import io.ktor.server.plugins.openapi.*
 import io.ktor.server.sessions.*
+import org.jetbrains.exposed.sql.ColumnType
+import org.jetbrains.exposed.sql.IntegerColumnType
 import org.jetbrains.exposed.sql.transactions.transaction
 import ru.ifmo.cs.helios.s311693.model.*
+import java.sql.ResultSet
 
 fun Application.configureRouting() {
 
@@ -45,6 +48,25 @@ fun Application.configureRouting() {
 
         get("/logout") {
             call.sessions.clear<UserSession>()
+        }
+
+        get("/people_nearby") {
+            val userSession = call.sessions.get<UserSession>()
+            val id = userSession?.id
+            fun ResultSet.toPeoplyNeabyResponse() = PeopleNearbyResponse(
+                this.getInt("id"),
+                this.getString("name"),
+                this.getString("sex"),
+                this.getInt("type_id")
+            )
+            call.respond(transaction {
+                val query = "SELECT * FROM people_nearby(?)".trimIndent()
+                val arguments = mutableListOf<Pair<ColumnType, *>>(
+                    Pair(IntegerColumnType(), id),
+                )
+                query.execAndMap(arguments) { it.toPeoplyNeabyResponse() }
+            })
+
         }
     }
 }

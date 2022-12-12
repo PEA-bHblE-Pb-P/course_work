@@ -14,7 +14,12 @@ import org.jetbrains.exposed.sql.Database
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.withContext
+import org.jetbrains.exposed.sql.IColumnType
+import org.jetbrains.exposed.sql.Transaction
+import org.jetbrains.exposed.sql.statements.StatementType
+import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.sql.ResultSet
 
 
 object DatabaseFactory {
@@ -50,4 +55,18 @@ object DatabaseFactory {
 
 fun Application.configureDatabase() {
     DatabaseFactory.init()
+}
+
+// better context(Transaction)
+fun <T : Any> String.execAndMap(
+    args: Iterable<Pair<IColumnType, Any?>> = emptyList(),
+    transform: (ResultSet) -> T
+): List<T> {
+    val result = arrayListOf<T>()
+    TransactionManager.current().exec(this, args, StatementType.SELECT) { rs ->
+        while (rs.next()) {
+            result += transform(rs)
+        }
+    }
+    return result
 }
