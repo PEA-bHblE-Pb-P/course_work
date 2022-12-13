@@ -10,28 +10,27 @@ function endpointQuery(postfix, query) {
   return "http://localhost:8080" + postfix + "/" + query;
 }
 
-export function login(id) {
-  return fetch(endpointQuery(LOGIN, id), {
+export async function login(id) {
+  return await fetch(endpointQuery(LOGIN, id), {
     method: "get",
     headers: {
       Accept: "text/plain, */*",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "*",
-      "Content-Type": "application/json",
     },
   }).then((response) => {
     if (!response.ok) throw new Error("Login error occurred!");
-    else return response.json();
+    else response.status
   });
 }
 
-async function logout() {
-  return fetch(endpoint(LOGOUT), {
-    method: "post",
+export async function logout() {
+  return await fetch(endpoint(LOGOUT), {
+    method: "get",
     headers: {
       Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
     },
+  }).then((response) => {
+    if (!response.ok) throw new Error("Login error occurred!");
+    else response.status
   });
 }
 

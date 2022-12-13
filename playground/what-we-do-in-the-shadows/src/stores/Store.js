@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 
-const loginStore = createStore({
+const store = createStore({
   state() {
     return {
       id: undefined,
@@ -18,4 +18,4 @@ const loginStore = createStore({
   },
 });
 
-export default loginStore;
+export default store;

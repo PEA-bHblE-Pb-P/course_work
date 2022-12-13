@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Index from "../components/common/Index.vue";
 import Typography from "../components/common/Typography.vue";
 import Login from "../components/common/Login.vue";
+import Logout from "../components/common/Logout.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -21,6 +22,11 @@ const router = createRouter({
       name: "Login",
       component: Login,
     },
+    {
+      path: "/logout",
+      name: "Logout",
+      component: Logout,
+    }
   ],
 });
 

@@ -1,6 +1,6 @@
 <template>
   <div class="grid place-items-center">
-    <form v-if="!this.$store.isLogin" @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit">
       <div class="mt-10 mb-6">
         <input
           type="text"
@@ -42,6 +42,7 @@
 
 <script>
 import {login} from "../../api.js";
+import router from "../../router/index.js";
 
 export default {
   name: "Login",
@@ -50,15 +51,12 @@ export default {
       id: ""
     }
   },
-  mounted() {
-    console.log(this.$store.isLogin)
-  },
   methods: {
     loginAndSet() {
       try {
         login(this.id)
         this.$store.commit('setId', this.id)
-        console.log(this.$store.id)
+        router.back()
       } catch (e) {
         console.log(e)
       }
