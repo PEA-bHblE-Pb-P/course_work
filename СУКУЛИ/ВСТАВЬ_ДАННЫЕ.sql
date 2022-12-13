@@ -22,12 +22,10 @@ INSERT INTO location(id, lat, lon, name, location_type_id) VALUES
 (16,59.9082,30.5135,'Кудрово',2);
 
 
-INSERT INTO passes VALUES (3, 5);
-
 INSERT INTO favor(id, sex_id, age_min, age_max) VALUES
 (1, 2, 1, 100), (2, 3, 30, 40);
 
-INSERT INTO "group"(id, location_id, admin_id, name) VALUES (1, 2, 3, 'МЫ ВАМПИРЫ А ВЫ ЛОХИ');
+INSERT INTO "group"(id, location_id, admin_id, name) VALUES (1, 2, null, 'МЫ ВАМПИРЫ А ВЫ ЛОХИ');
 
 INSERT INTO character(id, type_id, name, birthday, history, sex_id, place_of_living_id, location_id, "group", favor_id) VALUES
 (1, 1, 'Виаго', '1636-03-10', 'Вампир трехсот семидесяти девяти лет от роду, родом из Германии. Денди, помешанный на чистоте и порядке.', 3, 1, 1, 1, 2),
@@ -51,3 +49,5 @@ INSERT INTO murder(killer_id, victim, description) VALUES
 
 INSERT INTO court(id, verdict, date, defendant_id, group_id, location_id) VALUES
 (1, 'Гильермо был отпущен на волю.', '2022-10-17', 5, 1, 1);
+
+INSERT INTO passes VALUES (3, 5);

@@ -19,10 +19,18 @@ SELECT hunter_go_to_for_fight(6, 1);
 SELECT * FROM character WHERE id < 7;
 ROLLBACK;
 
-SELECT go_to_location_by_id(2, -1);
+SELECT go_to_location_by_id(1, 1);
+
 BEGIN;
 SELECT hunter_go_to_for_fight(6, -1);
 SELECT * FROM character WHERE id < 7;
 ROLLBACK;
 
 select kill(1, 6, 'УПС');
+
+explain select COUNT(*) from character where location_id = 15;
+
+create index characters_location_id
+    on character using hash (location_id);
+
+drop index characters_location_id;

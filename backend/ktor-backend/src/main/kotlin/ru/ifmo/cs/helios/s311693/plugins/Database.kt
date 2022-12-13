@@ -14,11 +14,13 @@ import org.jetbrains.exposed.sql.Database
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.withContext
+import org.jetbrains.exposed.exceptions.ExposedSQLException
 import org.jetbrains.exposed.sql.IColumnType
 import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.statements.StatementType
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.postgresql.util.PSQLException
 import java.sql.ResultSet
 
 
@@ -69,4 +71,8 @@ fun <T : Any> String.execAndMap(
         }
     }
     return result
+}
+
+fun ExposedSQLException.getUsefulMessage() : String {
+    return (this.cause as PSQLException).serverErrorMessage?.message ?: ""
 }
