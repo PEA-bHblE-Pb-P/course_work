@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Index from "../components/Index.vue";
-import Typography from "../components/Typography.vue";
-import Login from "../components/Login.vue";
+import Index from "../components/common/Index.vue";
+import Typography from "../components/common/Typography.vue";
+import Login from "../components/common/Login.vue";
 
 const router = createRouter({
   history: createWebHistory(),
