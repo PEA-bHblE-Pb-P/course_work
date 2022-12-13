@@ -124,6 +124,12 @@ paths:
             '*/*':
               schema:
                 type: "array"
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
   /location/{id}:
     get:
       description: ""
