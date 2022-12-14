@@ -84,19 +84,58 @@ fun Application.configureRouting() {
 
         }
 
-        get("/hunter_go_to_for_fight") {
-
-        }
-
-        get("/go_to_location_by_id/{location_id}") {
+        get("/hunter_go_to_for_fight/{location_id}") {
             val userSession = call.sessions.get<UserSession>()
             val id = userSession?.id
             val location_id = call.parameters["id"]!!.toInt()
+            call.respond(transaction {
+                val query = "SELECT * FROM hunter_go_to_for_fight(?, ?)".trimIndent()
+                val arguments = mutableListOf<Pair<ColumnType, *>>(
+                    Pair(IntegerColumnType(), id),
+                    Pair(IntegerColumnType(), location_id),
+                )
+                query.execAndMap(arguments) { }
+            })
+        }
+
+        get("/drink_blood/{char_id}/{amount}") {
+            val userSession = call.sessions.get<UserSession>()
+            val id = userSession?.id
+            val char_id = call.parameters["char_id"]!!.toInt()
+            val amount = call.parameters["amount"]!!.toInt()
+            call.respond(transaction {
+                val query = "SELECT * FROM drink_blood(?, ?, ?)".trimIndent()
+                val arguments = mutableListOf<Pair<ColumnType, *>>(
+                    Pair(IntegerColumnType(), id),
+                    Pair(IntegerColumnType(), char_id),
+                    Pair(IntegerColumnType(), amount),
+                )
+                query.execAndMap(arguments) { }
+            })
+        }
+        get("/go_to_location_by_id/{location_id}") {
+            val userSession = call.sessions.get<UserSession>()
+            val id = userSession?.id
+            val location_id = call.parameters["location_id"]!!.toInt()
             call.respond(transaction {
                 val query = "SELECT * FROM go_to_location_by_id(?, ?)".trimIndent()
                 val arguments = mutableListOf<Pair<ColumnType, *>>(
                     Pair(IntegerColumnType(), id),
                     Pair(IntegerColumnType(), location_id),
+                )
+                query.execAndMap(arguments) { }
+            })
+        }
+        get("/go_to_location/{location_name}") {
+            val userSession = call.sessions.get<UserSession>()
+            val id = userSession?.id
+            val location_name = call.parameters["location_name"]!!.toInt()
+
+            call.respond(transaction {
+                val query = "SELECT * FROM go_to_location(?, ?)".trimIndent()
+                val arguments = mutableListOf<Pair<ColumnType, *>>(
+                    Pair(IntegerColumnType(), id),
+                    Pair(VarCharColumnType(), location_name),
                 )
                 query.execAndMap(arguments) { }
             })
