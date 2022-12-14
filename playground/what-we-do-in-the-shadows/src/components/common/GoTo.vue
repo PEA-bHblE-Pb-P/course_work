@@ -43,7 +43,7 @@ export default {
       console.log(this.selected);
       this.$store.commit("setLocation", this.selected);
       go_to_location_id(this.selected.id);
-      router.push("/");
+      router.push("/profile");
     },
   },
 };

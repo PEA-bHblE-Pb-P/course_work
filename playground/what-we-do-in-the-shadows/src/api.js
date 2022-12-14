@@ -30,21 +30,20 @@ export async function logout() {
       Accept: "application/json, text/plain, */*",
     },
   }).then((response) => {
-    if (!response.ok) throw new Error("Login error occurred!");
+    if (!response.ok) throw new Error("Logout error occurred!");
     else response.status;
   });
 }
 
-async function people_nearby() {
+export async function people_nearby() {
   return fetch(endpoint(PEOPLE_NEARBY), {
     method: "get",
     headers: {
       Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      id: id,
-    }),
+    }
+  }).then((response) => {
+    if (!response.ok) throw new Error("People nearby error occurred!");
+    else response.json();
   });
 }
 
@@ -55,7 +54,7 @@ export async function go_to_location_id(id) {
       Accept: "application/json, text/plain, */*",
     },
   }).then((response) => {
-    if (!response.ok) throw new Error("Login error occurred!");
+    if (!response.ok) throw new Error("Go to error occurred!");
     else response.status;
   });
 }
