@@ -4,6 +4,7 @@ const store = createStore({
   state() {
     return {
       id: undefined,
+      location: undefined,
     };
   },
   getters: {
@@ -14,6 +15,9 @@ const store = createStore({
   mutations: {
     setId(state, id) {
       state.id = id;
+    },
+    setLocation(state, location) {
+      state.location = location;
     },
   },
 });

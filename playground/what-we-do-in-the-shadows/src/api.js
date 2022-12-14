@@ -18,7 +18,7 @@ export async function login(id) {
     },
   }).then((response) => {
     if (!response.ok) throw new Error("Login error occurred!");
-    else response.status
+    else response.status;
   });
 }
 
@@ -30,7 +30,7 @@ export async function logout() {
     },
   }).then((response) => {
     if (!response.ok) throw new Error("Login error occurred!");
-    else response.status
+    else response.status;
   });
 }
 

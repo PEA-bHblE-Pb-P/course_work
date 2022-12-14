@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { mapLocationType } from "../mapper.js";
 
 export const useLocationStore = defineStore("locationStore", {
   state: () => ({
@@ -37,8 +38,14 @@ export const useLocationStore = defineStore("locationStore", {
     ],
   }),
   getters: {
-    houses() {
-      return this.locations.filter((el) => el.type === 2);
+    typedLocations(state) {
+      return state.locations.map((loc) => ({
+        id: loc.id,
+        name: loc.name,
+        lat: loc.lat,
+        lot: loc.lot,
+        type: mapLocationType(loc.type),
+      }));
     },
   },
 });

@@ -3,6 +3,7 @@ import Index from "../components/common/Index.vue";
 import Typography from "../components/common/Typography.vue";
 import Login from "../components/common/Login.vue";
 import Logout from "../components/common/Logout.vue";
+import GoTo from "../components/common/GoTo.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -26,7 +27,12 @@ const router = createRouter({
       path: "/logout",
       name: "Logout",
       component: Logout,
-    }
+    },
+    {
+      path: "/goto",
+      name: "GoTo",
+      component: GoTo,
+    },
   ],
 });
 

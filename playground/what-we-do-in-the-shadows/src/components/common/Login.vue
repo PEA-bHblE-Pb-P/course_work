@@ -41,26 +41,26 @@
 </template>
 
 <script>
-import {login} from "../../api.js";
+import { login } from "../../api.js";
 import router from "../../router/index.js";
 
 export default {
   name: "Login",
   data() {
     return {
-      id: ""
-    }
+      id: "",
+    };
   },
   methods: {
     loginAndSet() {
       try {
-        login(this.id)
-        this.$store.commit('setId', this.id)
-        router.back()
+        login(this.id);
+        this.$store.commit("setId", this.id);
+        router.back();
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
