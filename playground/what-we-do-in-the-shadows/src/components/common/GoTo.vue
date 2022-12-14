@@ -4,14 +4,14 @@
     v-for="loc in locations"
     :key="loc.id"
     :location="loc"
-    @click="this.selected = loc.id"
-    :class="{ 'bg-gray-400': loc.id === selected }"
+    @click="this.selected = loc"
+    :class="{ 'bg-gray-400': loc.id === selected.id }"
   />
   <button
     class="inline-block m-10 px-7 py-3 bg-gray-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-gray-600 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
     type="button"
     @click="go"
-    :class="{ hidden: selected === undefined }"
+    :class="{ hidden: selected.id === undefined }"
   >
     GO
   </button>
@@ -21,14 +21,16 @@
 import Location from "./Location.vue";
 import { useLocationStore } from "../../stores/LocationStore.js";
 import router from "../../router/index.js";
+import {go_to_location_id} from "../../api.js";
 
 export default {
   name: "GoTo",
   components: { Location },
   data() {
     return {
-      locations: [],
-      selected: undefined,
+      selected: {
+        id: undefined
+      },
     };
   },
   computed: {
@@ -38,7 +40,9 @@ export default {
   },
   methods: {
     go() {
+      console.log(this.selected);
       this.$store.commit("setLocation", this.selected);
+      go_to_location_id(this.selected.id);
       router.push("/");
     },
   },

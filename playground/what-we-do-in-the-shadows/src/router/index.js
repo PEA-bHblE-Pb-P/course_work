@@ -4,6 +4,7 @@ import Typography from "../components/common/Typography.vue";
 import Login from "../components/common/Login.vue";
 import Logout from "../components/common/Logout.vue";
 import GoTo from "../components/common/GoTo.vue";
+import Profile from "../components/common/Profile.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -33,6 +34,11 @@ const router = createRouter({
       name: "GoTo",
       component: GoTo,
     },
+    {
+      path: "/profile",
+      name: "Profile",
+      component: Profile,
+    }
   ],
 });
 

@@ -5,6 +5,9 @@
       <router-link to="/typography" class="hover:bg-white p-2"
         >Typography</router-link
       >
+      <router-link v-if="isLogin" to="/profile" class="hover:bg-white p-2"
+        >Profile</router-link
+      >
       <router-link
         v-if="!isLogin"
         to="/login"

@@ -1,6 +1,7 @@
 const LOGIN = "/login";
 const LOGOUT = "/logout";
 const PEOPLE_NEARBY = "/people_nearby";
+const GO_TO_LOCATION_ID = "/go_to_location_by_id"
 
 function endpoint(postfix) {
   return "http://localhost:8080" + postfix;
@@ -44,5 +45,17 @@ async function people_nearby() {
     body: JSON.stringify({
       id: id,
     }),
+  });
+}
+
+export async function go_to_location_id(id) {
+  return await fetch(endpointQuery(GO_TO_LOCATION_ID, id), {
+    method: "get",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+    },
+  }).then((response) => {
+    if (!response.ok) throw new Error("Login error occurred!");
+    else response.status;
   });
 }
