@@ -16,13 +16,12 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.postgresql.util.PSQLException
 import java.sql.ResultSet
 
-
 object DatabaseFactory {
 
     private val appConfig = HoconApplicationConfig(ConfigFactory.load())
-    private val dbUrl = "jdbc:postgresql://localhost:5432/studs" //appConfig.property("db.jdbcUrl").getString()
-    private val dbUser = "s311693" //appConfig.property("db.dbUser").getString()
-    private val dbPassword = "s311693" //appConfig.property("db.dbPassword").getString()
+    private val dbUrl = "jdbc:postgresql://localhost:5432/studs" // appConfig.property("db.jdbcUrl").getString()
+    private val dbUser = "s311693" // appConfig.property("db.dbUser").getString()
+    private val dbPassword = "s311693" // appConfig.property("db.dbPassword").getString()
 
     fun init() {
         Database.connect(hikari())
@@ -45,7 +44,6 @@ object DatabaseFactory {
         withContext(Dispatchers.IO) {
             transaction { block() }
         }
-
 }
 
 fun Application.configureDatabase() {
@@ -66,6 +64,6 @@ fun <T : Any> String.execAndMap(
     return result
 }
 
-fun ExposedSQLException.getUsefulMessage() : String {
+fun ExposedSQLException.getUsefulMessage(): String {
     return (this.cause as PSQLException).serverErrorMessage?.message ?: ""
 }

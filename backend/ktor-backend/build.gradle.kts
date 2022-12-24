@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType.JSON
+
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
@@ -9,6 +11,7 @@ plugins {
     id("io.ktor.plugin") version "2.2.1"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.22"
     id("org.flywaydb.flyway") version "5.2.4"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 group = "ru.ifmo.cs.helios.s311693"
@@ -23,6 +26,14 @@ application {
 
 repositories {
     mavenCentral()
+}
+
+ktlint {
+    ignoreFailures.set(false)
+    disabledRules.set(setOf("final-newline", "no-wildcard-imports"))
+    reporters {
+        reporter(JSON)
+    }
 }
 
 dependencies {
