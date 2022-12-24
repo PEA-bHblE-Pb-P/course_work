@@ -12,7 +12,8 @@ plugins {
 }
 
 group = "ru.ifmo.cs.helios.s311693"
-version = "0.0.1"
+version = "0.0.2"
+
 application {
     mainClass.set("ru.ifmo.cs.helios.s311693.ApplicationKt")
 
@@ -34,19 +35,16 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-websockets-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.swagger.codegen.v3:swagger-codegen-generators:1.0.36")
     implementation("io.ktor:ktor-server-locations:$ktor_version")
-    implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version"
-    )
+    implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.postgresql:postgresql:$postgres_version")
-    implementation("com.zaxxer:HikariCP:2.7.8")
+    implementation("com.zaxxer:HikariCP:5.0.1")
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
