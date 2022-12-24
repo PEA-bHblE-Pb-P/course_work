@@ -39,7 +39,8 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.swagger.codegen.v3:swagger-codegen-generators:1.0.36")
     implementation("io.ktor:ktor-server-locations:$ktor_version")
-
+    implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version"
+    )
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
