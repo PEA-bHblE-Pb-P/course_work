@@ -1,0 +1,250 @@
+openapi: "3.0.3"
+info:
+  title: "ktor_backend API"
+  description: "ktor_backend API"
+  version: "1.0.0"
+servers:
+- url: "http://localhost:8080"
+paths:
+  /ws:
+    get:
+      description: ""
+      parameters:
+      - name: "Connection"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      - name: "Upgrade"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      - name: "Sec-WebSocket-Key"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "101":
+          description: "Switching Protocols"
+          headers:
+            Connection:
+              required: true
+              schema:
+                type: "string"
+            Upgrade:
+              required: true
+              schema:
+                type: "string"
+            Sec-WebSocket-Accept:
+              required: true
+              schema:
+                type: "string"
+  /json/kotlinx-serialization:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Map"
+  /go_to_location_by_id/{location_id}:
+    get:
+      description: ""
+      parameters:
+      - name: "id"
+        in: "query"
+        required: false
+        schema:
+          type: "string"
+      - name: "location_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+  /group:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/GroupResponse"
+  /group/{id}:
+    get:
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/GroupResponse"
+  /hunter_go_to_for_fight:
+    get:
+      description: ""
+  /kill/{char_id}:
+    get:
+      description: "get<ListingKill> { listing ->"
+      parameters:
+      - name: "char_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "description"
+        in: "query"
+        required: false
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /location/{id}:
+    get:
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/LocationResponse"
+  /location_type/{id}:
+    get:
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/LocationTypeResponse"
+  /login/{id}:
+    get:
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /logout:
+    get:
+      description: ""
+  /people_nearby:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+  /ping:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "pong!"
+components:
+  schemas:
+    Map:
+      type: "object"
+      properties: {}
+    GroupResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        name:
+          type: "string"
+        locationId:
+          type: "integer"
+          format: "int32"
+        adminId:
+          type: "integer"
+          format: "int32"
+    LocationResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        lat:
+          type: "number"
+          format: "float"
+        lon:
+          type: "number"
+          format: "float"
+        name:
+          type: "string"
+        locationTypeId:
+          type: "integer"
+          format: "int32"
+    LocationTypeResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        type:
+          type: "string"

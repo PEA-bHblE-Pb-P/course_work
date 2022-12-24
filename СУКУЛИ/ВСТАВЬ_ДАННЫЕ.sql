@@ -22,8 +22,6 @@ INSERT INTO location(id, lat, lon, name, location_type_id) VALUES
 (16,59.9082,30.5135,'Кудрово',2);
 
 
-INSERT INTO passes VALUES (3, 5);
-
 INSERT INTO favor(id, sex_id, age_min, age_max) VALUES
 (1, 2, 1, 100), (2, 3, 30, 40);
 
@@ -51,3 +49,5 @@ INSERT INTO murder(killer_id, victim, description) VALUES
 
 INSERT INTO court(id, verdict, date, defendant_id, group_id, location_id) VALUES
 (1, 'Гильермо был отпущен на волю.', '2022-10-17', 5, 1, 1);
+
+INSERT INTO passes VALUES (3, 5);
