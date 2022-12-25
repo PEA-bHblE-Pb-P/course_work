@@ -1,35 +1,27 @@
 package ru.ifmo.cs.helios.s311693.plugins
 
 import com.typesafe.config.ConfigFactory
-import io.ktor.server.routing.*
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.config.*
-import io.ktor.server.response.*
-import io.ktor.server.request.*
-import io.ktor.server.plugins.swagger.*
-import io.ktor.server.plugins.openapi.*
-import kotlinx.coroutines.Dispatchers
-import org.jetbrains.exposed.sql.Database
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.ktor.server.application.*
+import io.ktor.server.config.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.exceptions.ExposedSQLException
+import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.IColumnType
-import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.statements.StatementType
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.postgresql.util.PSQLException
 import java.sql.ResultSet
 
-
 object DatabaseFactory {
 
     private val appConfig = HoconApplicationConfig(ConfigFactory.load())
-    private val dbUrl = "jdbc:postgresql://localhost:5432/studs" //appConfig.property("db.jdbcUrl").getString()
-    private val dbUser = "s311693" //appConfig.property("db.dbUser").getString()
-    private val dbPassword = "s311693" //appConfig.property("db.dbPassword").getString()
+    private val dbUrl = "jdbc:postgresql://localhost:5432/studs" // appConfig.property("db.jdbcUrl").getString()
+    private val dbUser = "s311693" // appConfig.property("db.dbUser").getString()
+    private val dbPassword = "s311693" // appConfig.property("db.dbPassword").getString()
 
     fun init() {
         Database.connect(hikari())
@@ -52,7 +44,6 @@ object DatabaseFactory {
         withContext(Dispatchers.IO) {
             transaction { block() }
         }
-
 }
 
 fun Application.configureDatabase() {
@@ -73,6 +64,6 @@ fun <T : Any> String.execAndMap(
     return result
 }
 
-fun ExposedSQLException.getUsefulMessage() : String {
+fun ExposedSQLException.getUsefulMessage(): String {
     return (this.cause as PSQLException).serverErrorMessage?.message ?: ""
 }
