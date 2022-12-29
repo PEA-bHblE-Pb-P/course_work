@@ -1,53 +1,34 @@
 package ru.ifmo.cs.helios.s311693.plugins
 
-import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.ktor.server.application.*
-import io.ktor.server.config.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.exceptions.ExposedSQLException
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.IColumnType
 import org.jetbrains.exposed.sql.statements.StatementType
 import org.jetbrains.exposed.sql.transactions.TransactionManager
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.postgresql.util.PSQLException
 import java.sql.ResultSet
 
 object DatabaseFactory {
-
-    private val appConfig = HoconApplicationConfig(ConfigFactory.load())
-    private val dbUrl = "jdbc:postgresql://localhost:5432/studs" // appConfig.property("db.jdbcUrl").getString()
-    private val dbUser = "s311693" // appConfig.property("db.dbUser").getString()
-    private val dbPassword = "s311693" // appConfig.property("db.dbPassword").getString()
-
-    fun init() {
-        Database.connect(hikari())
-    }
-
-    private fun hikari(): HikariDataSource {
-        val config = HikariConfig()
-        config.driverClassName = "org.postgresql.Driver"
-        config.jdbcUrl = dbUrl
-        config.username = dbUser
-        config.password = dbPassword
-        config.maximumPoolSize = 3
-        config.isAutoCommit = false
-        config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
-        config.validate()
-        return HikariDataSource(config)
-    }
-
-    suspend fun <T> dbQuery(block: () -> T): T =
-        withContext(Dispatchers.IO) {
-            transaction { block() }
+    fun hikari(): HikariDataSource {
+        val hikariConfig = HikariConfig().apply {
+            driverClassName = "org.postgresql.Driver"
+            jdbcUrl = System.getenv("DB_URL")
+            username = System.getenv("DB_USER")
+            password = System.getenv("DB_PASSWORD")
+            maximumPoolSize = 3
+            isAutoCommit = false
+            transactionIsolation = "TRANSACTION_REPEATABLE_READ"
+            validate()
         }
+
+        return HikariDataSource(hikariConfig)
+    }
 }
 
-fun Application.configureDatabase() {
-    DatabaseFactory.init()
+fun configureDatabase() {
+    Database.connect(DatabaseFactory.hikari())
 }
 
 // better context(Transaction)
