@@ -1,7 +1,7 @@
 package ru.ifmo.cs.helios.s311693.plugins
 
-import io.ktor.server.sessions.*
 import io.ktor.server.application.*
+import io.ktor.server.sessions.*
 import java.io.File
 
 data class UserSession(val id: Int = 0)
@@ -12,5 +12,4 @@ fun Application.configureSecurity() {
             cookie.extensions["SameSite"] = "lax"
         }
     }
-
 }
