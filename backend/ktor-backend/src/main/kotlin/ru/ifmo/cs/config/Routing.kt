@@ -5,6 +5,7 @@ import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.server.application.*
 import io.ktor.server.plugins.openapi.*
 import io.ktor.server.plugins.swagger.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
@@ -13,6 +14,7 @@ import org.jetbrains.exposed.sql.ColumnType
 import org.jetbrains.exposed.sql.IntegerColumnType
 import org.jetbrains.exposed.sql.VarCharColumnType
 import org.jetbrains.exposed.sql.transactions.transaction
+import ru.ifmo.cs.domain.vampire.DrinkBloodRequest
 import ru.ifmo.cs.model.PeopleNearby
 import java.sql.ResultSet
 
@@ -78,7 +80,7 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
         get("/hunter_go_to_for_fight/{location_id}") {
             val userSession = call.sessions.get<UserSession>()
             val id = userSession?.id
-            val locationId = call.parameters["id"]!!.toInt()
+            val locationId = call.parameters["location_id"]!!.toInt()
             call.respond(
                 transaction {
                     val query = "SELECT * FROM hunter_go_to_for_fight(?, ?)".trimIndent()
@@ -91,22 +93,11 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
             )
         }
 
-        get("/drink_blood/{char_id}/{amount}") {
+        post("/drink_blood") {
             val userSession = call.sessions.get<UserSession>()
-            val id = userSession?.id
-            val charId = call.parameters["char_id"]!!.toInt()
-            val amount = call.parameters["amount"]!!.toInt()
-            call.respond(
-                transaction {
-                    val query = "SELECT * FROM drink_blood(?, ?, ?)".trimIndent()
-                    val arguments = mutableListOf<Pair<ColumnType, *>>(
-                        Pair(IntegerColumnType(), id),
-                        Pair(IntegerColumnType(), charId),
-                        Pair(IntegerColumnType(), amount),
-                    )
-                    query.execAndMap(arguments) { }
-                }
-            )
+            val id = userSession?.id!!
+            val request = call.receive<DrinkBloodRequest>()
+            call.respond(vampireService.drinkBlood(id, request.charId, request.amount))
         }
 
         get("/go_to_location_by_id/{location_id}") {
