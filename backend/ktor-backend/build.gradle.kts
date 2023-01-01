@@ -15,10 +15,10 @@ plugins {
 }
 
 group = "ru.ifmo.cs"
-version = "0.0.2"
+version = "0.0.3"
 
 application {
-    mainClass.set("ru.ifmo.cs.helios.s311693.ApplicationKt")
+    mainClass.set("ru.ifmo.cs.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
