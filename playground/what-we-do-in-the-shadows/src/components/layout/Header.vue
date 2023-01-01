@@ -1,42 +1,46 @@
 <template>
-  <header class="header">
-    <nav
-      class="relative flex w-full py-2 px-6 bg-gray-600 text-white"
-    >
-      <router-link to="/" class="hover:bg-gray-400 p-2">
-        <HomeIcon />
-      </router-link>
-      <router-link to="/typography" class="hover:bg-gray-400 p-2">
-        <FontIcon />
-      </router-link>
-      <router-link
-          v-if="isLogin"
-          to="/goto"
-          class="float-right hover:bg-gray-400 p-2"
-      >
-        <LocationIcon />
-      </router-link>
-      <PeopleIcon/>
-
-      <router-link v-if="isLogin" to="/profile" class="hover:bg-gray-400 p-2">
-        <UserIcon />
-      </router-link>
-      <router-link
-        v-if="!isLogin"
-        to="/login"
-        class="float-right hover:bg-gray-400 p-2"
-      >
-        <LoginIcon />
-      </router-link>
-      <router-link
-        v-if="isLogin"
-        to="/logout"
-        class="float-right hover:bg-gray-400 p-2"
-      >
-        <LogoutIcon />
-      </router-link>
+  <div>
+    <nav class="flex items-center justify-between flex-wrap p-6 bg-gray-600 text-white">
+      <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <router-link to="/" class="hover:bg-gray-400 p-2">
+          <HomeIcon />
+        </router-link>
+      </div>
+      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div class="lg:flex-grow text-sm">
+          <router-link
+              v-if="isLogin"
+              to="/goto"
+              class="block mt-4 hover:bg-gray-400 p-2"
+          >
+            <LocationIcon />
+          </router-link>
+          <router-link v-if="isLogin" to="to" class="block mt-4 hover:bg-gray-400 p-2">
+            <PeopleIcon/>
+          </router-link>
+          <router-link v-if="isLogin" to="/profile" class="block mt-4 hover:bg-gray-400 p-2">
+            <UserIcon />
+          </router-link>
+        </div>
+        <div>
+          <router-link
+            v-if="!isLogin"
+            to="/login"
+            class="float-right hover:bg-gray-400 p-2"
+          >
+            <LoginIcon />
+          </router-link>
+          <router-link
+            v-if="isLogin"
+            to="/logout"
+            class="float-right hover:bg-gray-400 p-2"
+          >
+            <LogoutIcon />
+          </router-link>
+        </div>
+      </div>
     </nav>
-  </header>
+  </div>
 </template>
 <script>
 import HomeIcon from "../icon/HomeIcon.vue";

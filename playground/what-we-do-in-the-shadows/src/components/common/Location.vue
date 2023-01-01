@@ -15,9 +15,3 @@ const props = defineProps({
   },
 });
 </script>
-
-<style scoped>
-.location {
-  border: 2px solid black;
-}
-</style>

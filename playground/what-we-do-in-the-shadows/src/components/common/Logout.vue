@@ -9,10 +9,6 @@
         LOGOUT
       </button>
     </form>
-    <img
-      class="mt-5"
-      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.denofgeek.com%2Fwp-content%2Fuploads%2F2019%2F05%2Fwhat-we-do-in-the-shadows-episode-6.jpg%3Fresize%3D768%252C432&f=1&nofb=1&ipt=397dbfbcd95a9beec72a0d77f7f66673bce2c743315b7ffd56ed83d731b9b1af&ipo=images"
-    />
   </div>
 </template>
 
