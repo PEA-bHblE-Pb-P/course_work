@@ -14,7 +14,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
-group = "ru.ifmo.cs.helios.s311693"
+group = "ru.ifmo.cs"
 version = "0.0.2"
 
 application {

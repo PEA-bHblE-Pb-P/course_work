@@ -1,4 +1,4 @@
-package ru.ifmo.cs.helios.s311693.plugins
+package ru.ifmo.cs.config
 
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.OK
@@ -13,11 +13,10 @@ import org.jetbrains.exposed.sql.ColumnType
 import org.jetbrains.exposed.sql.IntegerColumnType
 import org.jetbrains.exposed.sql.VarCharColumnType
 import org.jetbrains.exposed.sql.transactions.transaction
-import ru.ifmo.cs.helios.s311693.model.*
-import ru.ifmo.cs.helios.s311693.model.Location
+import ru.ifmo.cs.model.PeopleNearby
 import java.sql.ResultSet
 
-fun Application.configureRouting() {
+fun Application.configureRouting(deps: Dependencies) = with(deps) {
     routing {
         get("/ping") {
             call.respondText("pong!")
@@ -25,27 +24,26 @@ fun Application.configureRouting() {
 
         route("/group") {
             get("/{id}") {
-                call.respond(transaction { Group.findById(call.parameters["id"]!!.toInt()) }!!.toResponse())
+                call.respond(groupService.group(call.parameters["id"]!!.toInt()))
             }
 
             get {
-                call.respond(
-                    transaction { Group.all() }.map { it.toResponse() }
-                        .toTypedArray()
-                ) // cast to TypedArray for item type of array in swagger
+                call.respond(groupService.all())
             }
         }
 
         route("/location_type") {
             get("/{id}") {
-                call.respond(transaction { LocationType.findById(call.parameters["id"]!!.toInt()) }!!.toResponse())
+                call.respond(locationService.locationType(call.parameters["id"]!!.toInt()))
             }
         }
+
         route("/location") {
             get("/{id}") {
-                call.respond(transaction { Location.findById(call.parameters["id"]!!.toInt()) }!!.toResponse())
+                call.respond(locationService.location(call.parameters["id"]!!.toInt()))
             }
         }
+
         route("/login") {
             get("/{id}") {
                 call.sessions.set(UserSession(id = call.parameters["id"]!!.toInt()))

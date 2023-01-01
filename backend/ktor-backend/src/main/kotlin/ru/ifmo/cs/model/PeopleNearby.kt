@@ -1,6 +1,7 @@
-package ru.ifmo.cs.helios.s311693.model
+package ru.ifmo.cs.model
 
 import kotlinx.serialization.Serializable
+
 @Serializable
 data class PeopleNearby(
     val id: Int,

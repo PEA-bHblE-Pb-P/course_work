@@ -1,6 +1,5 @@
-package ru.ifmo.cs.helios.s311693.model
+package ru.ifmo.cs.model
 
-import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -19,18 +18,3 @@ class Group(id: EntityID<Int>) : IntEntity(id) {
     var locationId by Groups.locationId
     var adminId by Groups.adminId
 }
-
-@Serializable
-data class GroupResponse(
-    val id: Int,
-    val name: String,
-    val locationId: Int,
-    val adminId: Int
-)
-
-fun Group.toResponse() = GroupResponse(
-    id = id.value,
-    name = name,
-    locationId = locationId,
-    adminId = adminId
-)
