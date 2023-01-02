@@ -36,6 +36,10 @@ ktlint {
     }
 }
 
+tasks.test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-sessions-jvm:$ktor_version")
@@ -58,4 +62,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.0.1")
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
+    testImplementation("org.assertj:assertj-guava:3.5.0")
 }
