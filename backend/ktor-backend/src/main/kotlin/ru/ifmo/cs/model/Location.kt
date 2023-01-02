@@ -15,8 +15,8 @@ object LocationTable : IntIdTable("location_type") {
 class Location(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<Location>(LocationTable)
 
-    val lat by LocationTable.lat
-    val lon by LocationTable.lon
-    val name by LocationTable.name
-    val locationTypeId by LocationTable.locationTypeId
+    var lat by LocationTable.lat
+    var lon by LocationTable.lon
+    var name by LocationTable.name
+    var locationTypeId by LocationTable.locationTypeId
 }

@@ -15,8 +15,6 @@ import org.jetbrains.exposed.sql.IntegerColumnType
 import org.jetbrains.exposed.sql.VarCharColumnType
 import org.jetbrains.exposed.sql.transactions.transaction
 import ru.ifmo.cs.domain.vampire.DrinkBloodRequest
-import ru.ifmo.cs.model.PeopleNearby
-import java.sql.ResultSet
 
 fun Application.configureRouting(deps: Dependencies) = with(deps) {
     routing {
@@ -46,40 +44,32 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
             }
         }
 
-        route("/login") {
-            get("/{id}") {
-                call.sessions.set(UserSession(id = call.parameters["id"]!!.toInt()))
-                call.respond(OK)
-            }
+        patch("/login/{id}") {
+            call.sessions.set(UserSession(id = call.parameters["id"]!!.toInt()))
+            call.respond(OK)
         }
 
-        get("/logout") {
+        patch("/logout") {
             call.sessions.clear<UserSession>()
         }
 
-        get("/people_nearby") {
-            val userSession = call.sessions.get<UserSession>()
-            val id = userSession?.id
-            fun ResultSet.toPeopleNearbyResponse() = PeopleNearby(
-                this.getInt("id"),
-                this.getString("name"),
-                this.getString("sex"),
-                this.getInt("type_id")
-            )
-            call.respond(
-                transaction {
-                    val query = "SELECT * FROM people_nearby(?)".trimIndent()
-                    val arguments = mutableListOf<Pair<ColumnType, *>>(
-                        Pair(IntegerColumnType(), id),
-                    )
-                    query.execAndMap(arguments) { it.toPeopleNearbyResponse() }
-                }
-            )
+        route("/character") {
+            get("") {
+                val userSession = call.sessions.get<UserSession>()
+                val id = userSession?.id!!
+                call.respond(characterService.character(id))
+            }
+
+            get("/nearby") {
+                val userSession = call.sessions.get<UserSession>()
+                val id = userSession?.id!!
+                call.respond(characterService.peopleNearby(id))
+            }
         }
 
-        get("/hunter_go_to_for_fight/{location_id}") {
+        post("/hunter_go_to_for_fight/{location_id}") {
             val userSession = call.sessions.get<UserSession>()
-            val id = userSession?.id
+            val id = userSession?.id!!
             val locationId = call.parameters["location_id"]!!.toInt()
             call.respond(
                 transaction {

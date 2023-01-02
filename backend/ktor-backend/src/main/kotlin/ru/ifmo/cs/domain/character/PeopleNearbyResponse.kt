@@ -1,11 +1,11 @@
-package ru.ifmo.cs.model
+package ru.ifmo.cs.domain.character
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PeopleNearby(
+data class PeopleNearbyResponse(
     val id: Int,
     val name: String,
     val sex: String,
-    val typeId: Int,
+    val typeId: Int
 )
