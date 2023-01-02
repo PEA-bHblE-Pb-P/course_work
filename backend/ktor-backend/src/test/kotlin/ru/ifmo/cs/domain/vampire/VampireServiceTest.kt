@@ -1,6 +1,7 @@
 package ru.ifmo.cs.domain.vampire
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.extension.ExtendWith
@@ -12,6 +13,21 @@ class VampireServiceTest {
 
     @Test
     fun drinkBlood() {
-        assertThat(service.drinkBlood(1, 1, 100)).isNotEqualTo(Unit)
+        assertThat(service.drinkBlood(1, 3, 10))
+            .isNotEqualTo(Unit)
+    }
+
+    @Test
+    fun `drinkBlood should fail when id eq char id`() {
+        assertThatThrownBy {
+            service.drinkBlood(1, 1, 10)
+        }.isExactlyInstanceOf(Exception::class.java)
+    }
+
+    @Test
+    fun `drinkBlood should fail for human`() {
+        assertThatThrownBy {
+            service.drinkBlood(3, 5, 10)
+        }.isExactlyInstanceOf(Exception::class.java)
     }
 }
