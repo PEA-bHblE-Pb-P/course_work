@@ -29,7 +29,10 @@ class CharacterService {
             }
         }
 
-        return if (err == null || result == null) Result.success(Unit) else Result.failure(err)
+        return if (err == null || result == null)
+            Result.success(Unit)
+        else
+            Result.failure(err)
     }
 
     fun peopleNearby(id: Int) = transaction {

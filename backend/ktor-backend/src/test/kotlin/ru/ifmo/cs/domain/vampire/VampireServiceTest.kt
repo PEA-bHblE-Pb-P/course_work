@@ -14,7 +14,7 @@ class VampireServiceTest {
     @Test
     fun drinkBlood() {
         assertThat(service.drinkBlood(1, 3, 10))
-            .isNotEqualTo(Unit)
+            .isEqualTo(Result.success(Unit))
     }
 
     @Test

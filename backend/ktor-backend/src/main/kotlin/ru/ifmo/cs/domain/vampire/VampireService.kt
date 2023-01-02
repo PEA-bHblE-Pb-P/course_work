@@ -6,13 +6,17 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import ru.ifmo.cs.config.execAndMap
 
 class VampireService {
-    fun drinkBlood(id: Int, charId: Int, amount: Int) = transaction {
-        val query = "SELECT * FROM drink_blood(?, ?, ?)".trimIndent()
-        val arguments = mutableListOf<Pair<ColumnType, *>>(
-            Pair(IntegerColumnType(), id),
-            Pair(IntegerColumnType(), charId),
-            Pair(IntegerColumnType(), amount),
-        )
-        query.execAndMap(arguments) { }
+    fun drinkBlood(id: Int, charId: Int, amount: Int): Result<Unit> {
+        transaction {
+            val query = "SELECT * FROM drink_blood(?, ?, ?)".trimIndent()
+            val arguments = mutableListOf<Pair<ColumnType, *>>(
+                Pair(IntegerColumnType(), id),
+                Pair(IntegerColumnType(), charId),
+                Pair(IntegerColumnType(), amount),
+            )
+            query.execAndMap(arguments) { }
+        }
+
+        return Result.success(Unit)
     }
 }

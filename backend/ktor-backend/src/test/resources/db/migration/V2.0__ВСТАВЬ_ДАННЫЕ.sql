@@ -42,11 +42,11 @@ WHERE id = 1;
 INSERT INTO vampire_to_servant(servant_id, vampire_id) VALUES
 (5, 1), (3, 2);
 
-INSERT INTO murder(killer_id, victim, description) VALUES
-(3, 2, 'Гильермо мог случайно убить Афанаса. Тот слегка загорел на солнце.'),
-(3, 2, 'Гильермо снова пытался убить Афанаса. Тот поджарился на солнце.');
-
-INSERT INTO court(id, verdict, date, defendant_id, group_id, location_id) VALUES
-(1, 'Гильермо был отпущен на волю.', '2022-10-17', 5, 1, 1);
-
-INSERT INTO passes VALUES (3, 5);
+-- INSERT INTO murder(killer_id, victim, description) VALUES
+-- (3, 2, 'Гильермо мог случайно убить Афанаса. Тот слегка загорел на солнце.'),
+-- (3, 2, 'Гильермо снова пытался убить Афанаса. Тот поджарился на солнце.');
+--
+-- INSERT INTO court(id, verdict, date, defendant_id, group_id, location_id) VALUES
+-- (1, 'Гильермо был отпущен на волю.', '2022-10-17', 5, 1, 1);
+--
+-- INSERT INTO passes VALUES (3, 5);

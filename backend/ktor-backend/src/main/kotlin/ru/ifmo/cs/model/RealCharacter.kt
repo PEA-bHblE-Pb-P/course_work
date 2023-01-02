@@ -10,6 +10,7 @@ object Characters : IntIdTable("character") {
     val typeId = integer("type_id")
     val history = text("history")
     val sexId = reference("sex_id", SexTable)
+    val locationId = integer("location_id")
 }
 
 class RealCharacter(id: EntityID<Int>): IntEntity(id) {
@@ -19,4 +20,5 @@ class RealCharacter(id: EntityID<Int>): IntEntity(id) {
     var typeId by Characters.typeId
     var history by Characters.history
     var sex by Sex referencedOn Characters.sexId
+    var locationId by Characters.locationId
 }
