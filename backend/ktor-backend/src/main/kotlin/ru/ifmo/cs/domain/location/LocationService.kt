@@ -10,11 +10,11 @@ import ru.ifmo.cs.model.LocationType
 
 class LocationService {
     fun location(id: Int) = transaction {
-        LocationType.findById(id)
+        Location.findById(id)
     }!!.toResponse()
 
     fun locationType(id: Int) = transaction {
-        Location.findById(id)
+        LocationType.findById(id)
     }!!.toResponse()
 
     fun go(id: Int, locationId: Int) = transaction {
