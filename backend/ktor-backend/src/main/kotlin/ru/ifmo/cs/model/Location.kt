@@ -5,7 +5,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
-object LocationTable : IntIdTable("location_type") {
+object LocationTable : IntIdTable("location") {
     val lat = float("lat")
     val lon = float("lon")
     val name = varchar("name", 255)

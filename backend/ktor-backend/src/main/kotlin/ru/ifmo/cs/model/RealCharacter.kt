@@ -9,7 +9,7 @@ object Characters : IntIdTable("character") {
     val name = varchar("name", 255)
     val typeId = integer("type_id")
     val history = text("history")
-    val sexId = reference("sex_id", Sexs)
+    val sexId = reference("sex_id", SexTable)
 }
 
 class RealCharacter(id: EntityID<Int>): IntEntity(id) {
