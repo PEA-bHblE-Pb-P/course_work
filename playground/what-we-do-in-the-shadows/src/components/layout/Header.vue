@@ -6,19 +6,19 @@
           <HomeIcon />
         </router-link>
       </div>
-      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div class="lg:flex-grow text-sm">
+      <div class="w-full flex flex-grow lg:items-center lg:w-auto">
+        <div class="flex items-center lg:flex-grow">
           <router-link
               v-if="isLogin"
               to="/goto"
-              class="block mt-4 hover:bg-gray-400 p-2"
+              class="block hover:bg-gray-400 p-2"
           >
             <LocationIcon />
           </router-link>
-          <router-link v-if="isLogin" to="to" class="block mt-4 hover:bg-gray-400 p-2">
-            <PeopleIcon/>
+          <router-link v-if="isLogin" to="to" class="block hover:bg-gray-400 p-2">
+            <PeopleIcon />
           </router-link>
-          <router-link v-if="isLogin" to="/profile" class="block mt-4 hover:bg-gray-400 p-2">
+          <router-link v-if="isLogin" to="/profile" class="block hover:bg-gray-400 p-2">
             <UserIcon />
           </router-link>
         </div>

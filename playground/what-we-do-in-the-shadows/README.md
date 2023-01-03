@@ -24,6 +24,6 @@ _____________________
 2. profile
 _____________________
 
-- [ ] Characters info:
+- [ ] People nearby:
 1. login
-2. characters
+2. people nearby

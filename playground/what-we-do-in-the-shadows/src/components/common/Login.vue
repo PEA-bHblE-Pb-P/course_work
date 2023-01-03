@@ -54,9 +54,10 @@ export default {
   methods: {
     loginAndSet() {
       try {
-        login(this.id);
-        this.$store.commit("setId", this.id);
-        router.back();
+        login(this.id).then(()=> {
+          this.$store.commit("setId", this.id);
+          router.push("/profile");
+        });
       } catch (e) {
         console.log(e);
       }
