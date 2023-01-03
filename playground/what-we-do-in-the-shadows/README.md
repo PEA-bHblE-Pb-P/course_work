@@ -1,7 +1,29 @@
-# Vue 3 + Vite
+## Use cases
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+- [ ] Drink Blood:
+1. login as vamp
+2. map
+3. go to bar
+4. drink blood
+_____________________
 
-## Recommended IDE Setup
+- [ ] Go for fight:
+1. login as hunter
+2. locations
+3. go for fight
+_____________________
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- [ ] Go to location:
+1. login
+2. locations
+3. go to location
+_____________________
+
+- [ ] Profile info:
+1. login
+2. profile
+_____________________
+
+- [ ] Characters info:
+1. login
+2. characters
