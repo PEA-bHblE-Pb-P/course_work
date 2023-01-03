@@ -1,9 +1,9 @@
-package ru.ifmo.cs.helios.s311693
+package ru.ifmo.cs
 
 import io.ktor.server.application.Application
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import ru.ifmo.cs.helios.s311693.plugins.*
+import ru.ifmo.cs.config.*
 
 fun main() {
     embeddedServer(
@@ -21,6 +21,6 @@ fun Application.module() {
     configureMonitoring()
     configureSerialization()
     configureDatabase()
-    configureRouting()
+    configureRouting(Dependencies())
     configureApiDocumentation()
 }

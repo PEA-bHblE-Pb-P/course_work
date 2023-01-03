@@ -1,4 +1,4 @@
-package ru.ifmo.cs.helios.s311693.plugins
+package ru.ifmo.cs.config
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
