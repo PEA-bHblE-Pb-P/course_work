@@ -4,6 +4,7 @@ import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
+import org.jetbrains.exposed.sql.javatime.date
 
 object Characters : IntIdTable("character") {
     val name = varchar("name", 255)
@@ -11,9 +12,10 @@ object Characters : IntIdTable("character") {
     val history = text("history")
     val sexId = reference("sex_id", SexTable)
     val locationId = integer("location_id")
+//    val birthday = date("birthday")
 }
 
-class RealCharacter(id: EntityID<Int>): IntEntity(id) {
+class RealCharacter(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<RealCharacter>(Characters)
 
     var name by Characters.name
@@ -21,4 +23,5 @@ class RealCharacter(id: EntityID<Int>): IntEntity(id) {
     var history by Characters.history
     var sex by Sex referencedOn Characters.sexId
     var locationId by Characters.locationId
+//    var birthday by Characters.birthday
 }
