@@ -4,7 +4,6 @@
 </template>
 
 <script>
-import Location from "./Location.vue";
 import PeopleNearBy from "./PeopleNearBy.vue";
 import {character} from "../../api.js";
 
@@ -23,9 +22,8 @@ export default {
       }
     }
   },
-  created() {
-    this.character = character(this.characterId);
-    console.log(this.character);
+  async beforeCreate() {
+    this.character = await character(this.characterId);
   }
 }
 </script>

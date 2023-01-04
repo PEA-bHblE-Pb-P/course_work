@@ -40,20 +40,20 @@ export async function logout() {
 }
 
 export async function character() {
-  console.log(document.cookie)
-  return await fetch(endpoint(CHARACTER_ME), {
+  const resp = await fetch(endpoint(CHARACTER_ME), {
     method: "get",
     credentials: "include",
     headers: {
       Accept: "application/json, */*",
-      'Allow-Origin': "*",
       'Access-Control-Allow-Origin': "*",
       'Access-Control-Allow-Credentials': true
     },
-  }).then((response) => {
-    if (!response.ok) throw new Error("Login error occurred!");
-    else response.json();
   });
+
+  if (!resp.ok)
+    throw new Error("Login error occurred!");
+
+  return await resp.json();
 }
 
 export async function people_nearby() {
