@@ -2,6 +2,7 @@ package ru.ifmo.cs.config
 
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.OK
+import io.ktor.http.HttpStatusCode.Companion.PartialContent
 import io.ktor.server.application.*
 import io.ktor.server.plugins.openapi.*
 import io.ktor.server.plugins.swagger.*
@@ -102,7 +103,10 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
             val id = userSession?.id!!
             val locationId = call.parameters["location_id"]!!.toInt()
 
-            call.respond(hunterService.goForFight(id, locationId))
+            if (hunterService.goForFight(id, locationId).isSuccess)
+                call.respond(OK)
+            else
+                call.respond(BadRequest)
         }
 
         post("/drink_blood") {
