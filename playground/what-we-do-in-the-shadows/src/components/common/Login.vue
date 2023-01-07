@@ -56,7 +56,11 @@ export default {
       try {
         login(this.id).then(()=> {
           this.$store.commit("setId", this.id);
-          router.push("/profile");
+          console.log(router.currentRoute.value.redirectedFrom)
+          if (router.currentRoute.value.redirectedFrom === undefined)
+            router.push("/profile");
+          else
+            router.push(router.currentRoute.value.redirectedFrom);
         });
       } catch (e) {
         console.log(e);
