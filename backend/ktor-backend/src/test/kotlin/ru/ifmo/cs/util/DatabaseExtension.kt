@@ -11,7 +11,7 @@ import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
 @Testcontainers
-class DatabaseExtension: BeforeAllCallback {
+class DatabaseExtension : BeforeAllCallback {
     companion object {
         private const val DOCKER_IMAGE = "postgres:latest"
     }

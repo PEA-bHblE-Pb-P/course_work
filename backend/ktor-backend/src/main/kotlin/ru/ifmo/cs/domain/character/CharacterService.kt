@@ -14,13 +14,13 @@ class CharacterService {
         RealCharacter.findById(id)!!.toResponse()
     }
 
-    fun kill(id: Int, charId: Int, description: String): Result<Unit> {
-        val (result, err) = transaction {
+    fun kill(killerId: Int, charId: Int, description: String): Result<Unit> {
+        val (_, err) = transaction {
             try {
                 val query = "SELECT * FROM kill(?, ?, ?)".trimIndent()
                 val arguments = mutableListOf<Pair<ColumnType, *>>(
                     Pair(IntegerColumnType(), charId),
-                    Pair(IntegerColumnType(), id),
+                    Pair(IntegerColumnType(), killerId),
                     Pair(VarCharColumnType(), description),
                 )
                 return@transaction query.execAndMap(arguments) { } to null
@@ -29,7 +29,7 @@ class CharacterService {
             }
         }
 
-        return if (err == null || result == null)
+        return if (err == null)
             Result.success(Unit)
         else
             Result.failure(err)
@@ -41,6 +41,10 @@ class CharacterService {
             Pair(IntegerColumnType(), id),
         )
         query.execAndMap(arguments) { it.toPeopleNearbyResponse() }
+    }
+
+    fun allCharacters() = transaction {
+        RealCharacter.all().map { it.toResponse() }
     }
 
     private fun ResultSet.toPeopleNearbyResponse() = PeopleNearbyResponse(

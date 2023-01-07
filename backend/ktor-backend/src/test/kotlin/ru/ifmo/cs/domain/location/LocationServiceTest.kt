@@ -14,19 +14,21 @@ class LocationServiceTest {
     @Test
     fun location() {
         assertThat(service.location(1))
-            .isEqualTo(LocationResponse(
-                id = 1,
-                lat = -41.29433f,
-                lon = 174.78569f,
-                name = "Genghis Khan House",
-                locationTypeId = 2
-            ))
+            .isEqualTo(
+                LocationResponse(
+                    id = 1,
+                    lat = -41.29433f,
+                    lon = 174.78569f,
+                    name = "Genghis Khan House",
+                    locationTypeId = 2
+                )
+            )
     }
 
     @Test
     fun locationType() {
         assertThat(service.locationType(1))
-            .isEqualTo(LocationTypeResponse(id=1, type="bar"))
+            .isEqualTo(LocationTypeResponse(id = 1, type = "bar"))
     }
 
     @Test

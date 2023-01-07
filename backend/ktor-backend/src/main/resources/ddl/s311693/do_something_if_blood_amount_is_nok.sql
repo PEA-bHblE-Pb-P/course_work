@@ -1,4 +1,4 @@
-create function s311693.do_something_if_blood_amount_is_nok() returns trigger
+create or replace function s311693.do_something_if_blood_amount_is_nok() returns trigger
     language plpgsql
 as
 $$

@@ -13,7 +13,7 @@ create table s311693.drink_blood
 alter table s311693.drink_blood
     owner to s311693;
 
-create function s311693.drink_blood(vamp_id integer, char_id integer, amount integer) returns void
+create or replace function s311693.drink_blood(vamp_id integer, char_id integer, amount integer) returns void
     language plpgsql
 as
 $$

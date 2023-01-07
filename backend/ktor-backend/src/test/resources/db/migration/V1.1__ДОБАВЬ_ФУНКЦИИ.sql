@@ -16,6 +16,14 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION equals_locations(char_id int, char_id2 int) RETURNS BOOLEAN AS
+$$
+BEGIN
+    return (SELECT location_id FROM "character" WHERE id = char_id) =
+           (SELECT location_id FROM "character" WHERE id = char_id2);
+END;
+$$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION go_to_location_by_id(character_id int, loc_id int) RETURNS VOID AS
 $$
@@ -155,7 +163,11 @@ create or replace function kill(char_id int, killer_id int, description characte
 as
 $$
 begin
+    assert char_id != killer_id, 'check killer not eq victim';
     perform verify_character_alive(char_id);
+    perform verify_character_alive(killer_id);
+    assert equals_locations(char_id, killer_id), 'check killer and victim have some locations';
+
     INSERT INTO murder(KILLER_ID, VICTIM, DESCRIPTION, date)
     VALUES (killer_id, char_id, description, NOW());
     UPDATE character SET location_id = null, place_of_living_id = null WHERE id = char_id;
@@ -170,8 +182,12 @@ DECLARE
     okay_blood_amount    int = 85;
     dead_blood_amount    int = 75;
 BEGIN
+    assert char_id != vamp_id, 'check killer not eq victim';
     PERFORM verify_character_exists(vamp_id);
     PERFORM verify_character_exists(char_id);
+    assert (select type_id from character where id = vamp_id) !=
+           (select id from type where name = 'человек'), 'check not human';
+
     SELECT blood_percentage FROM character WHERE id = char_id INTO current_blood_amount;
     IF (current_blood_amount >= amount) THEN
         SELECT (current_blood_amount - amount) INTO current_blood_amount;
@@ -187,48 +203,50 @@ BEGIN
     ELSE
         RAISE EXCEPTION 'Jesus... You want to drink blood too much...';
     end if;
-END;
+END ;
 $$ language plpgsql;
 
 
-create function hunter_go_to_for_fight(hunter_id integer, target_location_id integer) returns void
+create or replace function hunter_go_to_for_fight(hunter_id integer, target_location_id integer) returns void
     language plpgsql
 as
 $$
 declare
-vampire_type          integer;
+    vampire_type          integer;
     vampire_cnt           integer;
     vamp_blood_percentage integer;
 begin
     perform verify_character_exists(hunter_id);
     perform verify_character_alive(hunter_id);
+    assert (select type_id from character where id = hunter_id) !=
+           (select id from type where name = 'охотник на вампиров'), 'check hunter type';
     RAISE NOTICE 'Охотник на вамиров id=% вышел на охоту', hunter_id;
 
     perform go_to_location_by_id(hunter_id, target_location_id);
-select id from type where name = 'вампир' INTO vampire_type;
-select COUNT(*) from character_type_nearby(hunter_id, 1) into vampire_cnt;
-RAISE NOTICE 'Вампиров рядом: %', vampire_cnt;
+    select id from type where name = 'вампир' INTO vampire_type;
+    select COUNT(*) from character_type_nearby(hunter_id, 1) into vampire_cnt;
+    RAISE NOTICE 'Вампиров рядом: %', vampire_cnt;
     if vampire_cnt > 1 then
         perform kill(hunter_id, (select id from character_type_nearby(hunter_id, 1) LIMIT 1),
                      'Охотник проиграл вампиру и умер');
         RAISE NOTICE 'Охотник проиграл вампиру и умер';
     elseif vampire_cnt = 1 then
-select blood_percentage
-from character c
-where c.id = (select id from character_type_nearby(hunter_id, 1))
-into vamp_blood_percentage;
-if vamp_blood_percentage != 100 then
+        select blood_percentage
+        from character c
+        where c.id = (select id from character_type_nearby(hunter_id, 1))
+        into vamp_blood_percentage;
+        if vamp_blood_percentage != 100 then
             perform kill((select id from character_type_nearby(hunter_id, 1) LIMIT 1), hunter_id,
                          'Вампир слаб и его убил охотник');
             RAISE NOTICE 'Вампир слаб и его убил охотник';
-else
-            perform kill((select id from character_type_nearby(1, hunter_id) LIMIT 1), hunter_id,
+        else
+            perform kill(hunter_id, (select id from character_type_nearby(hunter_id, 1) LIMIT 1),
                          'Вампир силён и убил охотника');
             RAISE NOTICE 'Вампир силён и убил охотника';
-end if;
-else
+        end if;
+    else
         RAISE NOTICE 'Охотник не нашёл вампиров';
-end if;
+    end if;
 
 end ;
 $$;

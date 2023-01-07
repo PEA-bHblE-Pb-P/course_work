@@ -8,7 +8,8 @@ CREATE TABLE "character" (
   "place_of_living_id" int,
   "location_id" int,
   "group" int,
-  "favor_id" int
+  "favor_id" int,
+  "photo_url" text
 );
 
 CREATE TABLE "type" (
