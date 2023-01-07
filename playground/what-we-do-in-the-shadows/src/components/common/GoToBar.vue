@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-4xl font-bold m-2">Pick a BAR to go</h1>
+  <PageHeader>Pick a BAR to go</PageHeader>
   <div class="grid grid-cols-3 gap-4">
     <Location
         v-for="loc in locations"
@@ -24,10 +24,11 @@ import Location from "./Location.vue";
 import { useLocationStore } from "../../stores/LocationStore.js";
 import router from "../../router/index.js";
 import {go_to_location_id} from "../../api.js";
+import PageHeader from "../layout/PageHeader.vue";
 
 export default {
   name: "GoToBar",
-  components: { Location },
+  components: {PageHeader, Location },
   data() {
     return {
       selected: {

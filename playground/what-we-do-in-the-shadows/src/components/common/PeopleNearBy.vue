@@ -1,4 +1,5 @@
 <template>
+  <PageHeader>People nearby</PageHeader>
   <div class="flex flex-wrap">
     <Character v-for="person in people" :key="person.id" :character="person"/>
   </div>
@@ -7,10 +8,11 @@
 <script>
 import {people_nearby} from "../../api.js";
 import Character from "./Character.vue";
+import PageHeader from "../layout/PageHeader.vue";
 
 export default {
   name: "PeopleNearBy",
-  components: {Character},
+  components: {PageHeader, Character},
   data() {
     return {
       people: []

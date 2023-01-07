@@ -9,7 +9,7 @@ data class LocationResponse(
     val lat: Float,
     val lon: Float,
     val name: String,
-    val locationTypeId: Int,
+    val locationTypeId: Int?,
 )
 
 fun Location.toResponse() = LocationResponse(
