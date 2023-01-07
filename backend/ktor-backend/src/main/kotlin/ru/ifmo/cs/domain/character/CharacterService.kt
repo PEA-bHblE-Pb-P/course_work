@@ -43,6 +43,10 @@ class CharacterService {
         query.execAndMap(arguments) { it.toPeopleNearbyResponse() }
     }
 
+    fun allCharacters() = transaction {
+        RealCharacter.all().map { it.toResponse() }
+    }
+
     private fun ResultSet.toPeopleNearbyResponse() = PeopleNearbyResponse(
         this.getInt("id"),
         this.getString("name"),
