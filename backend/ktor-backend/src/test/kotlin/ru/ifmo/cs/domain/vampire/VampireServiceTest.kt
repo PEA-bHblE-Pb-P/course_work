@@ -2,8 +2,9 @@ package ru.ifmo.cs.domain.vampire
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.jupiter.api.Test
+import org.jetbrains.exposed.exceptions.ExposedSQLException
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import ru.ifmo.cs.util.DatabaseExtension
 
@@ -21,13 +22,13 @@ class VampireServiceTest {
     fun `drinkBlood should fail when id eq char id`() {
         assertThatThrownBy {
             service.drinkBlood(1, 1, 10)
-        }.isExactlyInstanceOf(org.jetbrains.exposed.exceptions.ExposedSQLException::class.java)
+        }.isExactlyInstanceOf(ExposedSQLException::class.java)
     }
 
     @Test
     fun `drinkBlood should fail for human`() {
         assertThatThrownBy {
             service.drinkBlood(3, 5, 10)
-        }.isExactlyInstanceOf(org.jetbrains.exposed.exceptions.ExposedSQLException::class.java)
+        }.isExactlyInstanceOf(ExposedSQLException::class.java)
     }
 }

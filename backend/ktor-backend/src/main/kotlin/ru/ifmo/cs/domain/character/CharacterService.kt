@@ -1,6 +1,5 @@
 package ru.ifmo.cs.domain.character
 
-import org.intellij.lang.annotations.Language
 import org.jetbrains.exposed.exceptions.ExposedSQLException
 import org.jetbrains.exposed.sql.ColumnType
 import org.jetbrains.exposed.sql.IntegerColumnType
@@ -16,7 +15,7 @@ class CharacterService {
     }
 
     fun kill(killerId: Int, charId: Int, description: String): Result<Unit> {
-        val (result, err) = transaction {
+        val (_, err) = transaction {
             try {
                 val query = "SELECT * FROM kill(?, ?, ?)".trimIndent()
                 val arguments = mutableListOf<Pair<ColumnType, *>>(

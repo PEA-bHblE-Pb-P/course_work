@@ -71,7 +71,7 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
                 call.respond(characterService.character(id))
             }
 
-            get("/all"){
+            get("/all") {
                 call.respond(characterService.allCharacters())
             }
 

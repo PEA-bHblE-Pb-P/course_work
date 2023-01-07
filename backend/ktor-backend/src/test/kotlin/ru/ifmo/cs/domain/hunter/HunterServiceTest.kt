@@ -2,6 +2,7 @@ package ru.ifmo.cs.domain.hunter
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.jetbrains.exposed.exceptions.ExposedSQLException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import ru.ifmo.cs.util.DatabaseExtension
@@ -20,6 +21,6 @@ class HunterServiceTest {
     fun `goForFight should fail if not hunter character present`() {
         assertThatThrownBy {
             service.goForFight(1, 1)
-        }.isExactlyInstanceOf(org.jetbrains.exposed.exceptions.ExposedSQLException::class.java)
+        }.isExactlyInstanceOf(ExposedSQLException::class.java)
     }
 }
