@@ -15,7 +15,14 @@
           >
             <LocationIcon />
           </router-link>
-          <router-link v-if="isLogin" to="to" class="block hover:bg-gray-400 p-2">
+          <router-link
+              v-if="isLogin"
+              to="/bar"
+              class="block hover:bg-gray-400 p-2"
+          >
+            <BeerIcon />
+          </router-link>
+          <router-link v-if="isLogin" to="/nearby" class="block hover:bg-gray-400 p-2">
             <PeopleIcon />
           </router-link>
           <router-link v-if="isLogin" to="/profile" class="block hover:bg-gray-400 p-2">
@@ -50,9 +57,11 @@ import LogoutIcon from "../icon/LogoutIcon.vue";
 import LocationIcon from "../icon/LocationIcon.vue";
 import LoginIcon from "../icon/LoginIcon.vue";
 import PeopleIcon from "../icon/PeopleIcon.vue";
+import BeerIcon from "../icon/BeerIcon.vue";
 
 export default {
   components: {
+    BeerIcon,
     PeopleIcon,
     LoginIcon,
     LocationIcon,

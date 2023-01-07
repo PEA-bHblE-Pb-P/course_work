@@ -1,8 +1,8 @@
 <template>
-  <div class="location m-2">
-    <h3>{{ location.name }}</h3>
-    <p>{{ location.lat }} {{ location.lot }}</p>
-    <p>{{ location.type }}</p>
+  <div class="location m-2 p-2">
+    <h3>name: {{ location.name }}</h3>
+    <p>pos: ({{ location.lat }}, {{ location.lot }})</p>
+    <p>type: {{ location.type || 'none' }}</p>
   </div>
 </template>
 
@@ -15,3 +15,9 @@ const props = defineProps({
   },
 });
 </script>
+
+<style scoped>
+.location {
+  border: 2px solid black;
+}
+</style>

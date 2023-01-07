@@ -1,15 +1,15 @@
 <template>
-  <h1 class="font-rock-salt text-2xl">Character id: {{ characterId }}</h1>
-  <h1> {{ character.name }}</h1>
+  <Character :character="character"/>
 </template>
 
 <script>
 import PeopleNearBy from "./PeopleNearBy.vue";
 import {character} from "../../api.js";
+import Character from "./Character.vue";
 
 export default {
   name: "Profile",
-  components: {PeopleNearBy},
+  components: {Character, PeopleNearBy},
   computed: {
     characterId() {
       return this.$store.state.id;

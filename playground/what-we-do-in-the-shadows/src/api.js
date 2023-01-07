@@ -1,6 +1,6 @@
 const LOGIN = "/login";
 const LOGOUT = "/logout";
-const PEOPLE_NEARBY = "/people_nearby";
+const PEOPLE_NEARBY = "/character/nearby";
 const GO_TO_LOCATION_ID = "/go_to_location_by_id"
 const CHARACTER_ME = "/character/me"
 
@@ -17,7 +17,7 @@ export async function login(id) {
     method: "post",
     credentials: "include",
     headers: {
-      Accept: "text/plain, */*",
+      Accept: "application/json, text/plain, */*",
       'Access-Control-Allow-Origin': "localhost",
       'Access-Control-Allow-Credentials': true
     },
@@ -29,9 +29,11 @@ export async function login(id) {
 
 export async function logout() {
   return await fetch(endpoint(LOGOUT), {
-    method: "get",
+    method: "post",
     headers: {
       Accept: "application/json, text/plain, */*",
+      'Access-Control-Allow-Origin': "localhost",
+      'Access-Control-Allow-Credentials': true
     },
   }).then((response) => {
     if (!response.ok) throw new Error("Logout error occurred!");
@@ -57,22 +59,30 @@ export async function character() {
 }
 
 export async function people_nearby() {
-  return fetch(endpoint(PEOPLE_NEARBY), {
+  const resp = await fetch(endpoint(PEOPLE_NEARBY), {
     method: "get",
+    credentials: "include",
     headers: {
       Accept: "application/json, text/plain, */*",
-    }
-  }).then((response) => {
-    if (!response.ok) throw new Error("People nearby error occurred!");
-    else response.json();
+      'Access-Control-Allow-Origin': "localhost",
+      'Access-Control-Allow-Credentials': true
+    },
   });
+
+  if (!resp.ok)
+    throw new Error("Login error occurred!");
+
+  return await resp.json();
 }
 
 export async function go_to_location_id(id) {
   return await fetch(endpointQuery(GO_TO_LOCATION_ID, id), {
-    method: "get",
+    method: "post",
+    credentials: "include",
     headers: {
       Accept: "application/json, text/plain, */*",
+      'Access-Control-Allow-Origin': "localhost",
+      'Access-Control-Allow-Credentials': true
     },
   }).then((response) => {
     if (!response.ok) throw new Error("Go to error occurred!");
