@@ -1,5 +1,6 @@
 package ru.ifmo.cs.domain.character
 
+import org.intellij.lang.annotations.Language
 import org.jetbrains.exposed.exceptions.ExposedSQLException
 import org.jetbrains.exposed.sql.ColumnType
 import org.jetbrains.exposed.sql.IntegerColumnType
@@ -14,13 +15,13 @@ class CharacterService {
         RealCharacter.findById(id)!!.toResponse()
     }
 
-    fun kill(id: Int, charId: Int, description: String): Result<Unit> {
+    fun kill(killerId: Int, charId: Int, description: String): Result<Unit> {
         val (result, err) = transaction {
             try {
                 val query = "SELECT * FROM kill(?, ?, ?)".trimIndent()
                 val arguments = mutableListOf<Pair<ColumnType, *>>(
                     Pair(IntegerColumnType(), charId),
-                    Pair(IntegerColumnType(), id),
+                    Pair(IntegerColumnType(), killerId),
                     Pair(VarCharColumnType(), description),
                 )
                 return@transaction query.execAndMap(arguments) { } to null
@@ -29,7 +30,7 @@ class CharacterService {
             }
         }
 
-        return if (err == null || result == null)
+        return if (err == null)
             Result.success(Unit)
         else
             Result.failure(err)

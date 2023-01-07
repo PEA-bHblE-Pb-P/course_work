@@ -6,7 +6,7 @@ create table s311693.location
     lon              double precision,
     name             varchar,
     location_type_id integer
-        references s311693.location_type (id)
+        references s311693.location_type
 );
 
 alter table s311693.location

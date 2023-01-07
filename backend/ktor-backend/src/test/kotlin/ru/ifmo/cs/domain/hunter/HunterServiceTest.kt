@@ -20,6 +20,6 @@ class HunterServiceTest {
     fun `goForFight should fail if not hunter character present`() {
         assertThatThrownBy {
             service.goForFight(1, 1)
-        }.isExactlyInstanceOf(Exception::class.java)
+        }.isExactlyInstanceOf(org.jetbrains.exposed.exceptions.ExposedSQLException::class.java)
     }
 }

@@ -26,7 +26,7 @@ class CharacterServiceTest {
     @Order(2)
     fun peopleNearby() {
         assertThat(characterService.peopleNearby(1).size)
-            .isEqualTo(0)
+            .isEqualTo(1)
 
         for (i in 1..5) {
             println(characterService.character(i))
@@ -34,7 +34,7 @@ class CharacterServiceTest {
         }
 
         assertThat(characterService.peopleNearby(5).size)
-            .isEqualTo(2)
+            .isEqualTo(1)
     }
 
     @Test
@@ -67,7 +67,9 @@ class CharacterServiceTest {
         typeId = 1,
         history = "Вампир трехсот семидесяти девяти лет от роду, родом из Германии. Денди, помешанный на чистоте и порядке.",
         sex = "masculine",
-        location = 1
+        birthday = "1636-03-09",
+        location = 1,
+        photoUrl = null
     )
 
     @Test

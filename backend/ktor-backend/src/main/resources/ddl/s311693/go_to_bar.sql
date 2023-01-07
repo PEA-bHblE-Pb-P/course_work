@@ -1,4 +1,4 @@
-create function s311693.go_to_bar(bar_id integer, vamp_id integer) returns void
+create or replace function s311693.go_to_bar(bar_id integer, vamp_id integer) returns void
     language plpgsql
 as
 $$

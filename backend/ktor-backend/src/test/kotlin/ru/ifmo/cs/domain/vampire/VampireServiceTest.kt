@@ -21,13 +21,13 @@ class VampireServiceTest {
     fun `drinkBlood should fail when id eq char id`() {
         assertThatThrownBy {
             service.drinkBlood(1, 1, 10)
-        }.isExactlyInstanceOf(Exception::class.java)
+        }.isExactlyInstanceOf(org.jetbrains.exposed.exceptions.ExposedSQLException::class.java)
     }
 
     @Test
     fun `drinkBlood should fail for human`() {
         assertThatThrownBy {
             service.drinkBlood(3, 5, 10)
-        }.isExactlyInstanceOf(Exception::class.java)
+        }.isExactlyInstanceOf(org.jetbrains.exposed.exceptions.ExposedSQLException::class.java)
     }
 }
