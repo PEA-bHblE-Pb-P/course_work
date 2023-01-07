@@ -3,6 +3,7 @@ const LOGOUT = "/logout";
 const PEOPLE_NEARBY = "/character/nearby";
 const GO_TO_LOCATION_ID = "/go_to_location_by_id"
 const CHARACTER_ME = "/character/me"
+const LOCATION_BY_ID = "/location"
 
 function endpoint(postfix) {
   return "http://localhost:8080" + postfix;
@@ -88,4 +89,21 @@ export async function go_to_location_id(id) {
     if (!response.ok) throw new Error("Go to error occurred!");
     else response.status;
   });
+}
+
+export async function get_location(id) {
+  const resp = await fetch(endpointQuery(LOCATION_BY_ID, id), {
+    method: "get",
+    credentials: "include",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      'Access-Control-Allow-Origin': "localhost",
+      'Access-Control-Allow-Credentials': true
+    },
+  });
+
+  if (!resp.ok)
+    throw new Error("Location error occurred!");
+
+  return await resp.json();
 }

@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-4xl font-bold">Pick a BAR to go</h1>
+  <h1 class="text-4xl font-bold m-2">Pick a BAR to go</h1>
   <div class="grid grid-cols-3 gap-4">
     <Location
         v-for="loc in locations"

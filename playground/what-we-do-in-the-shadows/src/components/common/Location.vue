@@ -1,7 +1,8 @@
 <template>
-  <div class="location m-2 p-2">
+  <div class="location m-2 p-2 mdi-font-awesome">
+    <h1 class="text-2xl">Location</h1>
     <h3>name: {{ location.name }}</h3>
-    <p>pos: ({{ location.lat }}, {{ location.lot }})</p>
+    <p>pos: ({{ location.lat }}, {{ location.lon }})</p>
     <p>type: {{ location.type || 'none' }}</p>
   </div>
 </template>

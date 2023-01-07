@@ -22,7 +22,7 @@ export default {
       try {
         logout();
         this.$store.commit("setId", undefined);
-        router.back();
+        router.push("/");
       } catch (e) {
         console.log(e);
       }
