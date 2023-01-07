@@ -1,16 +1,16 @@
 <template>
-  <svg-icon type="mdi" :path="mdiBeer" :size="48"/>
+  <svg-icon type="mdi" :path="mdiBeer" :size="48" />
 </template>
 
 <script>
-import { mdiBeer } from '@mdi/js'
+import { mdiBeer } from "@mdi/js";
 
 export default {
   name: "BeerIcon",
   setup() {
     return {
-      mdiBeer
-    }
-  }
-}
+      mdiBeer,
+    };
+  },
+};
 </script>

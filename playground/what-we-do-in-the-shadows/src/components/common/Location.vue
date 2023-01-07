@@ -3,7 +3,7 @@
     <h1 class="text-2xl">Location</h1>
     <h3>name: {{ location.name }}</h3>
     <p>pos: ({{ location.lat }}, {{ location.lon }})</p>
-    <p>type: {{ location.type || 'none' }}</p>
+    <p>type: {{ location.type || "none" }}</p>
   </div>
 </template>
 

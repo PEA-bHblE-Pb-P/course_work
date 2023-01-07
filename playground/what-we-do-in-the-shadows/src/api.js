@@ -1,9 +1,9 @@
 const LOGIN = "/login";
 const LOGOUT = "/logout";
 const PEOPLE_NEARBY = "/character/nearby";
-const GO_TO_LOCATION_ID = "/go_to_location_by_id"
-const CHARACTER_ME = "/character/me"
-const LOCATION_BY_ID = "/location"
+const GO_TO_LOCATION_ID = "/go_to_location_by_id";
+const CHARACTER_ME = "/character/me";
+const LOCATION_BY_ID = "/location";
 
 function endpoint(postfix) {
   return "http://localhost:8080" + postfix;
@@ -19,8 +19,8 @@ export async function login(id) {
     credentials: "include",
     headers: {
       Accept: "application/json, text/plain, */*",
-      'Access-Control-Allow-Origin': "localhost",
-      'Access-Control-Allow-Credentials': true
+      "Access-Control-Allow-Origin": "localhost",
+      "Access-Control-Allow-Credentials": true,
     },
   }).then((response) => {
     if (!response.ok) throw new Error("Login error occurred!");
@@ -33,8 +33,8 @@ export async function logout() {
     method: "post",
     headers: {
       Accept: "application/json, text/plain, */*",
-      'Access-Control-Allow-Origin': "localhost",
-      'Access-Control-Allow-Credentials': true
+      "Access-Control-Allow-Origin": "localhost",
+      "Access-Control-Allow-Credentials": true,
     },
   }).then((response) => {
     if (!response.ok) throw new Error("Logout error occurred!");
@@ -48,13 +48,12 @@ export async function character() {
     credentials: "include",
     headers: {
       Accept: "application/json, */*",
-      'Access-Control-Allow-Origin': "*",
-      'Access-Control-Allow-Credentials': true
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true,
     },
   });
 
-  if (!resp.ok)
-    throw new Error("Login error occurred!");
+  if (!resp.ok) throw new Error("Login error occurred!");
 
   return await resp.json();
 }
@@ -65,13 +64,12 @@ export async function people_nearby() {
     credentials: "include",
     headers: {
       Accept: "application/json, text/plain, */*",
-      'Access-Control-Allow-Origin': "localhost",
-      'Access-Control-Allow-Credentials': true
+      "Access-Control-Allow-Origin": "localhost",
+      "Access-Control-Allow-Credentials": true,
     },
   });
 
-  if (!resp.ok)
-    throw new Error("Login error occurred!");
+  if (!resp.ok) throw new Error("Login error occurred!");
 
   return await resp.json();
 }
@@ -82,8 +80,8 @@ export async function go_to_location_id(id) {
     credentials: "include",
     headers: {
       Accept: "application/json, text/plain, */*",
-      'Access-Control-Allow-Origin': "localhost",
-      'Access-Control-Allow-Credentials': true
+      "Access-Control-Allow-Origin": "localhost",
+      "Access-Control-Allow-Credentials": true,
     },
   }).then((response) => {
     if (!response.ok) throw new Error("Go to error occurred!");
@@ -97,13 +95,12 @@ export async function get_location(id) {
     credentials: "include",
     headers: {
       Accept: "application/json, text/plain, */*",
-      'Access-Control-Allow-Origin': "localhost",
-      'Access-Control-Allow-Credentials': true
+      "Access-Control-Allow-Origin": "localhost",
+      "Access-Control-Allow-Credentials": true,
     },
   });
 
-  if (!resp.ok)
-    throw new Error("Location error occurred!");
+  if (!resp.ok) throw new Error("Location error occurred!");
 
   return await resp.json();
 }

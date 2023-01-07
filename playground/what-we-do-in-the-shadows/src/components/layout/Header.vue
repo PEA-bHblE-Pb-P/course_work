@@ -1,6 +1,8 @@
 <template>
   <div>
-    <nav class="flex items-center justify-between flex-wrap p-6 bg-gray-600 text-white">
+    <nav
+      class="flex items-center justify-between flex-wrap p-6 bg-gray-600 text-white"
+    >
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <router-link to="/" class="hover:bg-gray-400 p-2">
           <HomeIcon />
@@ -9,23 +11,31 @@
       <div class="w-full flex flex-grow lg:items-center lg:w-auto">
         <div class="flex items-center lg:flex-grow">
           <router-link
-              v-if="isLogin"
-              to="/goto"
-              class="block hover:bg-gray-400 p-2"
+            v-if="isLogin"
+            to="/goto"
+            class="block hover:bg-gray-400 p-2"
           >
             <LocationIcon />
           </router-link>
           <router-link
-              v-if="isLogin"
-              to="/bar"
-              class="block hover:bg-gray-400 p-2"
+            v-if="isLogin"
+            to="/bar"
+            class="block hover:bg-gray-400 p-2"
           >
             <BeerIcon />
           </router-link>
-          <router-link v-if="isLogin" to="/nearby" class="block hover:bg-gray-400 p-2">
+          <router-link
+            v-if="isLogin"
+            to="/nearby"
+            class="block hover:bg-gray-400 p-2"
+          >
             <PeopleIcon />
           </router-link>
-          <router-link v-if="isLogin" to="/profile" class="block hover:bg-gray-400 p-2">
+          <router-link
+            v-if="isLogin"
+            to="/profile"
+            class="block hover:bg-gray-400 p-2"
+          >
             <UserIcon />
           </router-link>
         </div>

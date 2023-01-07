@@ -54,13 +54,12 @@ export default {
   methods: {
     loginAndSet() {
       try {
-        login(this.id).then(()=> {
+        login(this.id).then(() => {
           this.$store.commit("setId", this.id);
-          console.log(router.currentRoute.value.redirectedFrom)
+          console.log(router.currentRoute.value.redirectedFrom);
           if (router.currentRoute.value.redirectedFrom === undefined)
             router.push("/profile");
-          else
-            router.push(router.currentRoute.value.redirectedFrom);
+          else router.push(router.currentRoute.value.redirectedFrom);
         });
       } catch (e) {
         console.log(e);

@@ -23,16 +23,16 @@
 import Location from "./Location.vue";
 import { useLocationStore } from "../../stores/LocationStore.js";
 import router from "../../router/index.js";
-import {go_to_location_id} from "../../api.js";
+import { go_to_location_id } from "../../api.js";
 import PageHeader from "../layout/PageHeader.vue";
 
 export default {
   name: "GoTo",
-  components: {PageHeader, Location },
+  components: { PageHeader, Location },
   data() {
     return {
       selected: {
-        id: undefined
+        id: undefined,
       },
     };
   },
