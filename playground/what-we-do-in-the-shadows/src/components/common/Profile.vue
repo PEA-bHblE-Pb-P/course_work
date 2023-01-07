@@ -18,6 +18,9 @@ export default {
     characterId() {
       return this.$store.state.id;
     },
+    characterByState() {
+      return this.$store.state.character;
+    }
   },
   data() {
     return {
@@ -29,8 +32,14 @@ export default {
       location: {},
     };
   },
-  async beforeCreate() {
-    this.character = await character(this.characterId);
+  async beforeMount() {
+    if (this.$store.getters.shouldSetCharacter) {
+      this.character = await character(this.characterId);
+      this.$store.commit("setCharacter", this.character);
+    } else {
+      this.character = await this.characterByState;
+    }
+
     this.location = await get_location(this.character.location);
   },
 };

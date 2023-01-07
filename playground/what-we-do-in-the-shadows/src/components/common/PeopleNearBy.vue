@@ -20,7 +20,6 @@ export default {
   },
   async mounted() {
     this.people = await people_nearby();
-    console.log(this.people);
   },
 };
 </script>

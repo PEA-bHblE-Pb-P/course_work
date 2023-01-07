@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { login } from "../../api.js";
+import {login} from "../../api.js";
 import router from "../../router/index.js";
 
 export default {
@@ -56,10 +56,10 @@ export default {
       try {
         login(this.id).then(() => {
           this.$store.commit("setId", this.id);
-          console.log(router.currentRoute.value.redirectedFrom);
           if (router.currentRoute.value.redirectedFrom === undefined)
             router.push("/profile");
-          else router.push(router.currentRoute.value.redirectedFrom);
+          else
+            router.push(router.currentRoute.value.redirectedFrom);
         });
       } catch (e) {
         console.log(e);

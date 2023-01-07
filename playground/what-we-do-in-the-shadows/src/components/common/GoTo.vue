@@ -17,14 +17,25 @@
   >
     GO
   </button>
+  <template v-if="isHunter">
+  <button
+      class="inline-block m-10 px-7 py-3 bg-gray-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+      type="button"
+      @click="goForFight"
+      :class="{ hidden: selected.id === undefined }"
+  >
+    GO FOR FIGHT
+  </button>
+  </template>
 </template>
 
 <script>
 import Location from "./Location.vue";
 import { useLocationStore } from "../../stores/LocationStore.js";
 import router from "../../router/index.js";
-import { go_to_location_id } from "../../api.js";
+import {go_for_fight, go_to_location_id} from "../../api.js";
 import PageHeader from "../layout/PageHeader.vue";
+import {isHunterType} from "../../mapper.js";
 
 export default {
   name: "GoTo",
@@ -40,14 +51,21 @@ export default {
     locations() {
       return useLocationStore().typedLocations;
     },
+    isHunter() {
+      return isHunterType(this.$store.state.character.type);
+    }
   },
   methods: {
     go() {
-      console.log(this.selected);
       this.$store.commit("setLocation", this.selected);
       go_to_location_id(this.selected.id);
       router.push("/profile");
     },
+    goForFight() {
+      this.$store.commit("setLocation", this.selected);
+      go_for_fight(this.selected.id);
+      router.push("/profile");
+    }
   },
 };
 </script>
