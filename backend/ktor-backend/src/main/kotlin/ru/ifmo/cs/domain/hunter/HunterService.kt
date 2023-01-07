@@ -13,5 +13,6 @@ class HunterService {
             Pair(IntegerColumnType(), locationId),
         )
         query.execAndMap(arguments) { }
+        return@transaction Result.success(Unit)
     }
 }

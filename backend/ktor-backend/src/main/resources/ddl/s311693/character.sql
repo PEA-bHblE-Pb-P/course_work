@@ -21,6 +21,7 @@ create table s311693.character
         references s311693."group",
     favor_id           integer
         references s311693.favor,
+    photo_url          text,
     blood_percentage   integer default 100 not null
 );
 

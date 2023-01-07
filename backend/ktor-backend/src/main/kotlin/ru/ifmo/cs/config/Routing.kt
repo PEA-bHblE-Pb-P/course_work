@@ -71,6 +71,10 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
                 call.respond(characterService.character(id))
             }
 
+            get("/all") {
+                call.respond(characterService.allCharacters())
+            }
+
             get("/nearby") {
                 val userSession = call.sessions.get<UserSession>()
                 val id = userSession?.id!!

@@ -5,7 +5,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
-object SexTable: IntIdTable("sex") {
+object SexTable : IntIdTable("sex") {
     val name = varchar("name", 50)
 }
 
