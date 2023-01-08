@@ -21,6 +21,7 @@ export default {
     async logoutAndSet() {
       await logout();
       this.$store.commit("setId", undefined);
+      this.$store.commit("setCharacter", undefined);
       await router.push("/");
     },
   },
