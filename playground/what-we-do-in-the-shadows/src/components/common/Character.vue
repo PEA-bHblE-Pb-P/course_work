@@ -1,5 +1,5 @@
 <template v-if="character.name">
-  <div class="grid grid-cols-2 m-2 p-2 character w-fit">
+  <div class="grid grid-cols-2 m-2 p-2 w-fit" :class="{ 'character': !highlight, 'highlight': highlight}">
     <div>
       <h1 class="mdi-font-awesome text-2xl">Character</h1>
       <h1 class="mdi-font-awesome">id: {{ character.id }}</h1>
@@ -23,13 +23,21 @@ const props = defineProps({
   character: {
     type: Object,
     required: true,
-    default: () => {},
+    default: {},
   },
+  highlight: {
+    type: Boolean,
+    required: false,
+    default: false
+  }
 });
 </script>
 
 <style scoped>
 .character {
   border: 2px solid black;
+}
+.highlight {
+  border: 2px solid red;
 }
 </style>

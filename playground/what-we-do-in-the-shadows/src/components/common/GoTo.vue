@@ -63,11 +63,11 @@ export default {
       this.$store.commit("setCharacter", undefined);
       await router.push("/profile");
     },
-    goForFight() {
+    async goForFight() {
       this.$store.commit("setLocation", this.selected);
-      go_for_fight(this.selected.id);
+      await go_for_fight(this.selected.id);
       this.$store.commit("setCharacter", undefined);
-      router.push("/profile");
+      await router.push("/profile");
     }
   },
   async beforeMount() {

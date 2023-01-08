@@ -5,6 +5,7 @@ const CHARACTER_ME = "/character/me";
 const LOCATION_BY_ID = "/location";
 const GO_FOR_FIGHT = "/hunter_go_to_for_fight"
 const LOCATION_ALL = "/location/all"
+const CHARACTERS = "/character/all"
 
 function endpoint(postfix) {
   return "http://localhost:8080" + postfix;
@@ -62,6 +63,22 @@ export async function character() {
 
 export async function people_nearby() {
   const resp = await fetch(endpoint(PEOPLE_NEARBY), {
+    method: "get",
+    credentials: "include",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Access-Control-Allow-Origin": "localhost",
+      "Access-Control-Allow-Credentials": true,
+    },
+  });
+
+  if (!resp.ok) throw new Error("People nearby error occurred!");
+
+  return await resp.json();
+}
+
+export async function characters() {
+  const resp = await fetch(endpoint(CHARACTERS), {
     method: "get",
     credentials: "include",
     headers: {

@@ -33,38 +33,44 @@
         LOGIN
       </button>
     </form>
-    <img
-      class="mt-5"
-      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnypost.com%2Fwp-content%2Fuploads%2Fsites%2F2%2F2020%2F05%2Fwhat-we-do-in-the-shadows-02.jpeg%3Fquality%3D90%26strip%3Dall&f=1&nofb=1&ipt=5bc07f3a63ce1a346c438bcf3640e9225f03a834b4950454df7c48cd6454ec94&ipo=images"
-    />
+    <div class="m-2 flex flex-wrap">
+      <Character :character="character" :highlight="id === character.id" v-for="character in limitedCharacters" :key="character.id" @click="id = character.id"/>
+    </div>
   </div>
 </template>
 
 <script>
-import {login} from "../../api.js";
+import {characters, login} from "../../api.js";
 import router from "../../router/index.js";
+import Character from "./Character.vue";
 
 export default {
   name: "Login",
+  components: {Character},
   data() {
     return {
       id: "",
+      characters: []
     };
   },
+  computed: {
+    limitedCharacters() {
+      return this.characters.sort((a,b)=>a.id - b.id).slice(0, 20)
+    }
+  },
   methods: {
-    loginAndSet() {
-      try {
-        login(this.id).then(() => {
-          this.$store.commit("setId", this.id);
-          if (router.currentRoute.value.redirectedFrom === undefined)
-            router.push("/profile");
-          else
-            router.push(router.currentRoute.value.redirectedFrom);
-        });
-      } catch (e) {
-        console.log(e);
-      }
+    async loginAndSet() {
+      await login(this.id).then(() => {
+        this.$store.commit("setId", this.id);
+        if (router.currentRoute.value.redirectedFrom === undefined)
+          router.push("/profile");
+        else
+          router.push(router.currentRoute.value.redirectedFrom);
+      });
     },
   },
+  async beforeMount() {
+    this.characters = await characters();
+  }
 };
 </script>
