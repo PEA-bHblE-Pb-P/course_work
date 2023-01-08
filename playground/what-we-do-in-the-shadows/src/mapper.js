@@ -72,7 +72,7 @@ function ageByBirthday(birthday) {
 
 function mapHumanImage(sex, birthday) {
   switch (sex) {
-    case "musculine":
+    case "masculine":
       return "/"+ageByBirthday(birthday)+"_man.png";
     case "feminine":
       return "/"+ageByBirthday(birthday)+"_woman.png";

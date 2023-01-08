@@ -57,14 +57,16 @@ export default {
     }
   },
   methods: {
-    go() {
+    async go() {
       this.$store.commit("setLocation", this.selected);
-      go_to_location_id(this.selected.id);
-      router.push("/profile");
+      await go_to_location_id(this.selected.id);
+      this.$store.commit("setCharacter", undefined);
+      await router.push("/profile");
     },
     goForFight() {
       this.$store.commit("setLocation", this.selected);
       go_for_fight(this.selected.id);
+      this.$store.commit("setCharacter", undefined);
       router.push("/profile");
     }
   },

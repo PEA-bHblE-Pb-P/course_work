@@ -1,7 +1,6 @@
 const LOGIN = "/login";
 const LOGOUT = "/logout";
 const PEOPLE_NEARBY = "/character/nearby";
-const GO_TO_LOCATION_ID = "/go_to_location_by_id";
 const CHARACTER_ME = "/character/me";
 const LOCATION_BY_ID = "/location";
 const GO_FOR_FIGHT = "/hunter_go_to_for_fight"
@@ -35,7 +34,7 @@ export async function logout() {
     method: "post",
     credentials: "include",
     headers: {
-      Accept: "application/json, text/plain, */*",
+      Accept: "*/*",
       "Access-Control-Allow-Origin": "localhost",
       "Access-Control-Allow-Credentials": true,
     },
@@ -78,7 +77,7 @@ export async function people_nearby() {
 }
 
 export async function go_to_location_id(id) {
-  return await fetch(endpointQuery(GO_TO_LOCATION_ID, id), {
+  const resp = await fetch(endpointQuery(LOCATION_BY_ID, id)+"/go", {
     method: "post",
     credentials: "include",
     headers: {
@@ -86,10 +85,10 @@ export async function go_to_location_id(id) {
       "Access-Control-Allow-Origin": "localhost",
       "Access-Control-Allow-Credentials": true,
     },
-  }).then((response) => {
-    if (!response.ok) throw new Error("Go to error occurred!");
-    else response.status;
   });
+
+  if (!resp.ok) throw new Error("Go to location error occurred!");
+  return resp.status;
 }
 
 export async function go_for_fight(id) {

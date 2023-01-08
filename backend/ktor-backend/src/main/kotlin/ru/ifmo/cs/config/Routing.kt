@@ -2,7 +2,6 @@ package ru.ifmo.cs.config
 
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.OK
-import io.ktor.http.HttpStatusCode.Companion.PartialContent
 import io.ktor.server.application.*
 import io.ktor.server.plugins.openapi.*
 import io.ktor.server.plugins.swagger.*
@@ -67,6 +66,7 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
 
         post("/logout") {
             call.sessions.clear<UserSession>()
+            call.respond(OK)
         }
 
         route("/character") {

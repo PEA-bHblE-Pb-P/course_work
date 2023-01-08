@@ -42,17 +42,17 @@ export default {
     }
   },
   methods: {
-    go() {
-      console.log(this.selected);
+    async go() {
       this.$store.commit("setLocation", this.selected);
-      go_to_location_id(this.selected.id);
-      router.push("/profile");
+      await go_to_location_id(this.selected.id);
+      this.$store.commit("setCharacter", undefined);
+      await router.push("/profile");
     },
   },
   async beforeMount() {
     if (this.$store.getters.shouldSetLocations) {
       this.locations = await locations();
-      await this.$store.commit("setLocations", this.locations);
+      await this.$store.commit("setLocations", this.locations)
     } else {
       this.locations = this.$store.state.locations;
     }
