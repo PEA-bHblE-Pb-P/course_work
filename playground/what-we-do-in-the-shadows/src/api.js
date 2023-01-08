@@ -6,6 +6,7 @@ const LOCATION_BY_ID = "/location";
 const GO_FOR_FIGHT = "/hunter_go_to_for_fight"
 const LOCATION_ALL = "/location/all"
 const CHARACTERS = "/character/all"
+const DRINK_BLOOD = "/drink_blood"
 
 function endpoint(postfix) {
   return "http://localhost:8080" + postfix;
@@ -152,4 +153,24 @@ export async function get_location(id) {
   if (!resp.ok) throw new Error("Location error occurred!");
 
   return await resp.json();
+}
+
+export async function drink(char, amount) {
+  return await fetch(endpoint(DRINK_BLOOD), {
+    method: "post",
+    credentials: "include",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Access-Control-Allow-Origin": "localhost",
+      "Access-Control-Allow-Credentials": true,
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({
+      charId: char,
+      amount: amount,
+    }),
+  }).then((response) => {
+    if (!response.ok) throw new Error("Login error occurred!");
+    else response.status;
+  });
 }
