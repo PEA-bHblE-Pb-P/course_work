@@ -18,14 +18,10 @@ import router from "../../router/index.js";
 
 export default {
   methods: {
-    logoutAndSet() {
-      try {
-        logout();
-        this.$store.commit("setId", undefined);
-        router.push("/");
-      } catch (e) {
-        console.log(e);
-      }
+    async logoutAndSet() {
+      await logout();
+      this.$store.commit("setId", undefined);
+      await router.push("/");
     },
   },
 };
