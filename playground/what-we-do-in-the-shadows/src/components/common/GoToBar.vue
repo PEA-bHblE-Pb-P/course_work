@@ -2,7 +2,7 @@
   <PageHeader>Pick a BAR to go</PageHeader>
   <div class="grid grid-cols-3 gap-4">
     <Location
-      v-for="loc in locations"
+      v-for="loc in typedLocations"
       :key="loc.id"
       :location="loc"
       @click="this.selected = loc"
@@ -36,6 +36,11 @@ export default {
       locations: []
     };
   },
+  computed: {
+    typedLocations() {
+      return this.$store.getters.typedLocations.filter((loc)=>loc.type === "bar");
+    }
+  },
   methods: {
     go() {
       console.log(this.selected);
@@ -47,7 +52,7 @@ export default {
   async beforeMount() {
     if (this.$store.getters.shouldSetLocations) {
       this.locations = await locations();
-      this.$store.commit("setLocations", this.locations);
+      await this.$store.commit("setLocations", this.locations);
     } else {
       this.locations = this.$store.state.locations;
     }

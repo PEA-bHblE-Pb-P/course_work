@@ -10,6 +10,7 @@ import PeopleNearBy from "./PeopleNearBy.vue";
 import { character, get_location } from "../../api.js";
 import Character from "./Character.vue";
 import Location from "./Location.vue";
+import {typedLocation} from "../../mapper.js";
 
 export default {
   name: "Profile",
@@ -40,7 +41,7 @@ export default {
       this.character = await this.characterByState;
     }
 
-    this.location = await get_location(this.character.location);
+    this.location = typedLocation(await get_location(this.character.location));
   },
 };
 </script>

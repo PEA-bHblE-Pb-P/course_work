@@ -33,3 +33,14 @@ export function mapCharacterType(type) {
 export function isHunterType(type) {
   return type === 5;
 }
+
+export function typedLocation(loc) {
+  return {
+    id: loc.id,
+    name: loc.name,
+    lat: loc.lat,
+    lon: loc.lon,
+    type: mapLocationType(loc.locationTypeId),
+    vampiresCount: loc.vampiresCount
+  }
+}

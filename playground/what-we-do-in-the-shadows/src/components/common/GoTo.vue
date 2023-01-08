@@ -2,7 +2,7 @@
   <PageHeader>Pick a place to go</PageHeader>
   <div class="grid grid-cols-3 gap-4">
     <Location
-      v-for="loc in locations"
+      v-for="loc in typedLocations"
       :key="loc.id"
       :location="loc"
       @click="this.selected = loc"
@@ -52,6 +52,9 @@ export default {
     characterByState() {
       return this.$store.state.character;
     },
+    typedLocations() {
+      return this.$store.getters.typedLocations;
+    }
   },
   methods: {
     go() {

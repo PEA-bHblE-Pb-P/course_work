@@ -36,7 +36,6 @@ const store = createStore({
     },
     setLocations(state, locations) {
       state.locations = locations;
-      state.location = typedLocation(locations.filter((loc)=>loc.id === state.location.id));
     },
     unsetLocations(state) {
       state.location = undefined;
