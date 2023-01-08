@@ -25,11 +25,7 @@ export default {
   },
   data() {
     return {
-      character: {
-        name: "",
-        id: "",
-        location: 1,
-      },
+      character: {},
       location: {},
     };
   },

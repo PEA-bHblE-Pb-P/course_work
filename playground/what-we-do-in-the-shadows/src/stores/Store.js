@@ -21,6 +21,7 @@ const store = createStore({
       return state.locations === undefined;
     },
     typedLocations(state) {
+      if (state.locations === undefined) return [];
       return state.locations.map((loc) => typedLocation(loc));
     },
   },

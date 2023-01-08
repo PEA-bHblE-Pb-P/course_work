@@ -44,3 +44,56 @@ export function typedLocation(loc) {
     vampiresCount: loc.vampiresCount
   }
 }
+function getAge(dateString) {
+  const today = new Date();
+  const birthDate = new Date(dateString);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+  {
+    age--;
+  }
+  return age;
+}
+
+function ageByBirthday(birthday) {
+  const age = getAge(birthday);
+
+  if (age < 20) {
+    return "young"
+  }
+
+  if (age < 45) {
+    return "cougar"
+  }
+
+  return "old"
+}
+
+function mapHumanImage(sex, birthday) {
+  switch (sex) {
+    case "musculine":
+      return "/"+ageByBirthday(birthday)+"_man.png";
+    case "feminine":
+      return "/"+ageByBirthday(birthday)+"_woman.png";
+    default:
+      return "/undefined.png";
+  }
+}
+
+export function mapImage(character) {
+  switch (character.typeId) {
+    case 1:
+      return "/вампир.jpg";
+    case 2:
+      return "/оборотень.png";
+    case 3:
+      return mapHumanImage(character.sex, character.birthday);
+    case 4:
+      return "/вампир.png";
+    case 5:
+      return "/охотник.png";
+    default:
+      return "/undefined.png";
+  }
+}
