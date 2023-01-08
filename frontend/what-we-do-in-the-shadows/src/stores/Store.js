@@ -7,7 +7,7 @@ const store = createStore({
       id: undefined,
       character: undefined,
       location: undefined,
-      locations: undefined
+      locations: undefined,
     };
   },
   getters: {
@@ -30,7 +30,7 @@ const store = createStore({
       state.id = id;
     },
     setCharacter(state, character) {
-      state.character = character
+      state.character = character;
     },
     setLocation(state, location) {
       state.location = location;
@@ -41,7 +41,7 @@ const store = createStore({
     unsetLocations(state) {
       state.location = undefined;
       state.locations = undefined;
-    }
+    },
   },
 });
 

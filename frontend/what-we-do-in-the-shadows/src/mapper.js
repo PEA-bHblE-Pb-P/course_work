@@ -41,16 +41,15 @@ export function typedLocation(loc) {
     lat: loc.lat,
     lon: loc.lon,
     type: mapLocationType(loc.locationTypeId),
-    vampiresCount: loc.vampiresCount
-  }
+    vampiresCount: loc.vampiresCount,
+  };
 }
 function getAge(dateString) {
   const today = new Date();
   const birthDate = new Date(dateString);
   let age = today.getFullYear() - birthDate.getFullYear();
   const m = today.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
-  {
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
     age--;
   }
   return age;
@@ -60,22 +59,22 @@ function ageByBirthday(birthday) {
   const age = getAge(birthday);
 
   if (age < 20) {
-    return "young"
+    return "young";
   }
 
   if (age < 45) {
-    return "cougar"
+    return "cougar";
   }
 
-  return "old"
+  return "old";
 }
 
 function mapHumanImage(sex, birthday) {
   switch (sex) {
     case "masculine":
-      return "/"+ageByBirthday(birthday)+"_man.png";
+      return "/" + ageByBirthday(birthday) + "_man.png";
     case "feminine":
-      return "/"+ageByBirthday(birthday)+"_woman.png";
+      return "/" + ageByBirthday(birthday) + "_woman.png";
     default:
       return "/undefined.png";
   }

@@ -5,36 +5,41 @@
       v-for="loc in typedLocations"
       :key="loc.id"
       :location="loc"
-      @click="this.selected = loc"
       :class="{ 'bg-gray-400': loc.id === selected.id }"
+      @click="selected = loc"
     />
   </div>
   <button
     class="inline-block m-10 px-7 py-3 bg-gray-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-gray-600 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
     type="button"
-    @click="go"
     :class="{ hidden: selected.id === undefined }"
+    @click="go"
   >
     GO
   </button>
   <template v-if="isHunter">
-  <button
+    <button
       class="inline-block m-10 px-7 py-3 bg-gray-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
       type="button"
-      @click="goForFight"
       :class="{ hidden: selected.id === undefined }"
-  >
-    GO FOR FIGHT
-  </button>
+      @click="goForFight"
+    >
+      GO FOR FIGHT
+    </button>
   </template>
 </template>
 
 <script>
 import Location from "./Location.vue";
 import router from "../../router/index.js";
-import {character, go_for_fight, go_to_location_id, locations} from "../../api.js";
+import {
+  character,
+  go_for_fight,
+  go_to_location_id,
+  locations,
+} from "../../api.js";
 import PageHeader from "../layout/PageHeader.vue";
-import {isHunterType} from "../../mapper.js";
+import { isHunterType } from "../../mapper.js";
 
 export default {
   name: "GoTo",
@@ -45,7 +50,7 @@ export default {
         id: undefined,
       },
       isHunter: false,
-      locations: []
+      locations: [],
     };
   },
   computed: {
@@ -54,21 +59,7 @@ export default {
     },
     typedLocations() {
       return this.$store.getters.typedLocations;
-    }
-  },
-  methods: {
-    async go() {
-      this.$store.commit("setLocation", this.selected);
-      await go_to_location_id(this.selected.id);
-      this.$store.commit("setCharacter", undefined);
-      await router.push("/profile");
     },
-    async goForFight() {
-      this.$store.commit("setLocation", this.selected);
-      await go_for_fight(this.selected.id);
-      this.$store.commit("setCharacter", undefined);
-      await router.push("/profile");
-    }
   },
   async beforeMount() {
     if (this.$store.getters.shouldSetCharacter) {
@@ -83,7 +74,21 @@ export default {
     } else {
       this.locations = this.$store.state.locations;
     }
-  }
+  },
+  methods: {
+    async go() {
+      this.$store.commit("setLocation", this.selected);
+      await go_to_location_id(this.selected.id);
+      this.$store.commit("setCharacter", undefined);
+      await router.push("/profile");
+    },
+    async goForFight() {
+      this.$store.commit("setLocation", this.selected);
+      await go_for_fight(this.selected.id);
+      this.$store.commit("setCharacter", undefined);
+      await router.push("/profile");
+    },
+  },
 };
 </script>
 

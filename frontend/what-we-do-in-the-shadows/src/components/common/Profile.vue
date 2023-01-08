@@ -6,22 +6,21 @@
 </template>
 
 <script>
-import PeopleNearBy from "./PeopleNearBy.vue";
 import { character, get_location } from "../../api.js";
 import Character from "./Character.vue";
 import Location from "./Location.vue";
-import {typedLocation} from "../../mapper.js";
+import { typedLocation } from "../../mapper.js";
 
 export default {
   name: "Profile",
-  components: { Location, Character, PeopleNearBy },
+  components: { Location, Character },
   computed: {
     characterId() {
       return this.$store.state.id;
     },
     characterByState() {
       return this.$store.state.character;
-    }
+    },
   },
   data() {
     return {

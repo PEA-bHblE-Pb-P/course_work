@@ -3,10 +3,10 @@ const LOGOUT = "/logout";
 const PEOPLE_NEARBY = "/character/nearby";
 const CHARACTER_ME = "/character/me";
 const LOCATION_BY_ID = "/location";
-const GO_FOR_FIGHT = "/hunter_go_to_for_fight"
-const LOCATION_ALL = "/location/all"
-const CHARACTERS = "/character/all"
-const DRINK_BLOOD = "/drink_blood"
+const GO_FOR_FIGHT = "/hunter_go_to_for_fight";
+const LOCATION_ALL = "/location/all";
+const CHARACTERS = "/character/all";
+const DRINK_BLOOD = "/drink_blood";
 
 function endpoint(postfix) {
   return "http://localhost:8080" + postfix;
@@ -95,7 +95,7 @@ export async function characters() {
 }
 
 export async function go_to_location_id(id) {
-  const resp = await fetch(endpointQuery(LOCATION_BY_ID, id)+"/go", {
+  const resp = await fetch(endpointQuery(LOCATION_BY_ID, id) + "/go", {
     method: "post",
     credentials: "include",
     headers: {
@@ -163,7 +163,7 @@ export async function drink(char, amount) {
       Accept: "application/json, text/plain, */*",
       "Access-Control-Allow-Origin": "localhost",
       "Access-Control-Allow-Credentials": true,
-      "Content-type": "application/json; charset=UTF-8"
+      "Content-type": "application/json; charset=UTF-8",
     },
     body: JSON.stringify({
       charId: char,
