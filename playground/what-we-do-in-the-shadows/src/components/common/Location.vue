@@ -4,6 +4,7 @@
     <h3>name: {{ location.name }}</h3>
     <p>pos: ({{ location.lat }}, {{ location.lon }})</p>
     <p>type: {{ location.type || "none" }}</p>
+    <h1>vampires: {{ location.vampiresCount }}</h1>
   </div>
 </template>
 

@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import { typedLocation } from "../mapper.js";
 
 const store = createStore({
   state() {
@@ -6,6 +7,7 @@ const store = createStore({
       id: undefined,
       character: undefined,
       location: undefined,
+      locations: undefined
     };
   },
   getters: {
@@ -14,7 +16,13 @@ const store = createStore({
     },
     shouldSetCharacter(state) {
       return state.character === undefined && state.id !== undefined;
-    }
+    },
+    shouldSetLocations(state) {
+      return state.locations === undefined;
+    },
+    typedLocations(state) {
+      return state.locations.map((loc) => typedLocation(loc));
+    },
   },
   mutations: {
     setId(state, id) {
@@ -26,6 +34,14 @@ const store = createStore({
     setLocation(state, location) {
       state.location = location;
     },
+    setLocations(state, locations) {
+      state.locations = locations;
+      state.location = typedLocation(locations.filter((loc)=>loc.id === state.location.id));
+    },
+    unsetLocations(state) {
+      state.location = undefined;
+      state.locations = undefined;
+    }
   },
 });
 

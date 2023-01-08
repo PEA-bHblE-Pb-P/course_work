@@ -10,12 +10,14 @@ data class LocationResponse(
     val lon: Float,
     val name: String,
     val locationTypeId: Int?,
+    val vampiresCount: Int
 )
 
-fun Location.toResponse() = LocationResponse(
+fun Location.toResponse(vampiresCount: Int) = LocationResponse(
     id = id.value,
     lat = lat,
     lon = lon,
     name = name,
     locationTypeId = locationTypeId,
+    vampiresCount = vampiresCount
 )

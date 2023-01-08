@@ -5,6 +5,7 @@ const GO_TO_LOCATION_ID = "/go_to_location_by_id";
 const CHARACTER_ME = "/character/me";
 const LOCATION_BY_ID = "/location";
 const GO_FOR_FIGHT = "/hunter_go_to_for_fight"
+const LOCATION_ALL = "/location/all"
 
 function endpoint(postfix) {
   return "http://localhost:8080" + postfix;
@@ -104,6 +105,21 @@ export async function go_for_fight(id) {
     if (!response.ok) throw new Error("Go to error occurred!");
     else response.status;
   });
+}
+
+export async function locations() {
+  const resp = await fetch(endpoint(LOCATION_ALL), {
+    method: "get",
+    credentials: "include",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Access-Control-Allow-Origin": "localhost",
+      "Access-Control-Allow-Credentials": true,
+    },
+  });
+
+  if (!resp.ok) throw new Error("Location count error occurred!");
+  return await resp.json();
 }
 
 export async function get_location(id) {

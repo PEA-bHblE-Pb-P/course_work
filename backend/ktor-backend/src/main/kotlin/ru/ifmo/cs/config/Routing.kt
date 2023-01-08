@@ -39,6 +39,10 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
                 call.respond(locationService.location(call.parameters["id"]!!.toInt()))
             }
 
+            get("/all") {
+                call.respond(locationService.locations())
+            }
+
             post("/{location_id}/go") {
                 val userSession = call.sessions.get<UserSession>()
                 val id = userSession?.id!!

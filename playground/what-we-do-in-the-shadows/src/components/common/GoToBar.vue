@@ -21,9 +21,8 @@
 
 <script>
 import Location from "./Location.vue";
-import { useLocationStore } from "../../stores/LocationStore.js";
 import router from "../../router/index.js";
-import { go_to_location_id } from "../../api.js";
+import {go_to_location_id, locations} from "../../api.js";
 import PageHeader from "../layout/PageHeader.vue";
 
 export default {
@@ -34,14 +33,8 @@ export default {
       selected: {
         id: undefined,
       },
+      locations: []
     };
-  },
-  computed: {
-    locations() {
-      return useLocationStore().typedLocations.filter(
-        (loc) => loc.type === "bar"
-      );
-    },
   },
   methods: {
     go() {
@@ -51,6 +44,14 @@ export default {
       router.push("/profile");
     },
   },
+  async beforeMount() {
+    if (this.$store.getters.shouldSetLocations) {
+      this.locations = await locations();
+      this.$store.commit("setLocations", this.locations);
+    } else {
+      this.locations = this.$store.state.locations;
+    }
+  }
 };
 </script>
 

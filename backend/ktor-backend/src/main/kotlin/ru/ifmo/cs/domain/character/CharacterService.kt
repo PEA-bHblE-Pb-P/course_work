@@ -53,4 +53,7 @@ class CharacterService {
         this.getString("sex"),
         this.getInt("type_id")
     )
+
+    fun vampiresCountByLocation(locationId: Int) =
+        allCharacters().count { it.typeId == 1 && it.location == locationId }
 }

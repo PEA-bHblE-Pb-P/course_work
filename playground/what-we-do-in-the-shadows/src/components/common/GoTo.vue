@@ -31,9 +31,8 @@
 
 <script>
 import Location from "./Location.vue";
-import { useLocationStore } from "../../stores/LocationStore.js";
 import router from "../../router/index.js";
-import {character, go_for_fight, go_to_location_id} from "../../api.js";
+import {character, go_for_fight, go_to_location_id, locations} from "../../api.js";
 import PageHeader from "../layout/PageHeader.vue";
 import {isHunterType} from "../../mapper.js";
 
@@ -45,13 +44,11 @@ export default {
       selected: {
         id: undefined,
       },
-      isHunter: false
+      isHunter: false,
+      locations: []
     };
   },
   computed: {
-    locations() {
-      return useLocationStore().typedLocations;
-    },
     characterByState() {
       return this.$store.state.character;
     },
@@ -74,6 +71,13 @@ export default {
       await this.$store.commit("setCharacter", char);
     }
     this.isHunter = isHunterType(this.characterByState.typeId);
+
+    if (this.$store.getters.shouldSetLocations) {
+      this.locations = await locations();
+      this.$store.commit("setLocations", this.locations);
+    } else {
+      this.locations = this.$store.state.locations;
+    }
   }
 };
 </script>
