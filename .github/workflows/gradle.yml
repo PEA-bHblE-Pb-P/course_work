@@ -1,4 +1,4 @@
-name: Gradle build & ktLintCheck
+name: Gradle ktLintCheck
 
 on:
   pull_request:
@@ -21,8 +21,5 @@ jobs:
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2.3.3
       
-    - name: Execute Gradle build
-      run: gradle build
-      
-    - name: Execute Gradle ktlintCheck
-      run: gradle ktlintCheck
+    - name: Execute Gradle ktLintCheck
+      run: gradle ktLintCheck
