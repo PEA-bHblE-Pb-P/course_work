@@ -62,6 +62,7 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
 
         post("/logout") {
             call.sessions.clear<UserSession>()
+            call.respond(OK)
         }
 
         route("/character") {
