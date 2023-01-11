@@ -8,8 +8,8 @@ import ru.ifmo.cs.util.DatabaseExtension
 
 @ExtendWith(DatabaseExtension::class)
 class LocationServiceTest {
-    private val service = LocationService()
     private val characterService = CharacterService()
+    private val service = LocationService(characterService)
 
     @Test
     fun location() {
@@ -20,7 +20,8 @@ class LocationServiceTest {
                     lat = -41.29433f,
                     lon = 174.78569f,
                     name = "Genghis Khan House",
-                    locationTypeId = 2
+                    locationTypeId = 2,
+                    vampiresCount = 1
                 )
             )
     }

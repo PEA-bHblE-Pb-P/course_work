@@ -34,6 +34,9 @@ ktlint {
     reporters {
         reporter(JSON)
     }
+    filter {
+        exclude("**/Application.kt")
+    }
 }
 
 tasks.test {
