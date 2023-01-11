@@ -10,7 +10,9 @@ data class CharacterResponse(
     val sex: String,
     val typeId: Int,
     val history: String,
-    val location: Int
+    val location: Int,
+    val birthday: String,
+    val bloodPercentage: Int
 )
 
 fun RealCharacter.toResponse() = CharacterResponse(
@@ -19,5 +21,7 @@ fun RealCharacter.toResponse() = CharacterResponse(
     sex = sex.name,
     history = history,
     typeId = typeId,
-    location = locationId
+    location = locationId,
+    birthday = birthday.toString(),
+    bloodPercentage = bloodPercentage
 )
