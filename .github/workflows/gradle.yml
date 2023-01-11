@@ -22,7 +22,7 @@ jobs:
     - run: cd backend/ktor-backend
       
     - name: Execute Gradle build
-      run: ./gradlew build
+      run: gradle build
       
     - name: Execute Gradle ktlintCheck
-      run: ./gradlew ktlintCheck
+      run: gradle ktlintCheck
