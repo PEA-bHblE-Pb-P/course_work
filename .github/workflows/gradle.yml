@@ -5,6 +5,10 @@ on:
     branches: [ "main", "dev", "backend" ]
   pull_request:
     branches: [ "main", "dev", "backend" ]
+    
+defaults:
+  run:
+    working-directory: backend/ktor-backend
 
 jobs:
   gradle:
@@ -22,7 +26,7 @@ jobs:
     - run: cd backend/ktor-backend
       
     - name: Execute Gradle build
-      run: ls && gradle build
+      run: gradle build
       
     - name: Execute Gradle ktlintCheck
       run: gradle ktlintCheck
