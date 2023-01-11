@@ -1,4 +1,4 @@
-create function s311693.execution_cannot_be_pardoned() returns trigger
+create or replace function s311693.execution_cannot_be_pardoned() returns trigger
     language plpgsql
 as
 $$

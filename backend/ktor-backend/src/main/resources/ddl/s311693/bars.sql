@@ -1,4 +1,4 @@
-create view s311693.bars(id, lat, lon, name, location_type_id) as
+create or replace view s311693.bars(id, lat, lon, name, location_type_id) as
 SELECT location.id,
        location.lat,
        location.lon,

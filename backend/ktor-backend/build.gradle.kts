@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType.JSON
+
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
@@ -9,12 +11,14 @@ plugins {
     id("io.ktor.plugin") version "2.2.1"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.22"
     id("org.flywaydb.flyway") version "5.2.4"
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
-group = "ru.ifmo.cs.helios.s311693"
-version = "0.0.1"
+group = "ru.ifmo.cs"
+version = "0.0.3"
+
 application {
-    mainClass.set("ru.ifmo.cs.helios.s311693.ApplicationKt")
+    mainClass.set("ru.ifmo.cs.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -22,6 +26,18 @@ application {
 
 repositories {
     mavenCentral()
+}
+
+ktlint {
+    ignoreFailures.set(false)
+    disabledRules.set(setOf("final-newline", "no-wildcard-imports"))
+    reporters {
+        reporter(JSON)
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 dependencies {
@@ -34,19 +50,25 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-websockets-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.swagger.codegen.v3:swagger-codegen-generators:1.0.36")
     implementation("io.ktor:ktor-server-locations:$ktor_version")
-    implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version"
-    )
+    implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.postgresql:postgresql:$postgres_version")
-    implementation("com.zaxxer:HikariCP:2.7.8")
+    implementation("com.zaxxer:HikariCP:5.0.1")
+    implementation("org.flywaydb:flyway-core:9.10.2")
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
+    testImplementation("org.assertj:assertj-guava:3.5.0")
+
+    val testcontainersVersion = "1.17.6"
+    testImplementation("org.testcontainers:junit-jupiter:$testcontainersVersion")
+    testImplementation("org.testcontainers:postgresql:$testcontainersVersion")
+    testImplementation("org.testcontainers:testcontainers:$testcontainersVersion")
 }
