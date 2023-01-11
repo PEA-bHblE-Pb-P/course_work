@@ -5,13 +5,20 @@ import org.jetbrains.exposed.sql.IntegerColumnType
 import org.jetbrains.exposed.sql.VarCharColumnType
 import org.jetbrains.exposed.sql.transactions.transaction
 import ru.ifmo.cs.config.execAndMap
+import ru.ifmo.cs.domain.character.CharacterService
 import ru.ifmo.cs.model.Location
 import ru.ifmo.cs.model.LocationType
 
-class LocationService {
+class LocationService(
+    private val characterService: CharacterService
+) {
     fun location(id: Int) = transaction {
         Location.findById(id)
-    }!!.toResponse()
+    }!!.toResponse(characterService.vampiresCountByLocation(id))
+
+    fun locations() = transaction {
+        Location.all().toList()
+    }.map { it.toResponse(characterService.vampiresCountByLocation(it.id.value)) }
 
     fun locationType(id: Int) = transaction {
         LocationType.findById(id)

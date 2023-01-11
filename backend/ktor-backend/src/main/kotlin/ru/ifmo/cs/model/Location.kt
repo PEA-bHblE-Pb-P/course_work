@@ -9,7 +9,7 @@ object LocationTable : IntIdTable("location") {
     val lat = float("lat")
     val lon = float("lon")
     val name = varchar("name", 255)
-    val locationTypeId = integer("location_type_id")
+    val locationTypeId = integer("location_type_id").nullable()
 }
 
 class Location(id: EntityID<Int>) : IntEntity(id) {

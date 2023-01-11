@@ -8,8 +8,8 @@ import ru.ifmo.cs.domain.vampire.VampireService
 
 class Dependencies {
     val groupService = GroupService()
-    val locationService = LocationService()
-    val vampireService = VampireService()
     val characterService = CharacterService()
+    val locationService = LocationService(characterService)
+    val vampireService = VampireService()
     val hunterService = HunterService()
 }

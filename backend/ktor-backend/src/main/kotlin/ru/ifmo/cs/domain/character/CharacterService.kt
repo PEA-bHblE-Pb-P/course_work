@@ -55,4 +55,7 @@ class CharacterService {
         this.getDate("birthday").toString(),
         this.getInt("blood_percentage")
     )
+
+    fun vampiresCountByLocation(locationId: Int) =
+        allCharacters().count { it.typeId == 1 && it.location == locationId }
 }

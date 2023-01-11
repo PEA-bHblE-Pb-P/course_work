@@ -38,6 +38,10 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
                 call.respond(locationService.location(call.parameters["id"]!!.toInt()))
             }
 
+            get("/all") {
+                call.respond(locationService.locations())
+            }
+
             post("/{location_id}/go") {
                 val userSession = call.sessions.get<UserSession>()
                 val id = userSession?.id!!
@@ -103,7 +107,10 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
             val id = userSession?.id!!
             val locationId = call.parameters["location_id"]!!.toInt()
 
-            call.respond(hunterService.goForFight(id, locationId))
+            if (hunterService.goForFight(id, locationId).isSuccess)
+                call.respond(OK)
+            else
+                call.respond(BadRequest)
         }
 
         post("/drink_blood") {
