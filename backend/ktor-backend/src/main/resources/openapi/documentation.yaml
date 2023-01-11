@@ -245,6 +245,9 @@ components:
           format: "int32"
         photoUrl:
           type: "string"
+        bloodPercentage:
+          type: "integer"
+          format: "int32"
     PeopleNearbyResponse:
       type: "object"
       properties:
@@ -256,6 +259,11 @@ components:
         sex:
           type: "string"
         typeId:
+          type: "integer"
+          format: "int32"
+        birthday:
+          type: "string"
+        bloodPercentage:
           type: "integer"
           format: "int32"
     GroupResponse:
