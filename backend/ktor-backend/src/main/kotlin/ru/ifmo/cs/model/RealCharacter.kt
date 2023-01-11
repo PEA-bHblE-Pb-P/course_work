@@ -11,8 +11,9 @@ object Characters : IntIdTable("character") {
     val typeId = integer("type_id")
     val history = text("history")
     val sexId = reference("sex_id", SexTable)
-    val locationId = integer("location_id").nullable()
+    val locationId = integer("location_id")
     val birthday = date("birthday")
+    val bloodPercentage = integer("blood_percentage")
     var photoUrl = text("photo_url").nullable()
 }
 
@@ -25,5 +26,6 @@ class RealCharacter(id: EntityID<Int>) : IntEntity(id) {
     var sex by Sex referencedOn Characters.sexId
     var locationId by Characters.locationId
     var birthday by Characters.birthday
+    var bloodPercentage by Characters.bloodPercentage
     var photoUrl by Characters.photoUrl
 }

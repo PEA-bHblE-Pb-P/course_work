@@ -7,5 +7,7 @@ data class PeopleNearbyResponse(
     val id: Int,
     val name: String,
     val sex: String,
-    val typeId: Int
+    val typeId: Int,
+    val birthday: String,
+    val bloodPercentage: Int
 )
