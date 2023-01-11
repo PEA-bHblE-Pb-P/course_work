@@ -2,9 +2,9 @@ name: Gradle build & ktLintCheck
 
 on:
   push:
-    branches: [ "main", "backend" ]
+    branches: [ "main", "dev", "backend" ]
   pull_request:
-    branches: [ "main", "backend" ]
+    branches: [ "main", "dev", "backend" ]
 
 jobs:
   gradle:
@@ -22,7 +22,7 @@ jobs:
     - run: cd backend/ktor-backend
       
     - name: Execute Gradle build
-      run: gradle build
+      run: ls && gradle build
       
     - name: Execute Gradle ktlintCheck
       run: gradle ktlintCheck
