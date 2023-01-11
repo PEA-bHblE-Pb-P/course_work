@@ -51,6 +51,8 @@ class CharacterService {
         this.getInt("id"),
         this.getString("name"),
         this.getString("sex"),
-        this.getInt("type_id")
+        this.getInt("type_id"),
+        this.getDate("birthday").toString(),
+        this.getInt("blood_percentage")
     )
 }
