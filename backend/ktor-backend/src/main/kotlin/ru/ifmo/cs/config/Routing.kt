@@ -117,7 +117,10 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
             val userSession = call.sessions.get<UserSession>()
             val id = userSession?.id!!
             val request = call.receive<DrinkBloodRequest>()
-            call.respond(vampireService.drinkBlood(id, request.charId, request.amount))
+            if (vampireService.drinkBlood(id, request.charId, request.amount).isSuccess)
+                call.respond(OK)
+            else
+                call.respond(BadRequest)
         }
     }
 }

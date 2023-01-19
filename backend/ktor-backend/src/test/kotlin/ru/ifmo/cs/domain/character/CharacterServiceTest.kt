@@ -68,6 +68,7 @@ class CharacterServiceTest {
         sex = "masculine",
         birthday = "1636-03-09",
         location = 1,
+        bloodPercentage = 100,
         photoUrl = null
     )
 

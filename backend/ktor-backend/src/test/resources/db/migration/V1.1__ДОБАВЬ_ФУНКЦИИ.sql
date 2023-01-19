@@ -104,7 +104,9 @@ CREATE OR REPLACE FUNCTION people_nearby(character_id int)
                 id      int,
                 name    varchar,
                 sex     varchar,
-                type_id int
+                type_id int,
+                birthday date,
+                blood_percentage int
             )
 AS
 $$
@@ -118,7 +120,7 @@ BEGIN
     SELECT type.id FROM "type" WHERE name LIKE 'человек' INTO human_type_id;
 
     RETURN QUERY
-        SELECT c.id AS id, c.name AS name, sx.name AS sex, c.type_id as type_id
+        SELECT c.id AS id, c.name AS name, sx.name AS sex, c.type_id as type_id, c.birthday as birthday, c.blood_percentage as blood_percentage
         FROM "character" c
                  JOIN sex sx ON sx.id = c.sex_id
         WHERE c.location_id = curr_loc_id
@@ -218,7 +220,7 @@ declare
 begin
     perform verify_character_exists(hunter_id);
     perform verify_character_alive(hunter_id);
-    assert (select type_id from character where id = hunter_id) !=
+    assert (select type_id from character where id = hunter_id) =
            (select id from type where name = 'охотник на вампиров'), 'check hunter type';
     RAISE NOTICE 'Охотник на вамиров id=% вышел на охоту', hunter_id;
 

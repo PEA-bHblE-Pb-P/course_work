@@ -22,8 +22,12 @@ DECLARE
     okay_blood_amount    int = 85;
     dead_blood_amount    int = 75;
 BEGIN
+    assert char_id != vamp_id, 'check killer not eq victim';
     PERFORM verify_character_exists(vamp_id);
     PERFORM verify_character_exists(char_id);
+    assert (select type_id from character where id = vamp_id) !=
+           (select id from type where name = 'человек'), 'check not human';
+
     SELECT blood_percentage FROM character WHERE id = char_id INTO current_blood_amount;
     IF (current_blood_amount >= amount) THEN
         SELECT (current_blood_amount - amount) INTO current_blood_amount;
@@ -39,7 +43,7 @@ BEGIN
     ELSE
         RAISE EXCEPTION 'Jesus... You want to drink blood too much...';
     end if;
-END;
+END ;
 $$;
 
 alter function s311693.drink_blood(integer, integer, integer) owner to s311693;
