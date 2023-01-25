@@ -25,7 +25,6 @@ fun Court.toResponse() = CourtResponse(
     locationId = locationId
 )
 
-
 fun ResultRow.toCourtResponse() = CourtResponse(
     this[integer("id")],
     this[Courts.verdict],

@@ -21,7 +21,6 @@ fun Favor.toResponse() = FavorResponse(
     ageMax = ageMax
 )
 
-
 fun ResultRow.toFavorResponse() = FavorResponse(
     this[integer("id")],
     this[Favors.sexId],
