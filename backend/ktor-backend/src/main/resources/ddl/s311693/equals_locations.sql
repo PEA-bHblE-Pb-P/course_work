@@ -3,7 +3,8 @@ create or replace function s311693.equals_locations(char_id integer, char_id2 in
 as
 $$
 BEGIN
-    return (SELECT location_id FROM "character" WHERE id = char_id) = (SELECT location_id FROM "character" WHERE id = char_id2);
+    return (SELECT location_id FROM "character" WHERE id = char_id) =
+           (SELECT location_id FROM "character" WHERE id = char_id2);
 END;
 $$;
 
