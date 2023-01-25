@@ -1,6 +1,7 @@
 package ru.ifmo.cs.config
 
 import ru.ifmo.cs.domain.character.CharacterService
+import ru.ifmo.cs.domain.favor.FavorService
 import ru.ifmo.cs.domain.group.GroupService
 import ru.ifmo.cs.domain.hunter.HunterService
 import ru.ifmo.cs.domain.location.LocationService
@@ -11,5 +12,6 @@ class Dependencies {
     val characterService = CharacterService()
     val locationService = LocationService(characterService)
     val vampireService = VampireService()
+    val favorService = FavorService()
     val hunterService = HunterService()
 }

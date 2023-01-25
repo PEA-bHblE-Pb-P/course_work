@@ -56,6 +56,20 @@ class CharacterService {
         this.getInt("blood_percentage")
     )
 
-    fun vampiresCountByLocation(locationId: Int) =
-        allCharacters().count { it.typeId == 1 && it.location == locationId }
+    private fun ResultSet.toCharacterInLocationResponse() = CharacterInLocationResponse(
+        this.getInt("id"),
+        this.getString("name"),
+        this.getString("sex"),
+        this.getInt("type_id"),
+        this.getInt("blood_percentage")
+    )
+
+    fun vampiresCountByLocation(locationId: Int): Int = transaction {
+        val query = "SELECT * FROM character_type_nearby_location(?, ?)".trimIndent()
+        val arguments = mutableListOf<Pair<ColumnType, *>>(
+            Pair(IntegerColumnType(), locationId),
+            Pair(IntegerColumnType(), 1),
+        )
+        return@transaction query.execAndMap(arguments) { it.toCharacterInLocationResponse() }.size
+    }
 }

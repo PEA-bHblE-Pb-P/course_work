@@ -11,7 +11,7 @@ object Characters : IntIdTable("character") {
     val typeId = integer("type_id")
     val history = text("history")
     val sexId = reference("sex_id", SexTable)
-    val locationId = integer("location_id")
+    val locationId = integer("location_id").nullable()
     val birthday = date("birthday")
     val bloodPercentage = integer("blood_percentage")
     var photoUrl = text("photo_url").nullable()

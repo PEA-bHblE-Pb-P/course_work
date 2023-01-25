@@ -70,7 +70,23 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/Object"
+                type: "object"
+  /favor/{id}:
+    get:
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FavorResponse"
   /group:
     get:
       description: ""
@@ -114,7 +130,9 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/Object"
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/CourtResponse"
   /location/{id}:
     get:
       description: ""
@@ -167,6 +185,18 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/components/schemas/Unit"
+  /location/all:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/LocationResponse"
   /location_type/{id}:
     get:
       description: ""
@@ -273,6 +303,21 @@ components:
         bloodPercentage:
           type: "integer"
           format: "int32"
+    FavorResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        sexId:
+          type: "integer"
+          format: "int32"
+        ageMin:
+          type: "integer"
+          format: "int32"
+        ageMax:
+          type: "integer"
+          format: "int32"
     GroupResponse:
       type: "object"
       properties:
@@ -285,6 +330,25 @@ components:
           type: "integer"
           format: "int32"
         adminId:
+          type: "integer"
+          format: "int32"
+    CourtResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        verdict:
+          type: "string"
+        date:
+          type: "string"
+        defendantId:
+          type: "integer"
+          format: "int32"
+        groupId:
+          type: "integer"
+          format: "int32"
+        locationId:
           type: "integer"
           format: "int32"
     LocationResponse:
@@ -302,6 +366,9 @@ components:
         name:
           type: "string"
         locationTypeId:
+          type: "integer"
+          format: "int32"
+        vampiresCount:
           type: "integer"
           format: "int32"
     Unit:

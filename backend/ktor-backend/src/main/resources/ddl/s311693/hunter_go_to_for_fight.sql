@@ -9,9 +9,9 @@ declare
 begin
     perform verify_character_exists(hunter_id);
     perform verify_character_alive(hunter_id);
-    assert (select type_id from character where id = hunter_id) !=
+    assert (select type_id from character where id = hunter_id) =
            (select id from type where name = 'охотник на вампиров'), 'check hunter type';
-    RAISE NOTICE 'Охотник на вамиров id=% вышел на охоту', hunter_id;
+    RAISE NOTICE 'Охотник на вампиров id=% вышел на охоту', hunter_id;
 
     perform go_to_location_by_id(hunter_id, target_location_id);
     select id from type where name = 'вампир' INTO vampire_type;

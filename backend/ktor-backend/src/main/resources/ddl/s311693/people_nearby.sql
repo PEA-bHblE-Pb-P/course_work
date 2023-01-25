@@ -13,7 +13,12 @@ BEGIN
     SELECT type.id FROM "type" WHERE name LIKE 'человек' INTO human_type_id;
 
     RETURN QUERY
-        SELECT c.id AS id, c.name AS name, sx.name AS sex, c.type_id as type_id, c.birthday as birthday, c.blood_percentage as blood_percentage
+        SELECT c.id               AS id,
+               c.name             AS name,
+               sx.name            AS sex,
+               c.type_id          as type_id,
+               c.birthday         as birthday,
+               c.blood_percentage as blood_percentage
         FROM "character" c
                  JOIN sex sx ON sx.id = c.sex_id
         WHERE c.location_id = curr_loc_id
