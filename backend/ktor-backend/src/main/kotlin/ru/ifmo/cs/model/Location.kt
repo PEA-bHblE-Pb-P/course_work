@@ -10,6 +10,7 @@ object LocationTable : IntIdTable("location") {
     val lon = float("lon")
     val name = varchar("name", 255)
     val locationTypeId = integer("location_type_id").nullable()
+    val photoUrl = text("photo_url").nullable()
 }
 
 class Location(id: EntityID<Int>) : IntEntity(id) {
@@ -19,4 +20,5 @@ class Location(id: EntityID<Int>) : IntEntity(id) {
     var lon by LocationTable.lon
     var name by LocationTable.name
     var locationTypeId by LocationTable.locationTypeId
+    var photoUrl by LocationTable.photoUrl
 }
