@@ -41,6 +41,7 @@ export function typedLocation(loc) {
     lat: loc.lat,
     lon: loc.lon,
     type: mapLocationType(loc.locationTypeId),
+    photoUrl: loc.photoUrl,
     vampiresCount: loc.vampiresCount,
   };
 }

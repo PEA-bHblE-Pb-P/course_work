@@ -5,6 +5,12 @@
     <p>pos: ({{ location.lat }}, {{ location.lon }})</p>
     <p>type: {{ location.type || "none" }}</p>
     <h1>vampires: {{ location.vampiresCount }}</h1>
+    <img
+      v-if="location.photoUrl"
+      class="w-40"
+      :src="location.photoUrl"
+      alt="photo"
+    />
   </div>
 </template>
 
