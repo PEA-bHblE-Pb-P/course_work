@@ -2,8 +2,12 @@ package ru.ifmo.cs.domain.vampire
 
 import org.jetbrains.exposed.sql.ColumnType
 import org.jetbrains.exposed.sql.IntegerColumnType
+import org.jetbrains.exposed.sql.Transaction
+import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import ru.ifmo.cs.config.execAndMap
+import ru.ifmo.cs.model.Characters
+import ru.ifmo.cs.model.VampireServantsTable
 
 class VampireService {
     fun drinkBlood(id: Int, charId: Int, amount: Int): Result<Unit> {
@@ -18,5 +22,9 @@ class VampireService {
         }
 
         return Result.success(Unit)
+    }
+
+    fun getServants(id: Int) = transaction {
+        VampireServantsTable.select { VampireServantsTable.vampireId eq id }.map { it[VampireServantsTable.servantId].value }.toList()
     }
 }

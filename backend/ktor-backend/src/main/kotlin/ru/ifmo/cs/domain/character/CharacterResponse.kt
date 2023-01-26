@@ -1,6 +1,12 @@
 package ru.ifmo.cs.domain.character
 
 import kotlinx.serialization.Serializable
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.Table.Dual.integer
+import ru.ifmo.cs.domain.court.CourtResponse
+import ru.ifmo.cs.model.Characters
+import ru.ifmo.cs.model.Courts
 import ru.ifmo.cs.model.RealCharacter
 
 @Serializable

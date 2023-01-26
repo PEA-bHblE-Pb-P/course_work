@@ -27,6 +27,12 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
             }
         }
 
+        route("/servants") {
+            get("/{id}") {
+                call.respond(vampireService.getServants(call.parameters["id"]!!.toInt()))
+            }
+        }
+
         route("/location_type") {
             get("/{id}") {
                 call.respond(locationService.locationType(call.parameters["id"]!!.toInt()))
@@ -36,6 +42,12 @@ fun Application.configureRouting(deps: Dependencies) = with(deps) {
         route("/favor") {
             get("/{id}") {
                 call.respond(favorService.id(call.parameters["id"]!!.toInt()))
+            }
+        }
+
+        route("/murder") {
+            get("/all") {
+                call.respond(murderService.all())
             }
         }
 
