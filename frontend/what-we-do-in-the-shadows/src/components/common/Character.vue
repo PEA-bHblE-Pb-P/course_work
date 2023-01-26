@@ -7,7 +7,7 @@
       <h1 class="mdi-font-awesome text-2xl">Character</h1>
       <h1 class="mdi-font-awesome">id: {{ character.id }}</h1>
       <h1 class="mdi-font-awesome">name: {{ character.name }}</h1>
-      <h1 class="mdi-font-awesome">typeId: {{ character.typeId }}</h1>
+      <h1 class="mdi-font-awesome">type: {{ mapCharacterType(character.typeId) }}</h1>
       <h1 class="mdi-font-awesome mb-2">sex: {{ character.sex }}</h1>
       <h1 class="mdi-font-awesome mb-2">birthday: {{ character.birthday }}</h1>
     </div>
@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { mapImage } from "../../mapper.js";
+import { mapCharacterType, mapImage } from "../../mapper.js";
 
 const props = defineProps({
   character: {
