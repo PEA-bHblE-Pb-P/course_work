@@ -237,7 +237,7 @@ END ;
 $$ language plpgsql;
 
 
-create or replace function hunter_go_to_for_fight(hunter_id integer, target_location_id integer) returns void
+create or replace function hunter_go_to_for_fight(hunter_id integer, target_location_id integer) returns varchar
     language plpgsql
 as
 $$
@@ -259,7 +259,7 @@ begin
     if vampire_cnt > 1 then
         perform kill(hunter_id, (select id from character_type_nearby(hunter_id, 1) LIMIT 1),
                      'Охотник проиграл вампиру и умер');
-        RAISE NOTICE 'Охотник проиграл вампиру и умер';
+        return 'Охотник проиграл вампиру и умер';
     elseif vampire_cnt = 1 then
         select blood_percentage
         from character c
@@ -268,14 +268,14 @@ begin
         if vamp_blood_percentage != 100 then
             perform kill((select id from character_type_nearby(hunter_id, 1) LIMIT 1), hunter_id,
                          'Вампир слаб и его убил охотник');
-            RAISE NOTICE 'Вампир слаб и его убил охотник';
+            return 'Вампир слаб и его убил охотник';
         else
             perform kill(hunter_id, (select id from character_type_nearby(hunter_id, 1) LIMIT 1),
                          'Вампир силён и убил охотника');
-            RAISE NOTICE 'Вампир силён и убил охотника';
+            return 'Вампир силён и убил охотника';
         end if;
     else
-        RAISE NOTICE 'Охотник не нашёл вампиров';
+        return 'Охотник не нашёл вампиров';
     end if;
 
 end ;

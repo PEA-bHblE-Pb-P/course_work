@@ -6,7 +6,8 @@ create table s311693.location
     lon              double precision,
     name             varchar,
     location_type_id integer
-        references s311693.location_type
+        references s311693.location_type,
+    photo_url        text
 );
 
 alter table s311693.location

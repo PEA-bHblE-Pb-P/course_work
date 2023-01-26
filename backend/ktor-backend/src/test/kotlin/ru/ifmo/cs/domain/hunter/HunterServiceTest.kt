@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.jetbrains.exposed.exceptions.ExposedSQLException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import ru.ifmo.cs.domain.court.CourtResponse
 import ru.ifmo.cs.util.DatabaseExtension
 
 @ExtendWith(DatabaseExtension::class)
@@ -13,8 +14,8 @@ class HunterServiceTest {
 
     @Test
     fun goForFight() {
-        assertThat(service.goForFight(5, 1))
-            .isNotEqualTo(listOf<Unit>())
+        assertThat(service.goForFight(6, 1))
+            .isEqualTo(listOf<CourtResponse>())
     }
 
     @Test

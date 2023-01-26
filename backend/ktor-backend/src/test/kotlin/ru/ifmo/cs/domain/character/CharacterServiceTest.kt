@@ -25,7 +25,7 @@ class CharacterServiceTest {
     @Order(2)
     fun peopleNearby() {
         assertThat(characterService.peopleNearby(1).size)
-            .isEqualTo(1)
+            .isEqualTo(3)
 
         for (i in 1..5) {
             println(characterService.character(i))
@@ -33,7 +33,7 @@ class CharacterServiceTest {
         }
 
         assertThat(characterService.peopleNearby(5).size)
-            .isEqualTo(1)
+            .isEqualTo(3)
     }
 
     @Test
@@ -69,7 +69,7 @@ class CharacterServiceTest {
         birthday = "1636-03-09",
         location = 1,
         bloodPercentage = 100,
-        photoUrl = null
+        photoUrl = "https://se.ifmo.ru/documents/1609903/1613524/photo_2021-09-17_16-47-58.jpg/f0afb842-d5e5-d0e4-215f-772e7a4312ba?t=1631886833350"
     )
 
     @Test
