@@ -40,7 +40,8 @@ CREATE TABLE "location" (
   "lat" float,
   "lon" float,
   "name" varchar,
-  "location_type_id" int references "location_type"(id)
+  "location_type_id" int references "location_type"(id),
+  "photo_url" text
 );
 
 CREATE TABLE "vampire_to_servant" (

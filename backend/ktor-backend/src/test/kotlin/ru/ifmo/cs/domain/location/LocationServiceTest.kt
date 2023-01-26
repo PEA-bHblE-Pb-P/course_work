@@ -21,7 +21,8 @@ class LocationServiceTest {
                     lon = 174.78569f,
                     name = "Genghis Khan House",
                     locationTypeId = 2,
-                    vampiresCount = 1
+                    vampiresCount = 1,
+                    photoUrl = null
                 )
             )
     }
