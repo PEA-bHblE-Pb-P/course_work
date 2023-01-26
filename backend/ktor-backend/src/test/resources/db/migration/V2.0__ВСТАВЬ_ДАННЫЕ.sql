@@ -4,22 +4,22 @@ INSERT INTO type(id, name) VALUES (1, 'вампир'), (2, 'оборотень')
 
 INSERT INTO location_type VALUES (1, 'bar'), (2, 'living'), (3, 'cafe'), (4, 'hospital');
 
-INSERT INTO location(id, lat, lon, name, location_type_id) VALUES
-(1,-41.2943296,174.7856846,'Genghis Khan House',2),
-(2,-41.2936503,174.8201893,'Chocolate Fish Cafe',3),
-(3,-41.2936419,174.7818361,'The Welsh Dragon Bar',1),
-(4,-41.2936443,174.735631,'Баня Эрика,NULL',NULL),
-(5,90,135,'Пьянка на полюсе',1),
-(6,120,228,'Думская',1),
-(7,-43,42,'Шесть углов',1),
-(8,0,13,'Ржевка',2),
-(9,2,24211111111,'Космозонд',2),
-(10,81,23,'Подписные издания',3),
-(11,999,321,'Вязьма',2),
-(13,59.95031,30.31683, 'Белорусская 6',2),
-(14,55.66982,37.27967,'Трилистник',2),
-(15,55.75825,37.64643,'Яма',1),
-(16,59.9082,30.5135,'Кудрово',2);
+INSERT INTO location(id, lat, lon, name, location_type_id, photo_url) VALUES
+(1,-41.2943296,174.7856846,'Genghis Khan House',2, null),
+(2,-41.2936503,174.8201893,'Chocolate Fish Cafe',3, null),
+(3,-41.2936419,174.7818361,'The Welsh Dragon Bar',1, null),
+(4,-41.2936443,174.735631,'Баня Эрика,NULL',NULL, null),
+(5,90,135,'Пьянка на полюсе',1, null),
+(6,120,228,'Думская',1, null),
+(7,-43,42,'Шесть углов',1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Zagorodny_Avenue_SPB_02.jpg/460px-Zagorodny_Avenue_SPB_02.jpg'),
+(8,0,13,'Ржевка',2, null),
+(9,2,24211111111,'Космозонд',2, null),
+(10,81,23,'Подписные издания',3, null),
+(11,999,321,'Вязьма',2, null),
+(13,59.95031,30.31683, 'Белорусская 6',2, 'https://int.itmo.ru/uploads/95/9552ea6c92176e61ccb8c2c0651d541e4f4a5d9b.jpg'),
+(14,55.66982,37.27967,'Трилистник',2, null),
+(15,55.75825,37.64643,'Яма',1, null),
+(16,59.9082,30.5135,'Кудрово',2, 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/%D0%90%D1%8D%D1%80%D0%BE%D1%81%D1%8A%D0%B5%D0%BC%D0%BA%D0%B0_%D0%BA%D1%83%D0%B4%D1%80%D0%BE%D0%B2%D0%BE.jpg/765px-%D0%90%D1%8D%D1%80%D0%BE%D1%81%D1%8A%D0%B5%D0%BC%D0%BA%D0%B0_%D0%BA%D1%83%D0%B4%D1%80%D0%BE%D0%B2%D0%BE.jpg');
 
 INSERT INTO favor(id, sex_id, age_min, age_max) VALUES
 (1, 2, 30, 100), (2, 3, 30, 40);
