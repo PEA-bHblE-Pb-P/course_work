@@ -1,7 +1,15 @@
 <template>
   <div class="w-fit">
     <Character :character="character" />
-    <Location :titled="true" :location="location" />
+    <Location v-if="location" :titled="true" :location="location" />
+    <div v-if="!location" class="p-5 m-5">
+      <img
+        class="w-40"
+        src="/rip.png"
+        alt="photo"
+      />
+      <h1 class="mdi-font-awesome mb-2">О нём слогали легенды: {{ character.history }}</h1>
+    </div>
   </div>
 </template>
 
@@ -25,7 +33,7 @@ export default {
   data() {
     return {
       character: {},
-      location: {},
+      location: undefined,
     };
   },
   async beforeMount() {
@@ -36,7 +44,9 @@ export default {
       this.character = await this.characterByState;
     }
 
-    this.location = typedLocation(await get_location(this.character.location));
+    let loc = await get_location(this.character.location);
+    if (loc)
+      this.location = typedLocation(loc);
   },
 };
 </script>
