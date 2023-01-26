@@ -239,6 +239,18 @@ paths:
             '*/*':
               schema:
                 type: "object"
+  /murder/all:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/MurderResponse"
   /ping:
     get:
       description: ""
@@ -252,6 +264,25 @@ paths:
               examples:
                 Example#1:
                   value: "pong!"
+  /servants/{id}:
+    get:
+      description: ""
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  type: "integer"
+                  format: "int32"
 components:
   schemas:
     Object:
@@ -383,4 +414,20 @@ components:
           type: "integer"
           format: "int32"
         type:
+          type: "string"
+    MurderResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        killerId:
+          type: "integer"
+          format: "int32"
+        victim:
+          type: "integer"
+          format: "int32"
+        description:
+          type: "string"
+        date:
           type: "string"
