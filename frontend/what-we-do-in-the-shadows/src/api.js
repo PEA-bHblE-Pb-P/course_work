@@ -110,7 +110,7 @@ export async function go_to_location_id(id) {
 }
 
 export async function go_for_fight(id) {
-  return await fetch(endpointQuery(GO_FOR_FIGHT, id), {
+  let resp = await fetch(endpointQuery(GO_FOR_FIGHT, id), {
     method: "post",
     credentials: "include",
     headers: {
@@ -118,10 +118,15 @@ export async function go_for_fight(id) {
       "Access-Control-Allow-Origin": "localhost",
       "Access-Control-Allow-Credentials": true,
     },
-  }).then((response) => {
-    if (!response.ok) throw new Error("Go to error occurred!");
-    else response.status;
-  });
+  })
+
+  if (!resp.ok) throw new Error("Login error occurred!");
+  else {
+    let jsoned = await resp.json();
+    console.log(jsoned);
+    if (jsoned === "" || jsoned === {} || jsoned === [] || jsoned === Array() ) alert("It seems to me the hunter's dead");
+    else alert("It seems to me the hunter's dead");
+  }
 }
 
 export async function locations() {
@@ -150,7 +155,7 @@ export async function get_location(id) {
     },
   });
 
-  if (!resp.ok) throw new Error("Location error occurred!");
+  if (!resp.ok) return undefined;
 
   return await resp.json();
 }
