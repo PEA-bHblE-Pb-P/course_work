@@ -1,7 +1,7 @@
 <template>
   <div class="w-fit">
     <Character :character="character" />
-    <Location :location="location" />
+    <Location :titled="true" :location="location" />
   </div>
 </template>
 

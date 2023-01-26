@@ -1,6 +1,6 @@
 <template>
   <div class="location m-2 p-2 mdi-font-awesome">
-    <h1 class="text-2xl">Location</h1>
+    <h1 v-if="titled" class="text-2xl">Location</h1>
     <h3>name: {{ location.name }}</h3>
     <p>pos: ({{ location.lat }}, {{ location.lon }})</p>
     <p>type: {{ location.type || "none" }}</p>
@@ -15,6 +15,11 @@ const props = defineProps({
     required: true,
     default: () => {},
   },
+  titled: {
+    type: Boolean,
+    required: true,
+    default: true
+  }
 });
 </script>
 

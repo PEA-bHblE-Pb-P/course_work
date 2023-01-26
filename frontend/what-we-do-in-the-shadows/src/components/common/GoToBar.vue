@@ -5,6 +5,7 @@
       v-for="loc in typedLocations"
       :key="loc.id"
       :location="loc"
+      :titled="false"
       :class="{ 'bg-gray-400': loc.id === selected.id }"
       @click="selected = loc"
     />
